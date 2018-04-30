@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on Utopia</title>
+    <link>/about/</link>
+    <description>Recent content in Abouts on Utopia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About Me</title>
+      <link>/about/about-me/</link>
+      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/about/about-me/</guid>
+      <description>Hi, my name is Kaiwen Teoh and you can call me Kalvin in case you found my name is difficult to remember. Year two student who study Statistical Computing and Operational Research at University of Tunku Abdul Rahman in Malaysia. I don&amp;rsquo;t cook but I do like spaghetti carbonara, ikan bakar, almond dessert and more.
+This blog is about statistics, operational research, data analysis, life and visualization with a special focus on R.</description>
+    </item>
+    
+  </channel>
+</rss>
