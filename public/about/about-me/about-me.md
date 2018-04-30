@@ -16,7 +16,7 @@ weight: 5
 <br>
 
 
-  This static site is created with [Hugo](https://gohugo.io/) by using [Minimal](https://github.com/calintat/minimal) theme which deployed on [Netlify](https://www.netlify.com/). You can always find my fun on [post](http://kaiwen-teoh.netlify.com/post/) menu and [博客](http://kalvinkaiwen.blogspot.my/) is my original mandarin blog since 2015 which consists of my random thoughts, emotions in my life. All the blog posts are released under a
+  This static site is created with [Hugo](https://gohugo.io/) by using [Minimal](https://github.com/calintat/minimal) theme which deployed on [Netlify](https://www.netlify.com/). You can always find my fun on [post](http://kaiwen-teoh.netlify.com/post/) menu and [博客](http://kalvinkaiwen.blogspot.my/) is my original mandarin blog since 2015 which consists of my random thoughts, emotions in my life. 
 
 
   
