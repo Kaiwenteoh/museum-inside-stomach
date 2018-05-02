@@ -6,19 +6,20 @@
     <description>Recent content in Abouts on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>About Me</title>
-      <link>/about/about-me/</link>
-      <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
+      <title>About</title>
+      <link>/about/about/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/about/about-me/</guid>
-      <description>Hi, my name is Kaiwen Teoh and you can call me Kalvin in case you found my name is difficult to remember. Year two student who study Statistical Computing and Operational Research at University of Tunku Abdul Rahman in Malaysia. I don&amp;rsquo;t cook but I do like spaghetti carbonara, ikan bakar, almond dessert and more.
-This blog is about statistics, operational research, data analysis, life and visualization with a special focus on R.</description>
+      <guid>/about/about/</guid>
+      <description>About Me Hi, my name is Kaiwen Teoh but you can just call me Kalvin. I&amp;rsquo;m a second-year student who is currently studying Statistical Computing and Operations Research at University Tunku Abdul Rahman in Perak, Malaysia. I don&amp;rsquo;t cook but I do like carbonara spaghetti, ikan bakar, almond dessert, and many more.
+
+Blog This blog is about statistics, operations research, data analysis and its visualization while using mainly R, and a little bit of my life.</description>
     </item>
     
   </channel>
