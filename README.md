@@ -1,2 +1,4 @@
 # museum-inside-stomach
-Redefine the purpose of learning via blogging.
+
+  Hi, my name is kai wen. 'Museum-Inside-Stomach" is a repository which consists of my content from my currently running website on http://kaiwen-teoh.netlify.com/. 
+  I'm welcome any of data enthusiasts, R users, programmers, students from different educational backgrounds to join me on the journey of continuous learning and growth.  
