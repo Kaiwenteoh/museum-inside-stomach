@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Utopia</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Utopia</description>
+    <title>Wrangle on Utopia</title>
+    <link>/tags/wrangle/</link>
+    <description>Recent content in Wrangle on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/wrangle/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>/post/data-wrangling/</guid>
       <description>During my semester 1 in year two, I was given the opportunity to take part in Watson analytic competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</description>
-    </item>
-    
-    <item>
-      <title>First post</title>
-      <link>/post/first-post/</link>
-      <pubDate>Sun, 29 Apr 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/first-post/</guid>
-      <description>First PostCurrently, I’m busy for my final examination. Further update will follow soon. Please be patience.
-</description>
     </item>
     
   </channel>

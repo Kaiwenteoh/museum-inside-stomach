@@ -11,6 +11,7 @@ weight: 5
   Hi, my name is Kaiwen Teoh but you can just call me Kalvin. I'm a second-year student who is currently studying Statistical Computing and Operations Research at University Tunku Abdul Rahman in Perak, Malaysia. I don't cook but I do like carbonara spaghetti, ikan bakar, almond dessert, and many more. 
 
 <br>
+<br>
 
 # *Blog*
 
@@ -20,6 +21,7 @@ weight: 5
 
   This static site is powered by [Hugo](https://gohugo.io/) using [Minimal](https://github.com/calintat/minimal) theme which deployed on [Netlify](https://www.netlify.com/). You can always find my fun on [post](http://kaiwen-teoh.netlify.com/post/) menu and [博客](http://kalvinkaiwen.blogspot.my/) is my mandarin blog since 2015 which consists of my random thoughts, emotions in my life. 
   
+<br>
 <br>
 
 # *Contact*
