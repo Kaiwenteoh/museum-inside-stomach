@@ -155,7 +155,7 @@ tail(data1,20)                        # show 30 rows from bottom
 ## Gsub function
   <br>
   
-  I never found *gsub* function is so useful until I met this problem during that time. As you can notice that in 'Year' colunmn, all the entries are followed by a 'X' character. By using *gusub* function, this issue is not longer an issue anymore.
+  I never found gsub( ) function is so useful until I met this problem during that time. As you can notice that in 'Year' colunmn, all the entries are followed by a 'X' character. By using gsub( ) function, this issue is not longer an issue anymore.
   
   <br>
   <br>
@@ -182,6 +182,9 @@ View(data1)               # view output
 
 ```
   
+  <br>
+  <br>
+### The End
   <br>
   <br>
   <br>
