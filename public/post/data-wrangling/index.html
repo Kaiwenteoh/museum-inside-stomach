@@ -155,7 +155,7 @@
 </div>
 
 
-    <br> <div class="text-justify"><p>During my semester 1 in year two, I was given the opportunity to take part in Watson analytic competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</p>
+    <br> <div class="text-justify"><p>During my semester 1 in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</p>
 <p><br> <br> <br></p>
 <div id="reading-data-into-r" class="section level2">
 <h2>Reading data into R</h2>
@@ -164,7 +164,7 @@
 <p><br> <br></p>
 <pre class="r"><code>data1=read.csv(file.choose())         # read csv file into R and store in a named variable</code></pre>
 <p><br> <br></p>
-<p>Print the output of ‘data1’ into R console occupies large space and it is undesired. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packagse like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and so on.</p>
+<p>Print the output of ‘data1’ into R console occupies large space and it is undesired. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and so on.</p>
 <p><br> <br></p>
 <pre class="r"><code>
 nrow(data1)                            # check number of rows for variable
@@ -262,7 +262,7 @@ data1
 <p>4 different years from 2008 to 2011 are grouped into a column named ‘Year’, and it’s data are grouped into another column named ‘Total greenhouse gas emissions (kt of CO2 equivalent)’. Because of this dataset consists total of 1056 rows so by default tibble can only shows up to 10 rows. You can always change this default mannually or even show the top or bottom of dataset.</p>
 <p><br> <br></p>
 <pre class="r"><code>
-options(tibble.print_min=50)          # change the default to print 50 rows       
+options(tibble.print_min=50)          # change the default to print 50 rows
 
 head(data1,20)                        # show 30 rows from top
 # A tibble: 20 x 4
@@ -352,7 +352,7 @@ data1[1:20, ]                                    # diplay first 20 rows
 <p>Try View( ) function if you’re using rstudio. View( ) function prints the whole output in another tab, so that you can have look on it, instead of print the large dataset on console.</p>
 <p><br> <br></p>
 <pre class="r"><code>View(data1)               # view output</code></pre>
-<p><br> <br> ### The End <br> <br> <br> <br> <br></p>
+<p><br> <br> <br> <br> <br></p>
 <div id="the-end" class="section level3">
 <h3>The End</h3>
 <p>Hope you won’t like</p>
