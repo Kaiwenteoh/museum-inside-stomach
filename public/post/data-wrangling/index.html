@@ -174,7 +174,7 @@
 <p><br> <br></p>
 <pre class="r"><code>data1=read.csv(file.choose())         # read csv file into R and store in a named variable</code></pre>
 <p><br> <br></p>
-<p>Print the output of ‘data1’ into R console occupies large space and it is undesired. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and so on.</p>
+<p>Print the output of ‘data1’ into R console occupies large space and it is undesired. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and more.</p>
 <p><br> <br></p>
 <pre class="r"><code>
 nrow(data1)                            # check number of rows for variable
@@ -240,7 +240,7 @@ data1=gather(data1,&#39;X2008&#39;,&#39;X2009&#39;,&#39;X2010&#39;,&#39;X2011&#3
 # tidy data                                                                        
 </code></pre>
 <p><br> <br></p>
-<p>‘%&gt;%’ is a pipe operator which indicates ‘and then’. Pipe operator is a convenient tool from <em>Magrittr</em> package but when we have <em>Tidyverse</em> library, it will be unnecessary for us to intall and load <em>Magrittr</em> manually because it’s part of the library.</p>
+<p>‘%&gt;%’ is a pipe operator which indicates ‘and then’. Pipe operator is a convenient tool from <em>Magrittr</em> package but when we have <em>Tidyverse</em> library, it will be unnecessary for us to intall and load <em>Magrittr</em> package manually because it’s part of the library.</p>
 <p>By using ‘%&gt;%’, we will get the same output with above code in one shot.</p>
 <p><br> <br></p>
 </div>

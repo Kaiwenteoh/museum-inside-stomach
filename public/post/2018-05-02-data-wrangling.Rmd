@@ -32,7 +32,7 @@ data1=read.csv(file.choose())         # read csv file into R and store in a name
   <br>
   <br>
   
-  Print the output of 'data1' into R console occupies large space and it is undesired. One way to deal with it is to change the class of 'data1' from data frame to tibble. And this require to load the *Tibble* package from *Tidyverse* library. *Tidyverse* is my personal favourite and it consists list of useful analysis R packages like *ggplot2*, *tidyr*, *dyplr* and so on.
+  Print the output of 'data1' into R console occupies large space and it is undesired. One way to deal with it is to change the class of 'data1' from data frame to tibble. And this require to load the *Tibble* package from *Tidyverse* library. *Tidyverse* is my personal favourite and it consists list of useful analysis R packages like *ggplot2*, *tidyr*, *dyplr* and more.
 
   <br>
   <br>
@@ -107,7 +107,7 @@ data1=gather(data1,'X2008','X2009','X2010','X2011',key='Year',value='Total green
   <br>
   <br>
   
-  '%>%' is a pipe operator which indicates 'and then'. Pipe operator is a convenient tool from *Magrittr* package but when we have *Tidyverse* library, it will be unnecessary for us to intall and load *Magrittr* manually because it's part of the library. 
+  '%>%' is a pipe operator which indicates 'and then'. Pipe operator is a convenient tool from *Magrittr* package but when we have *Tidyverse* library, it will be unnecessary for us to intall and load *Magrittr* package manually because it's part of the library. 
   
   By using '%>%', we will get the same output with above code in one shot.
 
