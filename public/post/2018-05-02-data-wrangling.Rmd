@@ -9,7 +9,7 @@ tags:
 slug: data-wrangling
 ---
 
-  During my semester 1 in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can't explain my feelings and gratitude to my academic advisor for her approach, guidance and patience. 
+  During my semester one in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can't explain my feelings and gratitude to my academic advisor for her approach, guidance and patience. 
 
   <br>
   <br>
