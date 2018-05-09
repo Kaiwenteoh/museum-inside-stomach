@@ -165,7 +165,7 @@
 </div>
 
 
-    <br> <div class="text-justify"><p>During my semester one in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</p>
+    <br> <div class="text-justify"><p>During my semester one in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM Watsons annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</p>
 <p><br> <br> <br></p>
 <div id="reading-data-into-r" class="section level2">
 <h2>Reading data into R</h2>
@@ -174,7 +174,9 @@
 <p><br> <br></p>
 <pre class="r"><code>data1=read.csv(file.choose())         # read csv file into R and store in a named variable</code></pre>
 <p><br> <br></p>
-<p>Print the output of ‘data1’ into R console occupies large space and it is undesired. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and more.</p>
+<p>‘file.choose( )’ function is an alternative for you to select downloaded file and read into R. You can also replace it with your filename in ‘filename.csv’ format inside the parentheses of ‘read.csv( )’ function if you prefer to do so.</p>
+<p><br> <br></p>
+<p>Print the output of ‘data1’ into R console in data frame occupies large space and it is undesirable. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and more.</p>
 <p><br> <br></p>
 <pre class="r"><code>
 nrow(data1)                            # check number of rows for variable
@@ -225,7 +227,7 @@ data1                                  # print output
 <div id="data-wrangling-on-r" class="section level2">
 <h2>Data wrangling on R</h2>
 <p><br></p>
-<p>As output produced is not in tidy format(one variable in one column and every observations have its row), it is difficult for us to do our analysis and visualise later. Not only that, in this case, there are some variables which you might have no interest to include it in tibble(table) like ‘Indicator.name’ and ‘Indicator.Code’. To overcome these kind of issues, <em>dplyr</em> and <em>tidyr</em> from <em>Tidyverse</em> library are always helpful in manipulating and tidying data.</p>
+<p>As output produced is not in tidy format(one variable in one column and every observations have its row), it is difficult for us to do our analysis and visualize later. Not only that, in this case, there are some variables which you might have no interest to include it in tibble(table) like ‘Indicator.name’ and ‘Indicator.Code’. To overcome these kind of issues, <em>dplyr</em> and <em>tidyr</em> from <em>Tidyverse</em> library are always helpful in manipulating and tidying data.</p>
 <p>So, we have a scenario here. Let say we want to include the name of countries and their amount of green house gasses released from 2008 to 2011 by 4 columns. First column is for the list of countries, while second column is for code of countries, third column is for years and fourth column is for total green house gasses released in kilo tonnes of carbon dioxide equivalent.</p>
 <p><br> <br></p>
 <div id="i" class="section level3">
@@ -237,7 +239,7 @@ data1=select(data1,Country.Name,Country.Code,X2008,X2009,X2010,X2011)
 
 data1=gather(data1,&#39;X2008&#39;,&#39;X2009&#39;,&#39;X2010&#39;,&#39;X2011&#39;,key=&#39;Year&#39;,value=&#39;Total greenhouse gas emissions (kt of CO2 equivalent)&#39;)    
 
-# tidy data                                                                        
+# tidy data                                                                      
 </code></pre>
 <p><br> <br></p>
 <p>‘%&gt;%’ is a pipe operator which indicates ‘and then’. Pipe operator is a convenient tool from <em>Magrittr</em> package but when we have <em>Tidyverse</em> library, it will be unnecessary for us to intall and load <em>Magrittr</em> package manually because it’s part of the library.</p>
@@ -359,9 +361,11 @@ data1[1:20, ]                                    # diplay first 20 rows
 19 Bangladesh           BGD          2008                         164701. 
 20 Bulgaria             BGR          2008                          71720. </code></pre>
 <p><br> <br></p>
-<p>Try View( ) function if you’re using rstudio. View( ) function prints the whole output in another tab, so that you can have look on it, instead of print the large dataset on console.</p>
+<p>Try View( ) function in Rstudio or Rgui to prints the whole result in another tab, so that you can have look on it, instead of print the large dataset on console.</p>
+<p>To modify your dataset like filling in missing values or adding new column to your datasets, use edit( ) command. This command works exactly like View( ) function except it provides you with the ability to refine data.</p>
 <p><br> <br></p>
-<pre class="r"><code>View(data1)               # view output</code></pre>
+<pre class="r"><code>View(data1)               # view output
+edit(data1)               # modify data</code></pre>
 <p><br> <br> <br> <br> <br></p>
 <div id="the-end" class="section level3">
 <h3>The End</h3>
