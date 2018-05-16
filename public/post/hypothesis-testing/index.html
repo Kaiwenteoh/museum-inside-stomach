@@ -172,17 +172,6 @@
 <script src="/rmarkdown-libs/sparkline/jquery.sparkline.min.js"></script>
 <link href="/rmarkdown-libs/rhandsontable/rhandsontable.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/rhandsontable-binding/rhandsontable.js"></script>
-<link href="/rmarkdown-libs/datatables-css/datatables-crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/datatables-binding/datatables.js"></script>
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
-<link href="/rmarkdown-libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/dt-core/js/jquery.dataTables.min.js"></script>
-<link href="/rmarkdown-libs/nouislider/jquery.nouislider.min.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/nouislider/jquery.nouislider.min.js"></script>
-<link href="/rmarkdown-libs/selectize/selectize.bootstrap3.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/selectize/selectize.min.js"></script>
-<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
 
 
 <div id="menu" class="section level1">
@@ -290,8 +279,8 @@ mean of x
 <p><br> <br></p>
 <p>A company’s marketing department claims that the average time of their staffs late to work in a day is 5 minutes with a standard deviation of 1.29 minutes. As a human resource manager, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes for a day is determined and recorded. The sample data is indicated as below:</p>
 <p><br> <br></p>
-<div id="htmlwidget-2" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2">{"x":{"filter":"top","filterHTML":"<tr>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"15\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n  <td data-type=\"number\" style=\"vertical-align: top;\">\n    <div class=\"form-group has-feedback\" style=\"margin-bottom: auto;\">\n      <input type=\"search\" placeholder=\"All\" class=\"form-control\" style=\"width: 100%;\"/>\n      <span class=\"glyphicon glyphicon-remove-circle form-control-feedback\"><\/span>\n    <\/div>\n    <div style=\"display: none; position: absolute; width: 200px;\">\n      <div data-min=\"1\" data-max=\"10\"><\/div>\n      <span style=\"float: left;\"><\/span>\n      <span style=\"float: right;\"><\/span>\n    <\/div>\n  <\/td>\n<\/tr>","data":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15],[9,3,9,3,10,1,7,2,5,7,6,9,6,1,6]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Late.time.in.minutes<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"columnDefs":[{"className":"dt-right","targets":[0,1]}],"order":[],"autoWidth":false,"orderClasses":false,"orderCellsTop":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="rhandsontable html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[["1","9"],["2","3"],["3","9"],["4","3"],["5","10"],["6","1"],["7","7"],["8","2"],["9","5"],["10","7"],["11","6"],["12","9"],["13","6"],["14","1"],["15","6"]],"rClass":["tbl_df","tbl","data.frame"],"rColClasses":{"Number":"numeric","Late.time.in.minutes":"numeric"},"rColnames":["Number","Late.time.in.minutes"],"rColHeaders":["Number","Late.time.in.minutes"],"rRowHeaders":null,"rDataDim":[15,2],"selectCallback":false,"colHeaders":["Number","Late.time.in.minutes"],"rowHeaders":null,"columns":null,"width":null,"height":null,"debug":0,"search":false,"stretchH":"none","comments":false,"contextMenu":{"items":{"row_above":[],"row_below":[],"remove_row":[],"hsep2":{"name":"---------"},"col_left":[],"col_right":[],"remove_col":[],"hsep3":{"name":"---------"},"undo":[],"redo":[],"hsep4":{"name":"---------"},"alignment":[]}}},"evals":[],"jsHooks":[]}</script>
 <p><br> <br></p>
 <pre class="r"><code>late_time_min= read.csv(file.choose())
 # Read file into R
