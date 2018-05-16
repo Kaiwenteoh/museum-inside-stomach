@@ -132,7 +132,7 @@ z.test(x, alternative = "two.sided"/"greater"/"less", mu, sigma.x, conf.level)
   <br>
   <br>
   
-```{r message=F, echo=FALSE}
+```{r message=F, echo=FALSE, warning=FALSE}
 Time <- tibble::tribble(
   ~Number., ~Late.time.in.minutes,
          1,                    10,
