@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Hypothesis testing</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Ubuntu', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: purple;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.38.2" />
+        
+
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118759884-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-118759884-1');
+        </script>
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Hypothesis testing</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="http://kalvinkaiwen.blogspot.my/">博客</a></li>
+                            
+                                <li><a href="/about/about/">About</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/Kaiwenteoh/museum-inside-stomach"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/Kalvin_kaiwen"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/kaiwen-teoh/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.stackoverflow.com/username/"><i class="fa fa-stack-overflow"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.facebook.com/kalvinkaiwen"><i class="fa fa-facebook"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/hypothesis-testing/">Hypothesis testing</a></h4>
+    <h5>May 13, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/statistics"><kbd class="item-tag">Statistics</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<link href="/rmarkdown-libs/handsontable/handsontable.full.min.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/handsontable/handsontable.full.min.js"></script>
+<script src="/rmarkdown-libs/numbro.languages/languages.js"></script>
+<script src="/rmarkdown-libs/chroma/chroma.min.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<script src="/rmarkdown-libs/sparkline/jquery.sparkline.min.js"></script>
+<link href="/rmarkdown-libs/rhandsontable/rhandsontable.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/rhandsontable-binding/rhandsontable.js"></script>
+
+
+<div id="menu" class="section level1">
+<h1>MENU</h1>
+<hr />
+<p>*<a href="#Introduction">Introduction</a></p>
+<p><br></p>
+<p>*<a href="#Hypothesis%20test%20about%20a%20population%20mean,%20$\mu$">Hypothesis test about a population mean, <span class="math inline">\(\mu\)</span></a></p>
+<p><br></p>
+<p>*<a href="#Hypothesis%20test%20about%20a%20population%20proportion,%20p">Hypothesis test about a population proportion, p</a></p>
+<p><br></p>
+<p><br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="introduction" class="section level1">
+<h1><a id="Introduction"></a>Introduction</h1>
+<p><br> <br></p>
+<p>A <strong>hypothesis test</strong> is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error.</p>
+<p><br></p>
+<p>The <strong>null hypothesis</strong> which denoted by <span class="math inline">\(H_0\)</span> is a statement that the value of population parameter is assumed to be true until it is declared false.</p>
+<p><br></p>
+<p>The <strong>alternative hypothesis</strong> which denoted by <span class="math inline">\(H_1\)</span> is a statement that the population parameter has a value that somehow differs from the value specified in the null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p><br></p>
+<p>While <strong>test statistic</strong> is a value that we compute from the sample of data and it is crucial in determining whether our null hypothesis, <span class="math inline">\(H_0\)</span> is rejected or not.</p>
+<p><br></p>
+<p>A hypothesis test can be a <strong>one-tailed test</strong> or <strong>two-tailed test</strong> depends on the situation. A one-tailed test can be divided into a left-tailed and right-tailed test. If the sign in the null hypothesis, <span class="math inline">\(H_0\)</span> is equal (=), then a two-tailed test should be performed instead of one-tailed test. For a left-tailed test, the sign for the value of population parameter in the null hypothesis, <span class="math inline">\(H_0\)</span> should be greater than equal (<span class="math inline">\(\ge\)</span>), while for a right-tailed test, sign for the null hypothesis, <span class="math inline">\(H_0\)</span> is less than equal (<span class="math inline">\(\le\)</span>).</p>
+<p><br></p>
+<p>A <strong>type I error</strong> occurs when we reject the true null hypothesis, <span class="math inline">\(H_O\)</span> while a <strong>type II error</strong> occurs when a false null hypothesis, <span class="math inline">\(H_0\)</span> is not rejected. The probability of making type I error is known as significance level, <span class="math inline">\(\alpha\)</span> and the probability of making type II error is denoted as <span class="math inline">\(\beta\)</span>.</p>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="one-sample-hypothesis-testing" class="section level1">
+<h1>One-Sample Hypothesis Testing</h1>
+<p><br> <br></p>
+<div id="hypothesis-test-about-a-population-mean-mu" class="section level2">
+<h2><a id="Hypothesis test about a population mean, $\mu$"></a>Hypothesis test about a population mean, <span class="math inline">\(\mu\)</span></h2>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population mean, <span class="math inline">\(\mu\)</span>, we perform Z-test when the sample is large (n <span class="math inline">\(\ge\)</span> 30).</p>
+<p><br> <br></p>
+<div id="z-test" class="section level3">
+<h3><a id="Z-test"></a>Z-test</h3>
+<p><br> <br></p>
+<p>Since base library of R doesn’t provide the function of Z-test, so we have to download and install the required R package, <a href="https://www.rdocumentation.org/packages/BSDA/versions/1.2.0">“BSDA”</a> which stands for <strong>Basic Statistics and Data Analysis</strong> from CRAN.</p>
+<p><br> <br></p>
+<pre class="r"><code>install.packages(&quot;BSDA&quot;)          
+# Install required R package</code></pre>
+<p><br> <br></p>
+<p>Then we load the library in console and use z.test( ) function to check the claim of the null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p><br> <br></p>
+<pre class="r"><code>library(&quot;BSDA&quot;)                   
+# Load &quot;BSDA&quot; 
+
+z.test(x, alternative = &quot;two.sided&quot;/&quot;greater&quot;/&quot;less&quot;, mu, sigma.x, conf.level)
+# Z-test</code></pre>
+<p><br> <br> <br></p>
+<div id="example-1" class="section level4">
+<h4>Example 1</h4>
+<p><br> <br></p>
+<p>A company’s marketing department claims that the average time of their staffs late to work in a working day is 5 minutes with a standard deviation of 1.29 minutes. The human resource department of the company wishes to check the claims whether it is true or not in order to improve company’s reputation. A sample of 35 people from marketing department late to work time in minutes is determined and recorded. The collected sample data for a working day is indicated as below:</p>
+<p><br> <br></p>
+<div id="htmlwidget-1" style="width:672px;height:480px;" class="rhandsontable html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"data":[["1","10"],["2","3"],["3","10"],["4","5"],["5","8"],["6","4"],["7","6"],["8","4"],["9","0"],["10","9"],["11","9"],["12","0"],["13","6"],["14","7"],["15","5"],["16","10"],["17","6"],["18","10"],["19","1"],["20","9"],["21","1"],["22","6"],["23","7"],["24","1"],["25","1"],["26","1"],["27","7"],["28","7"],["29","0"],["30","6"],["31","9"],["32","3"],["33","4"],["34","1"],["35","5"]],"rClass":["tbl_df","tbl","data.frame"],"rColClasses":{"Number.":"numeric","Late.time.in.minutes":"numeric"},"rColnames":["Number.","Late.time.in.minutes"],"rColHeaders":["Number.","Late.time.in.minutes"],"rRowHeaders":null,"rDataDim":[35,2],"selectCallback":false,"colHeaders":["Number.","Late.time.in.minutes"],"rowHeaders":null,"columns":null,"width":null,"height":null,"debug":0,"search":false,"stretchH":"none","comments":false,"contextMenu":{"items":{"row_above":[],"row_below":[],"remove_row":[],"hsep2":{"name":"---------"},"col_left":[],"col_right":[],"remove_col":[],"hsep3":{"name":"---------"},"undo":[],"redo":[],"hsep4":{"name":"---------"},"alignment":[]}}},"evals":[],"jsHooks":[]}</script>
+<p><br> <br> <br></p>
+<pre class="r"><code>late_time= read.csv(file.choose())                       
+# Read file into R</code></pre>
+<p><br> <br></p>
+<pre class="r"><code>library(&quot;BSDA&quot;)
+# Load &quot;BSDA&quot; package
+
+late_to_work= late_time$Late.time.in.minutes                          
+# Store data into &quot;late_to_work&quot; 
+
+z.test(late_to_work, alternative=&quot;two.sided&quot;, mu=5, sigma.x=1.29,conf.level = 0.95)  
+# Z-test with 5% significance level</code></pre>
+<p><br> <br></p>
+<pre><code>
+    One-sample z-Test
+
+data:  late_to_work
+z = -0.91722, p-value = 0.359
+alternative hypothesis: true mean is not equal to 5
+95 percent confidence interval:
+ 4.37263 5.22737
+sample estimates:
+mean of x 
+      4.8 </code></pre>
+<p><br> <br></p>
+<p>From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.359 is greater than the significance level, <span class="math inline">\(\alpha\)</span> which is equal to 0.05. Besides, the population mean, <span class="math inline">\(\mu\)</span> which is equal to 5 minutes is also within the 95% confidence interval (4.37263, 5.22737). Thus, the average time of marketing staffs late to work for a day is 5 minutes.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="t-test" class="section level3">
+<h3>T-test</h3>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population mean, <span class="math inline">\(\mu\)</span>, we perform T-test when</p>
+<ul>
+<li>The sample is small (n&lt;30).</li>
+<li>Standard deviation, <span class="math inline">\(\sigma\)</span> of the population is <strong>not known</strong>.</li>
+<li>The sample is drawn from a population which is approximately normally distributed.</li>
+</ul>
+<p><br> <br></p>
+<pre class="r"><code>t.test(x, alternative = &quot;two.sided&quot;/&quot;greater&quot;/&quot;less&quot;, mu, conf.level)
+# T-test </code></pre>
+<p><br> <br></p>
+<div id="example-2" class="section level4">
+<h4>Example 2</h4>
+<p><br> <br></p>
+<p>A company’s marketing department claims that the average time of their staffs late to work in a day is 5 minutes with a standard deviation of 1.29 minutes. As a human resource manager, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes for a day is determined and recorded. The sample data is indicated as below:</p>
+<p><br> <br></p>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="rhandsontable html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[["1","3"],["2","5"],["3","0"],["4","4"],["5","7"],["6","4"],["7","4"],["8","0"],["9","0"],["10","10"],["11","1"],["12","8"],["13","3"],["14","9"],["15","3"]],"rClass":["tbl_df","tbl","data.frame"],"rColClasses":{"Number":"numeric","Late.time.in.minutes":"numeric"},"rColnames":["Number","Late.time.in.minutes"],"rColHeaders":["Number","Late.time.in.minutes"],"rRowHeaders":null,"rDataDim":[15,2],"selectCallback":false,"colHeaders":["Number","Late.time.in.minutes"],"rowHeaders":null,"columns":null,"width":null,"height":null,"debug":0,"search":false,"stretchH":"none","comments":false,"contextMenu":{"items":{"row_above":[],"row_below":[],"remove_row":[],"hsep2":{"name":"---------"},"col_left":[],"col_right":[],"remove_col":[],"hsep3":{"name":"---------"},"undo":[],"redo":[],"hsep4":{"name":"---------"},"alignment":[]}}},"evals":[],"jsHooks":[]}</script>
+<p><br> <br></p>
+<pre class="r"><code>late_time_min= read.csv(file.choose())
+# Read file into R
+
+late_time_min= late_time_min$Late.time.in.minutes                          
+# Store data into &quot;late_time_min&quot; 
+
+t.test(late_time_min, alternative=&quot;greater&quot;, mu=5, conf.level = 0.95)  
+# T-test with 5% significance level</code></pre>
+<p><br> <br></p>
+<pre><code>
+    One Sample t-test
+
+data:  late_time_min
+t = 0.76972, df = 14, p-value = 0.2271
+alternative hypothesis: true mean is greater than 5
+95 percent confidence interval:
+ 4.22706     Inf
+sample estimates:
+mean of x 
+      5.6 </code></pre>
+<p><br> <br></p>
+<p>From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.2271 is greater than significance level which is equal to 0.05. Besides, the population mean, <span class="math inline">\(\mu\)</span> which is equal to 5 minutes is also within the 95% confidence interval (4.22706, Inf). Thus, the average time of marketing staffs late to work for a working day is 5 minutes.</p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="small-sample-size-with-known-standard-deviation-sigma" class="section level3">
+<h3>Small sample size with known standard deviation, <span class="math inline">\(\sigma\)</span></h3>
+<p><br> <br></p>
+<p>Perform <a href="#Z-test">Z-test</a> instead of T-test for small sample size when:</p>
+<ul>
+<li>The sample size is small (n&lt;30).</li>
+<li>Standard deviation, <span class="math inline">\(\sigma\)</span> of the population is <strong>known</strong>.</li>
+<li>The sample is drawn from a population which is approximately normally distributed.</li>
+</ul>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+<div id="hypothesis-test-about-a-population-proportion-p" class="section level2">
+<h2><a id="Hypothesis test about a population proportion, p"></a>Hypothesis test about a population proportion, p</h2>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population proportion, p, we perform Z-test when the sample is large (np&gt;5, nq&gt;5).</p>
+<p><br> <br></p>
+<div id="z-test-proprotion" class="section level3">
+<h3>Z-test (proprotion)</h3>
+<p><br> <br></p>
+<pre class="r"><code>prop.test(x, n, p, alternative=&quot;greater&quot;, correct=FALSE, conf.level = 0.95)            
+# Z-test for population proportion</code></pre>
+<p><br> <br></p>
+<div id="example3" class="section level4">
+<h4>Example3</h4>
+<p><br> <br></p>
+<p>A company’s marketing department claims that at most 80% of their staffs are late to work within 5 minutes for a working day. The human resource department of the company is responsible to test the claims whether it is valid or not in order to improve company’s reputation. A sample 120 marketing staffs showed that 89 of them are late to work within 5 minutes in a working day.</p>
+<p><br> <br></p>
+<pre class="r"><code>prop.test(89, 120, 0.80, alternative = &quot;greater&quot;, correct= FALSE, conf.level = 0.975)            </code></pre>
+<p><br> <br></p>
+<pre><code>
+    1-sample proportions test without continuity correction
+
+data:  89 out of 120, null probability 0.8
+X-squared = 2.5521, df = 1, p-value = 0.9449
+alternative hypothesis: true p is greater than 0.8
+97.5 percent confidence interval:
+ 0.6567147 1.0000000
+sample estimates:
+        p 
+0.7416667 </code></pre>
+<p><br> <br></p>
+<p>From the above summary, p-value = 0.9449 is greater than the significance level, <span class="math inline">\(\alpha\)</span> which is equal to 0.025. Besides, the population proportion, p= 0.8 is also falls within the 97.5% confidence interval (0.6567, 1.0000). Thus, the claim by the marketing department is true which is at most 80% of their staff are late to work within 5 minutes for a working day.</p>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+</div>
+<div id="the-end" class="section level2">
+<h2>The End</h2>
+<p><br> <br></p>
+<p>Hope you won’t compute test statistic or p-value like:</p>
+<p><br></p>
+<div class="figure">
+<img src="https://media3.giphy.com/media/xUPGcqaVH1cDeKZTBS/giphy-downsized.gif?cid=e1bb72ff5afc0d586a353651777054cf" />
+
+</div>
+</div>
+</div>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/data-wrangling/">Data wrangling with dplyr, tidyr and gsub()</a></h4>
+    <h5>May 2, 2018</h5>
+    
+    <a href="/tags/wrangle"><kbd class="item-tag">Wrangle</kbd></a>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kaiwen-teoh" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+         
+         <p class="copyright text-muted">&copy; 2018 Kaiwen Teoh.
+         
+         All posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+              
+        </footer>
+       
+    </body>
+
+</html>
+
