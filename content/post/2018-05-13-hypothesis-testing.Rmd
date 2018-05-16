@@ -291,6 +291,7 @@ rhandsontable(Times_2, rowHeaders = NULL,
                digits = 3, useTypes = FALSE, search = FALSE,
                width = NULL, height = NULL)
 
+
 ```
   
   <br>
