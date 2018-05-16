@@ -1,0 +1,443 @@
+---
+title: Hypothesis testing
+author: Kaiwen Teoh
+date: '2018-05-13'
+slug: hypothesis-testing
+categories:
+  - Statistics
+tags:
+  - R
+  - Statistics
+---
+
+#MENU
+
+----------
+  *[Introduction](#Introduction)
+  
+  <br>
+  
+  *[Hypothesis test about a population mean, $\mu$](#Hypothesis test about a population mean, $\mu$)
+  
+  <br>
+    
+  *[Hypothesis test about a population proportion, p](#Hypothesis test about a population proportion, p)
+  
+  <br>
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+
+
+
+#<a id="Introduction"></a>Introduction
+
+  <br>
+  <br>
+
+  A **hypothesis test** is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error. 
+  
+  <br>
+  
+  The **null hypothesis** which denoted by $H_0$ is a statement that the value of population parameter is assumed to be true until it is declared false.  
+  
+  <br>
+  
+  The **alternative hypothesis** which denoted by $H_1$ is a statement that the population parameter has a value that somehow differs from the value specified in the null hypothesis, $H_0$. 
+  
+  <br>
+  
+  While **test statistic** is a value that we compute from the sample of data and it is crucial in determining whether our null hypothesis, $H_0$ is rejected or not.
+  
+  <br>
+  
+  A hypothesis test can be a **one-tailed test** or **two-tailed test** depends on the situation. A one-tailed test can be divided into a left-tailed and right-tailed test. If the sign in the null hypothesis, $H_0$ is equal (=), then a two-tailed test should be performed instead of one-tailed test. For a left-tailed test, the sign for the value of population parameter in the null hypothesis, $H_0$ should be greater than equal ($\ge$), while for a right-tailed test, sign for the null hypothesis, $H_0$ is less than equal ($\le$). 
+  
+  <br>
+
+  A **type I error** occurs when we reject the true null hypothesis, $H_O$ while a **type II error** occurs when a false null hypothesis, $H_0$ is not rejected. The probability of making type I error is known as significance level, $\alpha$ and the probability of making type II error is denoted as $\beta$.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# One-Sample Hypothesis Testing
+
+  <br>
+  <br>
+  
+## <a id="Hypothesis test about a population mean, $\mu$"></a>Hypothesis test about a population mean, $\mu$  
+  
+  <br>
+  <br>
+  
+  In tests of hypothesis about a single population mean, $\mu$, we perform Z-test when the sample is large (n $\ge$ 30).  
+  
+  <br>
+  <br>
+
+### <a id="Z-test"></a>Z-test
+
+  <br>
+  <br>
+  
+  Since base library of R doesn't provide the function of Z-test, so we have to download and install the required R package, ["BSDA"](https://www.rdocumentation.org/packages/BSDA/versions/1.2.0) which stands for **Basic Statistics and Data Analysis** from CRAN.
+  
+  <br>
+  <br>
+  
+```{r message=FALSE, eval=F}
+
+install.packages("BSDA")          
+# Install required R package
+
+```
+
+  <br>
+  <br>
+  
+  Then we load the library in console and use z.test( ) function to check the claim of the null hypothesis, $H_0$.
+  
+  <br>
+  <br>
+  
+```{r message=F, comment=NA, eval=F}
+
+library("BSDA")                   
+# Load "BSDA" 
+
+z.test(x, alternative = "two.sided"/"greater"/"less", mu, sigma.x, conf.level)
+# Z-test
+
+```
+  
+  <br>
+  <br>
+  <br>
+  
+#### Example 1
+  
+  <br>
+  <br>
+  
+  A company's marketing department claims that the average time of their staffs late to work in a working day is 5 minutes with a standard deviation of 1.29 minutes. The human resource department of the company wishes to check the claims whether it is true or not in order to improve company's reputation. A sample of 35 people from marketing department late to work time in minutes is determined and recorded. The collected sample data for a working day is indicated as below:
+  
+  <br>
+  <br>
+  
+```{r message=F, echo=FALSE}
+Time <- tibble::tribble(
+  ~Number., ~Late.time.in.minutes,
+         1,                    10,
+         2,                     3,
+         3,                    10,
+         4,                     5,
+         5,                     8,
+         6,                     4,
+         7,                     6,
+         8,                     4,
+         9,                     0,
+        10,                     9,
+        11,                     9,
+        12,                     0,
+        13,                     6,
+        14,                     7,
+        15,                     5,
+        16,                    10,
+        17,                     6,
+        18,                    10,
+        19,                     1,
+        20,                     9,
+        21,                     1,
+        22,                     6,
+        23,                     7,
+        24,                     1,
+        25,                     1,
+        26,                     1,
+        27,                     7,
+        28,                     7,
+        29,                     0,
+        30,                     6,
+        31,                     9,
+        32,                     3,
+        33,                     4,
+        34,                     1,
+        35,                     5
+  )
+
+require(rhandsontable)
+rhandsontable(Time, rowHeaders = NULL,
+               digits = 3, useTypes = FALSE, search = FALSE,
+               width = NULL, height = NULL)
+
+```
+  
+  <br>
+  <br>
+  <br>
+  
+```{r}
+
+late_time= read.csv(file.choose())                       
+# Read file into R
+
+```
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+library("BSDA")
+# Load "BSDA" package
+
+late_to_work= late_time$Late.time.in.minutes                          
+# Store data into "late_to_work" 
+
+z.test(late_to_work, alternative="two.sided", mu=5, sigma.x=1.29,conf.level = 0.95)  
+# Z-test with 5% significance level
+
+```
+  
+  <br>
+  <br>
+  
+```{r echo=FALSE, message=FALSE, comment=NA}
+
+library("BSDA")
+
+late_to_work= late_time$Late.time.in.minutes                          
+
+z.test(late_to_work, alternative="two.sided", mu=5, sigma.x=1.29,conf.level = 0.95)  
+
+```
+
+  <br>
+  <br>
+  
+  From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.359 is greater than the significance level, $\alpha$ which is equal to 0.05. Besides, the population mean, $\mu$ which is equal to 5 minutes is also within the 95% confidence interval (4.37263, 5.22737). Thus, the average time of marketing staffs late to work for a day is 5 minutes.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+### T-test
+
+  <br>
+  <br>
+  
+  In tests of hypothesis about a single population mean, $\mu$, we perform T-test when
+  
+  * The sample is small (n<30).
+  * Standard deviation, $\sigma$ of the population is **not known**.
+  * The sample is drawn from a population which is approximately normally distributed.
+  
+  <br>
+  <br>
+  
+```{r eval=FALSE}
+
+t.test(x, alternative = "two.sided"/"greater"/"less", mu, conf.level)
+# T-test 
+
+```
+  
+  <br>
+  <br>
+  
+#### Example 2
+
+  <br>
+  <br>
+  
+  A company's marketing department claims that the average time of their staffs late to work in a day is 5 minutes with a standard deviation of 1.29 minutes. As a human resource manager, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes for a day is determined and recorded. The sample data is indicated as below:
+  
+  <br>
+  <br>
+  
+```{r message=F, echo=FALSE}
+Times2 <- tibble::tribble(
+  ~Number, ~Late.time.in.minutes,
+        1,                     3,
+        2,                     5,
+        3,                     0,
+        4,                     4,
+        5,                     7,
+        6,                     4,
+        7,                     4,
+        8,                     0,
+        9,                     0,
+       10,                    10,
+       11,                     1,
+       12,                     8,
+       13,                     3,
+       14,                     9,
+       15,                     3
+  )
+
+require(rhandsontable)
+rhandsontable(Times2, rowHeaders = NULL,
+               digits = 3, useTypes = FALSE, search = FALSE,
+               width = NULL, height = NULL)
+
+```
+  
+  <br>
+  <br>
+  
+```{r eval=FALSE}
+
+late_time_min= read.csv(file.choose())
+# Read file into R
+
+late_time_min= late_time_min$Late.time.in.minutes                          
+# Store data into "late_time_min" 
+
+t.test(late_time_min, alternative="greater", mu=5, conf.level = 0.95)  
+# T-test with 5% significance level
+
+```
+  
+  <br>
+  <br>
+  
+```{r comment=NA, echo=F, message=F}
+
+late_time_min= read.csv(file.choose())
+# Read file into R
+
+late_time_min= late_time_min$Late.time.in.minutes                          
+# Store data into "late_time_min" 
+
+t.test(late_time_min, alternative="greater", mu=5, conf.level = 0.95)  
+
+```
+  
+  <br>
+  <br>
+  
+  From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.2271 is greater than significance level which is equal to 0.05. Besides, the population mean, $\mu$ which is equal to 5 minutes is also within the 95% confidence interval (4.22706, Inf). Thus, the average time of marketing staffs late to work for a working day is 5 minutes.
+  
+  <br>
+  <br>
+
+### Small sample size with known standard deviation, $\sigma$
+  
+  <br>
+  <br>
+  
+  Perform [Z-test](#Z-test) instead of T-test for small sample size when:
+  
+  * The sample size is small (n<30).
+  * Standard deviation, $\sigma$ of the population is **known**.
+  * The sample is drawn from a population which is approximately normally distributed.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <a id="Hypothesis test about a population proportion, p"></a>Hypothesis test about a population proportion, p
+
+  <br>
+  <br>
+  
+  In tests of hypothesis about a single population proportion, p, we perform Z-test when the sample is large (np>5, nq>5).  
+  
+  <br>
+  <br>
+  
+### Z-test (proprotion)
+
+  <br>
+  <br>
+
+```{r eval=F}
+
+prop.test(x, n, p, alternative="greater", correct=FALSE, conf.level = 0.95)            
+# Z-test for population proportion
+
+```
+  
+  <br>
+  <br>
+  
+#### Example3
+
+  <br>
+  <br>
+  
+  A company's marketing department claims that at most 80% of their staffs are late to work within 5 minutes for a working day. The human resource department of the company is responsible to test the claims whether it is valid or not in order to improve company's reputation. A sample 120 marketing staffs showed that 89 of them are late to work within 5 minutes in a working day.
+
+  <br>
+  <br>
+  
+```{r eval=F}
+
+prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0.975)            
+
+```
+  
+  <br>
+  <br>
+  
+```{r message=F, echo=F, comment=NA}
+
+prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0.975)    
+
+```
+  
+  <br>
+  <br>
+  
+  From the above summary, p-value = 0.9449 is greater than the significance level, $\alpha$ which is equal to 0.025. Besides, the population proportion, p= 0.8 is also falls within the 97.5% confidence interval (0.6567, 1.0000). Thus, the claim by the marketing department is true which is at most 80% of their staff are late to work within 5 minutes for a working day.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## The End
+
+  <br>
+  <br>
+  
+  Hope you won't compute test statistic or p-value like:
+  
+  <br>
+  
+  ![](https://media3.giphy.com/media/xUPGcqaVH1cDeKZTBS/giphy-downsized.gif?cid=e1bb72ff5afc0d586a353651777054cf)  
+
+  
+
+  
+  
+
+ 
+  
+  
+
+
+  
+  
+
+  
+  
+
+  
+
+  
+  
+  
+  
+
+
