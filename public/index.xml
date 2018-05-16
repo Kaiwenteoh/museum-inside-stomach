@@ -23,6 +23,19 @@ Blog This blog is about statistics, operations research, data analysis and its v
     </item>
     
     <item>
+      <title>Discete Probability Distribution</title>
+      <link>/post/discete-probability-distribution/</link>
+      <pubDate>Wed, 09 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/discete-probability-distribution/</guid>
+      <description>Discrete Probability Distribution
+A discrete random variable is a random variable that has countable values. For an example, number of breads sold in bakery during a given day is a discrete random variable. When a random variable is discrete, then it will have a discrete probability distribution. The following examples are some of the discrete probability distributions that commonly used in statistics:
+Bernoulli distribution
+Binomail distribution
+Geometric distribution</description>
+    </item>
+    
+    <item>
       <title>Data wrangling with dplyr, tidyr and gsub()</title>
       <link>/post/data-wrangling/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>

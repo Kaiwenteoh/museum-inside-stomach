@@ -3,6 +3,7 @@ title: Data wrangling with dplyr, tidyr and gsub()
 author: Kaiwen Teoh
 date: '2018-05-02'
 categories:
+  - Wrangle
 tags:
   - Wrangle
   - R
