@@ -284,7 +284,7 @@ Times2 <- tibble::tribble(
        15,                     3
   )
 
-require(rhandsontable)
+library(rhandsontable)
 rhandsontable(Times2, rowHeaders = NULL,
                digits = 3, useTypes = FALSE, search = FALSE,
                width = NULL, height = NULL)
