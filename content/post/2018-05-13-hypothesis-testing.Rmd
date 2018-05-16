@@ -133,47 +133,48 @@ z.test(x, alternative = "two.sided"/"greater"/"less", mu, sigma.x, conf.level)
   <br>
   
 ```{r message=F, echo=FALSE, warning=FALSE}
-Time <- tibble::tribble(
-  ~Number., ~Late.time.in.minutes,
-         1,                    10,
-         2,                     3,
-         3,                    10,
-         4,                     5,
-         5,                     8,
-         6,                     4,
-         7,                     6,
-         8,                     4,
-         9,                     0,
-        10,                     9,
-        11,                     9,
-        12,                     0,
-        13,                     6,
-        14,                     7,
-        15,                     5,
-        16,                    10,
-        17,                     6,
-        18,                    10,
-        19,                     1,
-        20,                     9,
-        21,                     1,
-        22,                     6,
-        23,                     7,
-        24,                     1,
-        25,                     1,
-        26,                     1,
-        27,                     7,
-        28,                     7,
-        29,                     0,
-        30,                     6,
-        31,                     9,
-        32,                     3,
-        33,                     4,
-        34,                     1,
-        35,                     5
+
+Times <- tibble::tribble(
+  ~Number, ~Late.time.in.minutes,
+        1,                     2,
+        2,                    10,
+        3,                     7,
+        4,                     8,
+        5,                     8,
+        6,                     0,
+        7,                     7,
+        8,                     6,
+        9,                     1,
+       10,                     0,
+       11,                     1,
+       12,                     5,
+       13,                     8,
+       14,                     8,
+       15,                     6,
+       16,                     9,
+       17,                     9,
+       18,                    10,
+       19,                     6,
+       20,                     1,
+       21,                     4,
+       22,                     0,
+       23,                     7,
+       24,                     7,
+       25,                     3,
+       26,                    10,
+       27,                     0,
+       28,                     1,
+       29,                     3,
+       30,                     6,
+       31,                     1,
+       32,                     4,
+       33,                     0,
+       34,                     0,
+       35,                    10
   )
 
 require(rhandsontable)
-rhandsontable(Time, rowHeaders = NULL,
+rhandsontable(Times, rowHeaders = NULL,
                digits = 3, useTypes = FALSE, search = FALSE,
                width = NULL, height = NULL)
 
@@ -266,52 +267,30 @@ t.test(x, alternative = "two.sided"/"greater"/"less", mu, conf.level)
   
 ```{r message=F, echo=FALSE}
 
-Times <- tibble::tribble(
+Times_2 <- tibble::tribble(
   ~Number, ~Late.time.in.minutes,
-        1,                     2,
-        2,                    10,
-        3,                     7,
-        4,                     8,
-        5,                     8,
-        6,                     0,
+        1,                     9,
+        2,                     3,
+        3,                     9,
+        4,                     3,
+        5,                    10,
+        6,                     1,
         7,                     7,
-        8,                     6,
-        9,                     1,
-       10,                     0,
-       11,                     1,
-       12,                     5,
-       13,                     8,
-       14,                     8,
-       15,                     6,
-       16,                     9,
-       17,                     9,
-       18,                    10,
-       19,                     6,
-       20,                     1,
-       21,                     4,
-       22,                     0,
-       23,                     7,
-       24,                     7,
-       25,                     3,
-       26,                    10,
-       27,                     0,
-       28,                     1,
-       29,                     3,
-       30,                     6,
-       31,                     1,
-       32,                     4,
-       33,                     0,
-       34,                     0,
-       35,                    10
+        8,                     2,
+        9,                     5,
+       10,                     7,
+       11,                     6,
+       12,                     9,
+       13,                     6,
+       14,                     1,
+       15,                     6
   )
 
-require(knitr)
-require(kableExtra)
-kable_styling(
-              kable(Times, digits = 3, row.names = FALSE, align = "c",
-              caption = NULL, format = "html"),
-        bootstrap_options = c("striped", "hover", "condensed"),
-        position = "center", full_width = FALSE) 
+require(DT)
+datatable(Times_2, rownames = FALSE, caption = NULL,
+               filter = "top", escape = FALSE, style = "default",
+               width = NULL, height = NULL)
+
 
 ```
   

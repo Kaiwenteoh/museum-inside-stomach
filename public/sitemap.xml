@@ -30,13 +30,13 @@
   </url>
   
   <url>
-    <loc>/categories/statistics/</loc>
+    <loc>/tags/statistics/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/statistics/</loc>
+    <loc>/categories/statistics/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -54,13 +54,13 @@
   </url>
   
   <url>
-    <loc>/categories/wrangle/</loc>
+    <loc>/tags/wrangle/</loc>
     <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/wrangle/</loc>
+    <loc>/categories/wrangle/</loc>
     <lastmod>2018-05-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
