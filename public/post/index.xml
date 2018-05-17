@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>About</title>
+      <link>/post/about/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/about/</guid>
+      <description>About MeHi, my name is Kaiwen Teoh but you can just call me Kalvin. I’m a second-year student who is currently studying Statistical Computing and Operations Research at University Tunku Abdul Rahman in Perak, Malaysia. I don’t cook but I do like carbonara spaghetti, ikan bakar, almond dessert, and many more.
+
+BlogThis blog is about statistics, operations research, data analysis and its visualization while using mainly R, and a little bit of my life.</description>
+    </item>
     
     <item>
       <title>Hypothesis testing</title>
