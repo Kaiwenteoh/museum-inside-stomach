@@ -25,7 +25,9 @@
 
 
 Introduction
-A hypothesis test is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error.</description>
+A hypothesis test is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error.
+
+The null hypothesis which denoted by \(H_0\) is a statement that the value of population parameter is assumed to be true until it is declared false.</description>
     </item>
     
     <item>
