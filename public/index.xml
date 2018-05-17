@@ -13,10 +13,10 @@
     
     <item>
       <title>About</title>
-      <link>/post/about/</link>
+      <link>/about/about/</link>
       <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/post/about/</guid>
+      <guid>/about/about/</guid>
       <description>About MeHi, my name is Kaiwen Teoh but you can just call me Kalvin. I’m a second-year student who is currently studying Statistical Computing and Operations Research at University Tunku Abdul Rahman in Perak, Malaysia. I don’t cook but I do like carbonara spaghetti, ikan bakar, almond dessert, and many more.
 
 BlogThis blog is about statistics, operations research, data analysis and its visualization while using mainly R, and a little bit of my life.</description>
@@ -48,15 +48,6 @@ The null hypothesis which denoted by \(H_0\) is a statement that the value of po
       
       <guid>/post/data-wrangling/</guid>
       <description>During my semester one in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM Watsons annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/about/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>About  html body { font-family: &#39;Raleway&#39;, sans-serif; background-color: white; } :root { --accent: purple; --border-width: 5px ; }   hljs.initHighlightingOnLoad();   $(document).on(&#39;click&#39;, function() { $(&#39;.collapse&#39;).collapse(&#39;hide&#39;); })    About      Home Posts Projects 博客 About             About May 2, 2018  About Me Hi, my name is Kaiwen Teoh but you can just call me Kalvin.</description>
     </item>
     
   </channel>
