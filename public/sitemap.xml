@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/post/2018-05-19/import-world-bank-data/</loc>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/hypothesis-testing/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
   </url>
@@ -29,14 +34,26 @@
   </url>
   
   <url>
+    <loc>/tags/import/</loc>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/import/</loc>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -54,7 +71,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-19T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
