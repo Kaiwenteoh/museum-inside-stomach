@@ -23,15 +23,6 @@
     </item>
     
     <item>
-      <title>A hint on how to read World Bank data into R</title>
-      <link>/post/import-world-bank-data/</link>
-      <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/import-world-bank-data/</guid>
-      <description>World Bank is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download open data in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.</description>
-    </item>
-    
-    <item>
       <title>Hypothesis testing</title>
       <link>/post/hypothesis-testing/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
