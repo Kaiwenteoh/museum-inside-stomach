@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics on Utopia</title>
+    <link>/categories/statistics/</link>
+    <description>Recent content in Statistics on Utopia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 13 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hypothesis testing</title>
+      <link>/post/hypothesis-testing/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/hypothesis-testing/</guid>
+      <description>MENU*Introduction
+
+*Hypothesis test about a population mean, \(\mu\)
+
+*Hypothesis test about a population proportion, p
+
+
+Introduction
+A hypothesis test is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error.
+
+The null hypothesis which denoted by \(H_0\) is a statement that the value of population parameter is assumed to be true until it is declared false.</description>
+    </item>
+    
+  </channel>
+</rss>
