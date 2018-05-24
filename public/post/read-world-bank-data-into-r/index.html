@@ -166,7 +166,7 @@
 
 
     <br> <div class="text-justify"><p><br> <br></p>
-<p><a href="https://data.worldbank.org/">World Bank</a> is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download open data in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.csv( ), read.xlsx( ) functions.</p>
+<p><a href="https://data.worldbank.org/">World Bank</a> is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download it in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option for you to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.csv( ), read.xlsx( ) functions.</p>
 <p><br> <br> <br> <br></p>
 <div id="installation" class="section level2">
 <h2>Installation</h2>
@@ -236,7 +236,7 @@ WDIsearch(&#39;green.\*house.\*gass.\*emissions&#39;)
 <div id="convert-class-of-searched-outputoptional" class="section level2">
 <h2>Convert class of searched output(optional)</h2>
 <hr />
-<p>It seems like the output produced above is a little bit messy. So, let’s convert the class of matrix into another data type, data frame. Before that, we have to store the output produced by a named variable.</p>
+<p>It seems like the output produced above is a little bit messy. So, let’s convert the class of the matrix into another data type, data frame. Before that, we have to store the output produced by a named variable.</p>
 <p><br> <br></p>
 <pre class="r"><code>data= WDIsearch(&#39;greenhouse&#39;)
 # Store in &#39;data&#39;</code></pre>
@@ -250,7 +250,7 @@ WDIsearch(&#39;green.\*house.\*gass.\*emissions&#39;)
 <p><br> <br></p>
 <pre class="r"><code>data= as.data.frame(WDIsearch(&#39;greenhouse&#39;))</code></pre>
 <p><br> <br></p>
-<p>Both of the above ways produce the same output in data frame.</p>
+<p>Both of the above ways produce the same output in data frame format.</p>
 <p><br> <br></p>
 <pre><code>          indicator
 1    EN.ATM.GHGT.ZG
@@ -335,7 +335,7 @@ Other greenhouse gas emissions, HFC, PFC and SF6 (thousand metric tons of CO2 eq
 <pre class="r"><code>ghge= WDI(indicator=&#39;EN.ATM.GHGT.KT.CE&#39;, country= c(&#39;MY&#39;,&#39;SG&#39;,&#39;CA&#39;),start= 2000,end= 2004)
 # Download data and store into &#39;ghge&#39;.</code></pre>
 <p><br> <br></p>
-<p>Now, we have our dataset in tidy format. If you notice, you will found that total greenhouse gas emissions in kilotonnes in different years for different countries are combined under a named ‘year’ column.</p>
+<p>Now, we have our dataset in tidy format. If you notice, you will found that total greenhouse gas emissions in kilotonnes in different years for these three countries are combined under a named ‘year’ column.</p>
 <p><br> <br></p>
 <pre><code>   iso2c   country EN.ATM.GHGT.KT.CE year
 1     CA    Canada        1040136.77 2004
@@ -387,7 +387,7 @@ colnames(ghge)= columnnames
 <div id="resources" class="section level2">
 <h2>Resources</h2>
 <hr />
-<p>For more details and information, please refer documentation for <a href="https://www.rdocumentation.org/packages/WDI/versions/2.5">WDI</a></p>
+<p>For more details and information, refer documentation for <a href="https://www.rdocumentation.org/packages/WDI/versions/2.5">WDI</a></p>
 <p><br> <br> <br> <br> <br></p>
 <p><img src="https://media0.giphy.com/media/cVo0s2rC0zFLi/giphy-downsized.gif?cid=e1bb72ff5b053e763739574d36806f59" width="350" height="300"></p>
 </div>

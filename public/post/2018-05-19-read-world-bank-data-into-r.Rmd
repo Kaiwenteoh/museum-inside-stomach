@@ -14,7 +14,7 @@ tags:
   <br>
   <br>
   
-  [World Bank](https://data.worldbank.org/) is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download open data in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.csv( ), read.xlsx( ) functions.
+  [World Bank](https://data.worldbank.org/) is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download it in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option for you to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.csv( ), read.xlsx( ) functions.
   
   
   <br>
@@ -145,7 +145,7 @@ WDIsearch('greenhouse')
 
 ----------------------------------------------------
   
-  It seems like the output produced above is a little bit messy. So, let's convert the class of matrix into another data type, data frame. Before that, we have to store the output produced by a named variable.
+  It seems like the output produced above is a little bit messy. So, let's convert the class of the matrix into another data type, data frame. Before that, we have to store the output produced by a named variable.
   
   <br>
   <br>
@@ -189,7 +189,7 @@ data= as.data.frame(WDIsearch('greenhouse'))
   <br>
   <br>
   
-  Both of the above ways produce the same output in data frame.
+  Both of the above ways produce the same output in data frame format.
   
   <br>
   <br>
@@ -284,7 +284,7 @@ ghge= WDI(indicator='EN.ATM.GHGT.KT.CE', country= c('MY','SG','CA'),start= 2000,
   <br>
   <br>
   
-  Now, we have our dataset in tidy format. If you notice, you will found that total greenhouse gas emissions in kilotonnes in different years for different countries are combined under a named 'year' column.
+  Now, we have our dataset in tidy format. If you notice, you will found that total greenhouse gas emissions in kilotonnes in different years for these three countries are combined under a named 'year' column.
   
   <br>
   <br>
@@ -339,7 +339,7 @@ ghge
 
 ---------------------------------
 
-  For more details and information, please refer documentation for [WDI](https://www.rdocumentation.org/packages/WDI/versions/2.5)
+  For more details and information, refer documentation for [WDI](https://www.rdocumentation.org/packages/WDI/versions/2.5)
   
   <br>
   <br>
