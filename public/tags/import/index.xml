@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Import on Utopia</title>
+    <link>/tags/import/</link>
+    <description>Recent content in Import on Utopia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 19 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/import/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A hint on how to read World Bank data into R</title>
+      <link>/post/read-world-bank-data-into-r/</link>
+      <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/read-world-bank-data-into-r/</guid>
+      <description>World Bank is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download open data in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.</description>
+    </item>
+    
+  </channel>
+</rss>
