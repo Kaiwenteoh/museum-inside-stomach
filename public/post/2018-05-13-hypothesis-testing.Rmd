@@ -424,12 +424,6 @@ prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0
   <br>
   
   ![](https://media3.giphy.com/media/xUPGcqaVH1cDeKZTBS/giphy-downsized.gif?cid=e1bb72ff5afc0d586a353651777054cf)
-  
-  <br>
-  <br>
-  
-  <a href="#top">Back to top</a>
-  
  
 
   
