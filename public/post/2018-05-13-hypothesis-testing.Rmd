@@ -428,7 +428,9 @@ prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0
   <br>
   <br>
   
-   <a href="#top">Back to top</a>
+  <a href="#top">Back to top</a>
+  
+ 
 
   
 
