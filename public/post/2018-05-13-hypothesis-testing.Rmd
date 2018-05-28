@@ -41,19 +41,37 @@ tags:
   <br>
   <br>
 
-  A **hypothesis test** is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which include null hypothesis, alternative hypothesis, test statistics, tail of test, type I and type II error. 
+  A **hypothesis test** is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which includes null hypothesis, alternative hypothesis, test statistics, p-value, tail of test, type I and type II error. 
   
   <br>
   
-  The **null hypothesis** which denoted by $H_0$ is a statement that the value of population parameter is assumed to be true until it is declared false.  
+  A **population paramter** is a statistical measure that for a given population is fixed and can be used in the description of that population. Proportion, $p$, population mean, $\mu$ and population standard deviation, $\sigma$ are the examples of population paramter.
   
   <br>
   
-  The **alternative hypothesis** which denoted by $H_1$ is a statement that the population parameter has a value that somehow differs from the value specified in the null hypothesis, $H_0$. 
+  The **null hypothesis** which denoted by $H_0$ is a statement that the value of population parameter is assumed to be true until it is declared false. For an instance, the mean height of male secondary school students is 162 cm. The population parameter here is refer to the mean height and its value, 162 cm is true unless we prove it's wrong. 
   
   <br>
+  
+  $H_0$: $\mu$ = 162cm
+  
+  <br>
+  
+  The **alternative hypothesis** which denoted by $H_1$ is a statement that the population parameter has a value that somehow differs from the value specified in the null hypothesis, $H_0$. Let continue from previous example, our null hypothesis, $H_0$  has stated that the mean height of male secondary school students is 162 cm, so our alternative hypothesis for this case, $H_1$ here can be the mean height of male secondary school students not equal to 162 cm, less than 162 cm or more than 162 cm.
+  
+  <br>
+  
+   $H_1$: $\mu$ $\ne$ 162cm          
+   $H_1$: $\mu$ < 162cm  
+   $H_1$: $\mu$ > 162cm 
+   
+   <br>
   
   While **test statistic** is a value that we compute from the sample of data and it is crucial in determining whether our null hypothesis, $H_0$ is rejected or not.
+  
+  <br>
+  
+  A **p-value** is a probability that we compute from test statistic. It's just like test statistic which used in decision making on whether we should reject the claim from null hypothesis, $H_0$.
   
   <br>
   
@@ -61,14 +79,19 @@ tags:
   
   <br>
 
-  A **type I error** occurs when we reject the true null hypothesis, $H_O$ while a **type II error** occurs when a false null hypothesis, $H_0$ is not rejected. The probability of making type I error is known as significance level, $\alpha$ and the probability of making type II error is denoted as $\beta$.
+  A **type I error** occurs when we reject the true null hypothesis, $H_O$ while a **type II error** occurs when a false null hypothesis, $H_0$ is not rejected. The probability of making type I error is known as significance level, $\alpha$ and the probability of making type II error is denoted as $\beta$. From the previous example, type I error is the error occured when we reject the true mean height of male secondary school students which is 162 cm. However, type II error from above case is the mean height of male secondary school students is not equal to 162 cm but we do not reject the false statement. 
   
+  <br>
+  <br>
+  <br>
+  <br>
   <br>
   <br>
   <br>
   <br>
   
 # One-Sample Hypothesis Testing
+
 
   <br>
   <br>
@@ -78,7 +101,7 @@ tags:
   <br>
   <br>
   
-  In tests of hypothesis about a single population mean, $\mu$, we perform Z-test when the sample is large (n $\ge$ 30).  
+  In tests of hypothesis about a single population mean, $\mu$, we perform Z-test when the sample is sufficiently large (n $\ge$ 30).  
   
   <br>
   <br>
@@ -127,7 +150,7 @@ z.test(x, alternative = "two.sided"/"greater"/"less", mu, sigma.x, conf.level)
   <br>
   <br>
   
-  A company's marketing department claims that the average time of their staffs late to work in a working day is 5 minutes with a standard deviation of 1.29 minutes. The human resource department of the company wishes to check the claims whether it is true or not in order to improve company's reputation. A sample of 35 people from marketing department late to work time in minutes is determined and recorded. The collected sample data for a working day is indicated as below:
+  A marketing department of a branch company claims that the mean time of their staffs late to work on Monday is 5 minutes with a standard deviation of 1.29 minutes. The human resource department from headquarter of that company wishes to check the claims whether it is true or not in order to improve employee's discipline. A sample of 35 people from marketing department late to work time in minutes on a Monday is determined and recorded. The collected sample data is indicated as below:
   
   <br>
   <br>
@@ -226,7 +249,18 @@ z.test(late_to_work, alternative="two.sided", mu=5, sigma.x=1.29,conf.level = 0.
   <br>
   <br>
   
-  From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.359 is greater than the significance level, $\alpha$ which is equal to 0.05. Besides, the population mean, $\mu$ which is equal to 5 minutes is also within the 95% confidence interval (4.37263, 5.22737). Thus, the average time of marketing staffs late to work for a day is 5 minutes.
+  $H_0$: $\mu$ = 5 minutes                                                           
+  
+  $H_1$: $\mu$ $\ne$ 5 minutes
+  
+  <br>
+  <br>
+  
+  We reject our null hypothesis, $H_0$ when p-value is less than significance level, $\alpha$. From the above summary, p = 0.359 is greater than $\alpha$ = 0.05.  
+  
+  We also can have a look on 95% confidence interval. Since the population mean, $\mu$ 5 minutes is within the 95% confidence interval = (4.37263 , 5.22737), so we do not reject the null hypothesis, $H_0$.  
+  
+  Thus, there is insuficient evidence to conclude that the mean late time of marketing staffs to work on Monday is not equal to 5 minutes. 
   
   <br>
   <br>
@@ -263,7 +297,7 @@ t.test(x, alternative = "two.sided"/"greater"/"less", mu, conf.level)
   <br>
   <br>
   
-  A company's marketing department claims that the average time of their staffs late to work in a day is 5 minutes with a standard deviation of 1.29 minutes. As a human resource manager, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes for a day is determined and recorded. The sample data is indicated as below:
+  A company's marketing department claims that the average time of their staffs late to work on Monday is 5 minutes with a standard deviation of 1.29 minutes. As a human resource staff, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes on a Monday is determined and recorded. The sample data is indicated as below:
   
   <br>
   <br>
@@ -333,8 +367,20 @@ t.test(late_time_min, alternative="greater", mu=5, conf.level = 0.95)
   <br>
   <br>
   
-  From the above summary, it can be concluded that the claim by the marketing department is true and valid since p-value= 0.2271 is greater than significance level which is equal to 0.05. Besides, the population mean, $\mu$ which is equal to 5 minutes is also within the 95% confidence interval (4.22706, Inf). Thus, the average time of marketing staffs late to work for a working day is 5 minutes.
+  $H_0$: $\mu$ = 5 minutes                                                           
   
+  $H_1$: $\mu$ > 5 minutes
+  
+  <br>
+  
+  From the above summary, p = 0.2271 is greater than $\alpha$ = 0.05.  
+  
+  We also can have a look on 95% confidence interval. Since the population mean, $\mu$ 5 minutes is within the 95% confidence interval = (4.22706 , Inf), so we do not reject the null hypothesis, $H_0$.  
+  
+  Thus, there is insuficient evidence to conclude that the mean late time to work of marketing staffs on Monday is not equal to 5 minutes.
+  
+  <br>
+  <br>
   <br>
   <br>
 
@@ -353,7 +399,11 @@ t.test(late_time_min, alternative="greater", mu=5, conf.level = 0.95)
   <br>
   <br>
   <br>
-  
+  <br>
+  <br>
+  <br>
+  <br>
+ 
 ## <a id="Hypothesis test about a population proportion, p"></a>Hypothesis test about a population proportion, p
 
   <br>
@@ -384,14 +434,14 @@ prop.test(x, n, p, alternative="greater", correct=FALSE, conf.level = 0.95)
   <br>
   <br>
   
-  A company's marketing department claims that at most 80% of their staffs are late to work within 5 minutes for a working day. The human resource department of the company is responsible to test the claims whether it is valid or not in order to improve company's reputation. A sample 120 marketing staffs showed that 89 of them are late to work within 5 minutes in a working day.
+  A company's marketing department claims that at most 30% of their staffs are tend to be late to work in July. In September of the same year, staffs from human resource department wish to know whether the percentage has changed(become lower) after the training program was conducted in August. A sample of 250 marketing staffs showed that 39 of them are tend to be late to work.
 
   <br>
   <br>
   
 ```{r eval=F}
 
-prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0.975)            
+prop.test(39, 250, 0.30, alternative = "less", correct= FALSE, conf.level = 0.975)            
 
 ```
   
@@ -400,20 +450,31 @@ prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0
   
 ```{r message=F, echo=F, comment=NA}
 
-prop.test(89, 120, 0.80, alternative = "greater", correct= FALSE, conf.level = 0.975)    
+prop.test(39, 250, 0.30, alternative = "less", correct= FALSE, conf.level = 0.975)    
 
 ```
   
   <br>
   <br>
   
-  From the above summary, p-value = 0.9449 is greater than the significance level, $\alpha$ which is equal to 0.025. Besides, the population proportion, p= 0.8 is also falls within the 97.5% confidence interval (0.6567, 1.0000). Thus, the claim by the marketing department is true which is at most 80% of their staff are late to work within 5 minutes for a working day.
+  $H_0$ = $p$ = 0.30
+  
+  $H_1$ = $p$ < 0.30
+  
+  <br>
+  
+  From the above summary, the p-value less than the significance level, $\alpha$ which is equal to 0.025. 
+  
+  Besides, the population proportion, $p$ = 0.3 is not within the 97.5% confidence interval (0.0000000 , 0.2061459). 
+  
+  Thus, there is sufficient evidence to conclude that the percentage of marketing staffs tend to be late to work after attended training program is less than 30%.
   
   <br>
   <br>
   <br>
   <br>
-  
+  <br>
+
 ## The End
 
   <br>
