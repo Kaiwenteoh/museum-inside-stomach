@@ -45,7 +45,7 @@ tags:
   
   <br>
   
-  A **population paramter** is a statistical measure that for a given population is fixed and can be used in the description of that population. Proportion, $p$, population mean, $\mu$ and population standard deviation, $\sigma$ are the examples of population paramter.
+  A **population parameter** is a statistical measure that for a given population is fixed and can be used in the description of that population. Proportion, $p$, population mean, $\mu$ and population standard deviation, $\sigma$ are the examples of population parameter.
   
   <br>
   
