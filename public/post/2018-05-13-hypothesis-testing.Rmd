@@ -480,7 +480,7 @@ prop.test(39, 250, 0.30, alternative = "less", correct= FALSE, conf.level = 0.97
   <br>
   <br>
   
-  Hope you won't compute test statistic or p-value like:
+  What I did without computing software.
   
   <br>
   
