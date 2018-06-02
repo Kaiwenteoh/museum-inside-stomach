@@ -36,10 +36,10 @@ weight: 5
   <br>
   <br>
   
-  <img src="https://lh3.googleusercontent.com/Dfp1MdvwrOy73c9NqoH0HosteRiE6qi4x1VJ0TWgclXWnm98p6DYqiC1Dy3NBFC8iJLf9RuQ3eD4hYfUqqTsrF1wtIlSTNs6S9-SldBuhfVFcgVPSxUpBzoLSsTlujdBAJB-8YAb=w2400" height="200px" width="350px" style="float: left; padding-right: 80px;">
+  <img src="https://lh3.googleusercontent.com/Dfp1MdvwrOy73c9NqoH0HosteRiE6qi4x1VJ0TWgclXWnm98p6DYqiC1Dy3NBFC8iJLf9RuQ3eD4hYfUqqTsrF1wtIlSTNs6S9-SldBuhfVFcgVPSxUpBzoLSsTlujdBAJB-8YAb=w2400" height="170px" width="320px" style="float: left; padding-right: 80px;">
   
 
-  <img src="https://lh3.googleusercontent.com/MDR-0POORnOLkFm0xfRWCYM49vDT-PYoa-XI2yAdAggxBO9nInDG0mxZuBifeYRItfaaQHw8MoXaLQUI13P_AA_UrnjVMTPzOm3fR7CWSP_9gotN_lKSmhUjWckUZgEPmzrodnIX=w2400" height="200px" width="290px">
+  <img src="https://lh3.googleusercontent.com/MDR-0POORnOLkFm0xfRWCYM49vDT-PYoa-XI2yAdAggxBO9nInDG0mxZuBifeYRItfaaQHw8MoXaLQUI13P_AA_UrnjVMTPzOm3fR7CWSP_9gotN_lKSmhUjWckUZgEPmzrodnIX=w2400" height="170px" width="320px">
   
   
   
