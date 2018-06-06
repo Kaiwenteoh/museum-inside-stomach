@@ -23,6 +23,21 @@
     </item>
     
     <item>
+      <title>Correlation and Covariance</title>
+      <link>/post/correlation-and-covariance/</link>
+      <pubDate>Sat, 02 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/correlation-and-covariance/</guid>
+      <description>RECIPEIntro to Correlation Intro to Covariance Difference between Correlation and Covariance Hypothesis test about a correlation, \(\rho\) Testing difference between two correlation coefficients Visualizing correlationScatter plot Visualizing correlation matricesSymbolic Number Coding
+Scatter Plot Matrix
+Network Plot
+Correlogram
+Correlation
+What?
+A correlation, r is a statistical way that describes the degree of relationship between two quantitative variables.</description>
+    </item>
+    
+    <item>
       <title>A hint on how to read World Bank data into R</title>
       <link>/post/read-world-bank-data-into-r/</link>
       <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
