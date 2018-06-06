@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+         
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Correlation and Covariance</title>
+        
+        <style>
+
+    html body {
+        font-family: 'Ubuntu', sans-serif;
+        background-color: white;
+    }
+
+    :root {
+        --accent: purple;
+        --border-width:  5px ;
+    }
+
+</style>
+
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css"> 
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+ 
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script> 
+
+    <script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
+ <meta name="generator" content="Hugo 0.38.2" />
+        
+
+        
+        
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-118759884-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+
+          gtag('config', 'UA-118759884-1');
+        </script>
+        
+    </head>
+
+    
+    
+    <script type="text/javascript" async
+      src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    
+
+    <body>
+         
+        <nav class="navbar navbar-default navbar-fixed-top">
+
+            <div class="container">
+
+                <div class="navbar-header">
+
+                    <a class="navbar-brand visible-xs" href="#">Correlation and Covariance</a>
+
+                    <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div class="collapse navbar-collapse">
+
+                    
+                        <ul class="nav navbar-nav">
+                            
+                                <li><a href="/">Home</a></li>
+                            
+                                <li><a href="/post/">Posts</a></li>
+                            
+                                <li><a href="/project/">Projects</a></li>
+                            
+                                <li><a href="http://kalvinkaiwen.blogspot.my/">博客</a></li>
+                            
+                                <li><a href="/about/about/">About</a></li>
+                            
+                        </ul>
+                    
+
+                    
+                        <ul class="nav navbar-nav navbar-right">
+                            
+                                <li class="navbar-icon"><a href="mailto:me@example.com"><i class="fa fa-envelope-o"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://github.com/Kaiwenteoh/museum-inside-stomach"><i class="fa fa-github"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://twitter.com/Kalvin_kaiwen"><i class="fa fa-twitter"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.linkedin.com/in/kaiwen-teoh/"><i class="fa fa-linkedin"></i></a></li>
+                            
+                                <li class="navbar-icon"><a href="https://www.facebook.com/kalvinkaiwen"><i class="fa fa-facebook"></i></a></li>
+                            
+                        </ul>
+                    
+
+                </div>
+
+            </div>
+
+        </nav>
+
+
+<main>
+
+    <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/correlation-and-covariance/">Correlation and Covariance</a></h4>
+    <h5>June 2, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/regression"><kbd class="item-tag">Regression</kbd></a>
+    
+
+</div>
+
+
+    <br> <div class="text-justify"><div id="recipe" class="section level1">
+<h1>RECIPE</h1>
+<hr />
+<ul>
+<li><p><a href="#Correlation">Intro to Correlation</a> <br></p></li>
+<li><p><a href="#Covariance">Intro to Covariance</a> <br></p></li>
+<li><p><a href="#Correlation%20vs%20Covariance">Difference between Correlation and Covariance</a> <br></p></li>
+<li><p><a href="#Testing%20Hypothesis%20About%20a%20Correlation%20Coefficient">Hypothesis test about a correlation, <span class="math inline">\(\rho\)</span></a> <br></p></li>
+<li><p><a href="#Testing%20Difference%20Between%20Two%20Corrrelation%20Coefficients">Testing difference between two correlation coefficients</a> <br></p></li>
+<li>Visualizing correlation
+<ul>
+<li><a href="#Scatter%20Plot">Scatter plot</a> <br></li>
+</ul></li>
+<li>Visualizing correlation matrices
+<ul>
+<li><a href="#Symbolic%20Number%20Coding">Symbolic Number Coding</a><br />
+</li>
+<li><a href="#Scatter%20Plot%20Matrix">Scatter Plot Matrix</a><br />
+</li>
+<li><a href="#Network%20Plot">Network Plot</a><br />
+</li>
+<li><a href="#Correlogram">Correlogram</a></li>
+</ul>
+<p><br> <br> <br> <br> <br> <br></p></li>
+</ul>
+</div>
+<div id="correlation" class="section level1">
+<h1><a id="Correlation"></a>Correlation</h1>
+<p><br> <br></p>
+<div id="what" class="section level2">
+<h2>What?</h2>
+<p><br></p>
+<p>A <strong>correlation</strong>, r is a statistical way that describes the degree of relationship between two quantitative variables.</p>
+<p>A positive correlation means that when one variable increase, the other variable also increase and when one variable decrease, the other variable decrease. While negative correlation exists when one variable increase, the other variable decrease.</p>
+<p><br> <br></p>
+</div>
+<div id="why" class="section level2">
+<h2>Why?</h2>
+<p><br></p>
+<p>Correlation is important as it describes the direction (positive or negative) and also strength (weak, strong) of a relationship between two variables. For an example, a correlation, r can be used to explain the degree of association between GPA and study time of student in hours. And the relationships between these two variables doesn’t necessarily mean “causality” (cause and effect). It means that correlation, in this case, does not imply that the change in GPA is affected by the study time in hours and vice versa. So, no matter what variable, in this case, is used as a response variable or a predictor variable, the correlation coefficient is still the same.</p>
+<p><br> <br></p>
+</div>
+<div id="how" class="section level2">
+<h2>How?</h2>
+<p><br></p>
+<p>Correlation, r has the value that lies between -1 to 1 (from negative correlation to positive correlation).</p>
+<ul>
+<li>when r= 0, there is no linear relationship between two variables.</li>
+<li>when r= -1, there is a strong negative correlation between two variables.</li>
+<li>when r= +1, there is a strong positive correlation between two variables.</li>
+</ul>
+<p><br></p>
+<p>The formula for calculating correlation, r between two quantitative variables is:</p>
+<p><br></p>
+<p><span class="math display">\[r = \frac {{S}{xy}}{\sqrt {{S}{xx}{S}_{yy}}}\]</span><br />
+<br></p>
+<ul>
+<li>S<sub>xy</sub> is the sum of product of difference between each x value and its mean, <span class="math inline">\(\bar{X}\)</span> and difference between each y value and its mean, <span class="math inline">\(\bar{Y}\)</span>.</li>
+<li>S<sub>xx</sub> is the sum of square of difference between each x value and its mean, <span class="math inline">\(\bar{X}\)</span>.</li>
+<li>S<sub>yy</sub> is the sum of square of difference between each y value and its mean, <span class="math inline">\(\bar{Y}\)</span>.</li>
+</ul>
+<p><br> <br></p>
+<p>To compute correlation, r by using statistical language, R use cor( ) function.</p>
+<p><br></p>
+<pre class="r"><code>cor(x,y)
+# correlation between 2 variables.</code></pre>
+<p><br> <br></p>
+</div>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p><br></p>
+<p>“women” is a dataset from base library of R which consists of height and weight of 15 womens.</p>
+<p><br></p>
+<pre class="r"><code>
+women
+   height weight
+1      58    115
+2      59    117
+3      60    120
+4      61    123
+5      62    126
+6      63    129
+7      64    132
+8      65    135
+9      66    139
+10     67    142
+11     68    146
+12     69    150
+13     70    154
+14     71    159
+15     72    164
+
+cor(women$height, women$weight)
+[1] 0.9954948</code></pre>
+<p><br></p>
+<p>Since r= 0.995, so there is a strong positive linear relationship between weight and height of women.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="covariance" class="section level1">
+<h1><a id="Covariance"></a>Covariance</h1>
+<p><br> <br></p>
+<div id="what-1" class="section level2">
+<h2>What?</h2>
+<p><br></p>
+<p>Covariance is a measure of how a change in one variable is associated with changes in the second variable. For a variable, variance measures the deviation of data from its mean. When coming to two variables, covariance is used to indicate the direction of a linear relationship between the two variables. If both variables tend to increase or decrease together, the covariance coefficient is positive. If one variable tends to increase while the other variable decrease, the covariance coefficient is negative.</p>
+<p><br> <br></p>
+</div>
+<div id="why-1" class="section level2">
+<h2>Why?</h2>
+<p><br></p>
+<p>Covariance can be used to describe the direction (positive, negative) of a linear relationship between two variables. In addition, covariance is a measure of correlation and it can be used to determine the correlation coefficient, r between two variables. The formula for calculating correlation, r between two variables using covariance is:</p>
+<p><br></p>
+<p><span class="math display">\[r = \frac {cov(x,y)}{\sqrt {{S}{x}{S}_{y}}}\]</span> <br></p>
+<ul>
+<li>where cov(x,y) is the covariance of variable x and y.</li>
+<li>S<sub>x</sub> is the standard deviation of x.</li>
+<li>S<sub>y</sub> is the standard deviation of y.</li>
+</ul>
+<p><br> <br></p>
+</div>
+</div>
+<div id="how-1" class="section level1">
+<h1>How?</h1>
+<p><br></p>
+<p>Unlike correlation, r, covariance is not limited to the range of -1 to +1. If both variables tend to increase or decrease together, the covariance coefficient is positive. A positive covariance coefficient indicates that there is a positive linear relationship between two variables while negative covariance coefficient explains that there is a negative linear relationship between two variables. The formula for calculating covariance coefficient is:</p>
+<p><br></p>
+<p><span class="math display">\[cov{(x,y)} = \frac{\sum\limits_{i=1}^{n}{(x_i-\overline{x}) \cdot (y_i-\overline{y})} }{n-1}\]</span> <br></p>
+<p>To perform computation of covariance between two variables in R, use cov( ) function.</p>
+<p><br></p>
+<pre class="r"><code>cov(x,y)
+# covariance of x and y.</code></pre>
+<p><br> <br></p>
+<div id="example-1" class="section level2">
+<h2>Example</h2>
+<p><br></p>
+<pre class="r"><code>
+cov(women$height,women$weight)
+[1] 69</code></pre>
+<p><br></p>
+<p>Positive covariance coefficient, 69 indicates that there is positive linear relationship between weight and height of women.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="correlation-vs-covariance" class="section level1">
+<h1><a id="Correlation vs Covariance"></a>Correlation vs Covariance</h1>
+<p><br> <br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Correlation
+</th>
+<th style="text-align:center;">
+Covariance
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+No unit
+</td>
+<td style="text-align:center;">
+Expressed in units
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Value lies from -1 to +1
+</td>
+<td style="text-align:center;">
+Value lies from negative infinity to positive infinity
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Direction and magnitude of linear relationship is known
+</td>
+<td style="text-align:center;">
+Magnitude of linear relationship is not known.
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+cor(x,y)
+</td>
+<td style="text-align:center;">
+cov(x,y)
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="testing-hypothesis-about-a-correlation-coefficient" class="section level1">
+<h1><a id="Testing Hypothesis About a Correlation Coefficient"></a>Testing Hypothesis About a Correlation Coefficient</h1>
+<p><br> <br></p>
+<div id="what-2" class="section level2">
+<h2>What?</h2>
+<p><br></p>
+<p>Hypothesis testing is the idea to make use of sample statistics to make inference about population parameters. The sample statistics in this case refers to correlation coefficient, r. By convention, the population parameter that we use here is <span class="math inline">\(\rho\)</span>.</p>
+<p><br> <br></p>
+</div>
+<div id="why-2" class="section level2">
+<h2>Why?</h2>
+<p><br></p>
+<p>Normally, we know which variable should be regarded as a response variable, Y. Consider evaluating whether or not a linear relationship exists between human fertility rate and radiotherapy treatments. For this example, it is obvious that human fertility rate should be used as a response variable to be predicted by radiotherapy treatments.</p>
+<p>What if we have the case like it is not obvious to treat which variable as a response variable? For an instance, we wish to evaluate whether or not a linear relationship exists between height and weight of women. In this situation, t-test for correlation coefficient is used instead of Z-test for testing:</p>
+<p><br></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho\)</span> = 0.</li>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho\)</span> <span class="math inline">\(\ge\)</span> 0.</li>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho\)</span> <span class="math inline">\(\le\)</span> 0.</li>
+</ul>
+<p><br> <br></p>
+</div>
+<div id="how-2" class="section level2">
+<h2>How?</h2>
+<p><br></p>
+<div id="step1" class="section level3">
+<h3>Step1:</h3>
+<p><br></p>
+<p>Define null hypothesis, <span class="math inline">\(H_0\)</span> and alternative hypothesis, <span class="math inline">\(H_1\)</span>.</p>
+<p><br></p>
+</div>
+<div id="step2" class="section level3">
+<h3>Step2:</h3>
+<p><br></p>
+<p>Set confidence level.</p>
+<p><br></p>
+</div>
+<div id="step3" class="section level3">
+<h3>Step3:</h3>
+<p><br></p>
+<p>Compute test statistic, t with formula:</p>
+<p><br></p>
+<p><span class="math display">\[t = \frac{r{\sqrt{N-2}}}{\sqrt {1-{r}^{2}}}\]</span></p>
+<p><br></p>
+</div>
+<div id="step4" class="section level3">
+<h3>Step4:</h3>
+<p><br></p>
+<p>Reject <span class="math inline">\(H_0\)</span> if p-value is less than significance level, <span class="math inline">\(\alpha\)</span>.</p>
+<p><br></p>
+</div>
+<div id="step5" class="section level3">
+<h3>Step5:</h3>
+<p><br></p>
+<p>Conclusion.</p>
+<p><br> <br></p>
+<p>To have a hypothesis testing for correlation coefficient in r, use cor.test(). There are two ways of syntax which provide the same output.</p>
+<p>The first one is making use of <strong>with( ) function</strong>. With( ) function allow us to include the name of column inside the cor.test( ) function without the use of dollar sign, ‘$’.</p>
+<p><br></p>
+<pre class="r"><code>with(dataname, cor.test(column_name1, column_name2, alternative= &quot;greater&quot; / &quot;less&quot; / &quot;two.sided&quot;))</code></pre>
+<p><br></p>
+<p>or</p>
+<p><br></p>
+<p>The second one is making use of <strong>dollar sign, ‘$’</strong> which has much shorter code compare to with( ) function.</p>
+<p><br></p>
+<pre class="r"><code>cor.test(dataname$column_name1, data$column_name2, alternative= &quot;greater&quot; / &quot;less&quot; / &quot;two.sided&quot;)</code></pre>
+<p><br> <br></p>
+</div>
+</div>
+<div id="example-2" class="section level2">
+<h2>Example</h2>
+<p><br></p>
+<p>I’m using back the ‘women’ dataset from the previous example as illustration. Assuming that we know in advance that correlation of height and weight should be positive (the increase of height will increase the weight also). So, our null hypothesis, <span class="math inline">\(H_0\)</span> and alternative hypothesis, <span class="math inline">\(H_1\)</span> is set as:</p>
+<p><br></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\rho\)</span> <span class="math inline">\(\le\)</span> 0</li>
+<li><span class="math inline">\(H_1\)</span>: <span class="math inline">\(\rho\)</span> <span class="math inline">\(&gt;\)</span> 0</li>
+</ul>
+<p><br></p>
+<p>We set our significance level, <span class="math inline">\(\alpha\)</span> equal to 5%.</p>
+<p><br></p>
+<pre class="r"><code>
+cor.test(women$height, women$weight, alternative= &quot;greater&quot;)
+
+    Pearson&#39;s product-moment correlation
+
+data:  women$height and women$weight
+t = 37.855, df = 13, p-value = 5.455e-15
+alternative hypothesis: true correlation is greater than 0
+95 percent confidence interval:
+ 0.9883962 1.0000000
+sample estimates:
+      cor 
+0.9954948 </code></pre>
+<p><br></p>
+<p>Since the p-value is less than 0.05 (5%), there is sufficient evidence to conclude that at <span class="math inline">\(\alpha\)</span>=0.05, there is a significant linear relationship between height and weight of women.</p>
+<p>Note that correlation coefficient, r is also known as Pearson’s product-moment correlation coefficient.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+<p>It’s 12 am.</p>
+<p><br></p>
+<p><img src="https://media.giphy.com/media/inH7GSP1hqMus/giphy.gif" width="300" height="250"></p>
+<p><br> <br></p>
+</div>
+</div>
+<div id="testing-difference-between-two-corrrelation-coefficients" class="section level1">
+<h1><a id="Testing Difference Between Two Corrrelation Coefficients"></a>Testing Difference Between Two Corrrelation Coefficients</h1>
+<p><br> <br></p>
+<div id="what-3" class="section level2">
+<h2>What?</h2>
+<p><br></p>
+<p>To compare the correlation coefficient, r between two variables from two different groups, we can also do a hyopothesis testing on it.</p>
+<p><br></p>
+</div>
+<div id="why-3" class="section level2">
+<h2>Why?</h2>
+<p><br></p>
+<p>To determine the correlation coefficient, r for two different groups whether it’s different from each other for the same variables.</p>
+<p><br></p>
+</div>
+<div id="how-3" class="section level2">
+<h2>How?</h2>
+<p><br></p>
+<div id="step1-1" class="section level3">
+<h3>Step1:</h3>
+<p><br></p>
+<p>Z-test is used instead of t-test. And this require us to do a transformation which is called <strong>Fisher’s r to z transformation</strong>. The formula of the transformation is:</p>
+<p><br></p>
+<p><span class="math display">\[Z_r= \frac{[ln(1+r)-ln(1-r)]}{2}\]</span></p>
+<p><br></p>
+</div>
+<div id="step2-1" class="section level3">
+<h3>Step2:</h3>
+<p><br></p>
+<p>Set the confidence level.</p>
+<p><br></p>
+</div>
+<div id="step3-1" class="section level3">
+<h3>Step3:</h3>
+<p><br></p>
+<p>The test statistic, Z is:</p>
+<p><br></p>
+<p><span class="math display">\[Z= \frac{Z_1-Z_2}{{\sigma}_{z_1-z_2}}\]</span></p>
+<p><br></p>
+<p>where <span class="math display">\[{\sigma}_{z_1-z_2}= \sqrt{\frac{1}{{N}_{1}-{3}}+\frac{1}{{N}_{2}-{3}}}\]</span></p>
+<p><br></p>
+</div>
+<div id="step4-1" class="section level3">
+<h3>Step4:</h3>
+<p><br></p>
+<p>Reject <span class="math inline">\(H_0\)</span> if p-value is less than significance level, <span class="math inline">\(\alpha\)</span>.</p>
+<p><br></p>
+</div>
+<div id="step5-1" class="section level3">
+<h3>Step5:</h3>
+<p><br></p>
+<p>Conclusion.</p>
+<p><br> <br></p>
+<p>To testing the difference between two correlation coefficients, use r.test( ) function in <strong>psych</strong> package.</p>
+<p><br></p>
+<pre class="r"><code>install.packages(&quot;psych&quot;)
+# install package
+
+library(&quot;psych&quot;)
+# load library
+
+r.test(r12=r_1, n=n_1, r34=y, n2=n_2, twotailed = T/F)
+# hypothesis testing</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="example-3" class="section level2">
+<h2>Example</h2>
+<p><br></p>
+<p>Suppose we have two groups, Chemistry students and students from Engineering programme. For the sample of 100 students from Chemistry programme, the correlation between GPA and study time in hours is 0.789 while the correlation between these two variables for the 120 students from Engineering programme is 0.673. To test the difference between two correlation coefficients whether it’s the same at <span class="math inline">\(\alpha\)</span> = 0.05:</p>
+<p><br></p>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: <span class="math inline">\(r_1\)</span> = <span class="math inline">\(r_2\)</span></li>
+<li><span class="math inline">\(H_1\)</span>: <span class="math inline">\(r_1\)</span> <span class="math inline">\(\ne\)</span> <span class="math inline">\(r_2\)</span></li>
+</ul>
+<p><br></p>
+<pre class="r"><code>library(&quot;psych&quot;)
+
+r.test(r12=0.789, n=100, r34=0.673, n2=120, twotailed = T)</code></pre>
+<pre><code>Correlation tests 
+Call:r.test(n = 100, r12 = 0.789, r34 = 0.673, n2 = 120, twotailed = T)
+Test of difference between two independent correlations 
+ z value 1.84    with probability  0.07</code></pre>
+<p><br></p>
+<p>Since the p-value is not less than 0.05, thus there is insufficient evidence to conclude that there is a difference between two correlation coefficients.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="correlation-matrix" class="section level1">
+<h1>Correlation Matrix</h1>
+<p><br></p>
+<p>In addition, to find a single correlation coefficient, r for two quantitative variables, we can also make use of cor( ) function to find a correlation matrix for multiple quantitative variables. This enables us to have a look at the relationship between multiple variables during the stage of exploratory analysis.</p>
+<p><br></p>
+<pre class="r"><code>cor(x)
+# correlation for multiple variables in table
+# x is a dataset which consists of numerical variables.   </code></pre>
+<p><br></p>
+<div id="example-1-1" class="section level2">
+<h2>Example 1</h2>
+<p><br></p>
+<p>Let’s use one of the popular sample datasets from base library named ‘mtcars’ for the next illustration. By typing in ‘mtcars’ in r console, you will found that the ‘mtcars’ dataset consists of 11 numerical variables. To find all of the correlation coefficients, r at once in a table:</p>
+<p><br></p>
+<pre class="r"><code>
+cor(mtcars)
+            mpg        cyl       disp         hp        drat         wt
+mpg   1.0000000 -0.8521620 -0.8475514 -0.7761684  0.68117191 -0.8676594
+cyl  -0.8521620  1.0000000  0.9020329  0.8324475 -0.69993811  0.7824958
+disp -0.8475514  0.9020329  1.0000000  0.7909486 -0.71021393  0.8879799
+hp   -0.7761684  0.8324475  0.7909486  1.0000000 -0.44875912  0.6587479
+drat  0.6811719 -0.6999381 -0.7102139 -0.4487591  1.00000000 -0.7124406
+wt   -0.8676594  0.7824958  0.8879799  0.6587479 -0.71244065  1.0000000
+qsec  0.4186840 -0.5912421 -0.4336979 -0.7082234  0.09120476 -0.1747159
+vs    0.6640389 -0.8108118 -0.7104159 -0.7230967  0.44027846 -0.5549157
+am    0.5998324 -0.5226070 -0.5912270 -0.2432043  0.71271113 -0.6924953
+gear  0.4802848 -0.4926866 -0.5555692 -0.1257043  0.69961013 -0.5832870
+carb -0.5509251  0.5269883  0.3949769  0.7498125 -0.09078980  0.4276059
+            qsec         vs          am       gear        carb
+mpg   0.41868403  0.6640389  0.59983243  0.4802848 -0.55092507
+cyl  -0.59124207 -0.8108118 -0.52260705 -0.4926866  0.52698829
+disp -0.43369788 -0.7104159 -0.59122704 -0.5555692  0.39497686
+hp   -0.70822339 -0.7230967 -0.24320426 -0.1257043  0.74981247
+drat  0.09120476  0.4402785  0.71271113  0.6996101 -0.09078980
+wt   -0.17471588 -0.5549157 -0.69249526 -0.5832870  0.42760594
+qsec  1.00000000  0.7445354 -0.22986086 -0.2126822 -0.65624923
+vs    0.74453544  1.0000000  0.16834512  0.2060233 -0.56960714
+am   -0.22986086  0.1683451  1.00000000  0.7940588  0.05753435
+gear -0.21268223  0.2060233  0.79405876  1.0000000  0.27407284
+carb -0.65624923 -0.5696071  0.05753435  0.2740728  1.00000000</code></pre>
+<p><br></p>
+<p>You might found that the values of correlation are showed in 7 decimal places and it is quite messy. To change the decimal places of the values (round off), apply round ( ) function.</p>
+<p><br></p>
+<pre class="r"><code>round(x, digit place)
+# replace x with name of dataset</code></pre>
+<p><br></p>
+</div>
+<div id="example-2-1" class="section level2">
+<h2>Example 2</h2>
+<p><br></p>
+<p>To display the output of ‘mtcars’ dataset from the previous example in 2 decimal places, you have two options here.</p>
+<ul>
+<li>Store its output into a named variable first then only apply round( ) function.</li>
+<li>One shot to display the round off output in R console.</li>
+</ul>
+<p><br></p>
+<pre class="r"><code>
+data= cor(mtcars)
+# store output into &#39;data&#39;
+
+round(data, 2)
+       mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+# display output in 2 decimal places(round off)</code></pre>
+<p><br></p>
+<p>or</p>
+<p><br></p>
+<pre class="r"><code>
+round(cor(mtcars), 2)
+       mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb
+mpg   1.00 -0.85 -0.85 -0.78  0.68 -0.87  0.42  0.66  0.60  0.48 -0.55
+cyl  -0.85  1.00  0.90  0.83 -0.70  0.78 -0.59 -0.81 -0.52 -0.49  0.53
+disp -0.85  0.90  1.00  0.79 -0.71  0.89 -0.43 -0.71 -0.59 -0.56  0.39
+hp   -0.78  0.83  0.79  1.00 -0.45  0.66 -0.71 -0.72 -0.24 -0.13  0.75
+drat  0.68 -0.70 -0.71 -0.45  1.00 -0.71  0.09  0.44  0.71  0.70 -0.09
+wt   -0.87  0.78  0.89  0.66 -0.71  1.00 -0.17 -0.55 -0.69 -0.58  0.43
+qsec  0.42 -0.59 -0.43 -0.71  0.09 -0.17  1.00  0.74 -0.23 -0.21 -0.66
+vs    0.66 -0.81 -0.71 -0.72  0.44 -0.55  0.74  1.00  0.17  0.21 -0.57
+am    0.60 -0.52 -0.59 -0.24  0.71 -0.69 -0.23  0.17  1.00  0.79  0.06
+gear  0.48 -0.49 -0.56 -0.13  0.70 -0.58 -0.21  0.21  0.79  1.00  0.27
+carb -0.55  0.53  0.39  0.75 -0.09  0.43 -0.66 -0.57  0.06  0.27  1.00
+# one shot display the new output in 2 decimal places</code></pre>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="missing-value" class="section level1">
+<h1>Missing value</h1>
+<p><br></p>
+<p>Sometime we might get ‘NA’ as a result of cor( ) function. This is because of the dataset we put into the argument of cor( ) function consists of missing values. To encounter this kind of problem, apply <strong>use=“complete.obs”</strong> inside the function of cor( ) function. For more details about the usage of use( ) function, we can always refer the official documentation of correlation, covariance function by typing in ?cor or ?cov in R console.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="visualizing-correlation" class="section level1">
+<h1><a id="Visualizing correlation"></a>Visualizing correlation</h1>
+<p><br> <br></p>
+<div id="scatter-plot" class="section level2">
+<h2><a id="Scatter Plot"></a>Scatter Plot</h2>
+<p><br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-16-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br> <br> <br> <br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-17-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br> <br> <br> <br> <br></p>
+<p><strong>Scatter plot</strong> is a graphical way to show the relationship between two quantitative variables. To create a simple scatter plot in R, we can make use of R base graphics or download and install additional data visualization R packages like ‘ggplot2’, ‘ggvis’, ‘plotly’ and so on.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="visualizing-correlation-matrix" class="section level1">
+<h1><a id="Visualizing Correlation Matrix"></a>Visualizing Correlation Matrix</h1>
+<p><br> <br> <br></p>
+<div id="symbolic-number-coding" class="section level2">
+<h2><a id="Symbolic Number Coding"></a>Symbolic Number Coding</h2>
+<p><br> <br></p>
+<p>From previous example, we determine correlation coefficients for multiple variables in a table form like: <br> <br></p>
+<pre><code>       mpg   cyl  disp    hp
+mpg   1.00 -0.85 -0.85 -0.78
+cyl  -0.85  1.00  0.90  0.83
+disp -0.85  0.90  1.00  0.79
+hp   -0.78  0.83  0.79  1.00</code></pre>
+<p><br></p>
+<p>synmnum( ) function is a simple function to visualize the structured matrix. In short, this function encodes range of values inside a matrix table as symbols we set for ease of interpretation.</p>
+<p><br></p>
+<pre><code>     mpg cyl disp hp
+mpg  &amp;   +   +    + 
+cyl  +   &amp;   *    * 
+disp +   *   &amp;    * 
+hp   +   *   *    &amp; 
+attr(,&quot;legend&quot;)
+[1] -0.9 &#39;+&#39; -0.6 &#39;-&#39; -0.3 &#39;@&#39; 0 &#39;$&#39; 0.3 &#39;^&#39; 0.6 &#39;*&#39; 0.9 &#39;#&#39; 0.95 &#39;&amp;&#39; 1</code></pre>
+<p><br> <br></p>
+<p>If you notice, you will found that there’s a legend below the table, each value within an interval is represented by a symbol we set. For an example, the correlation between ‘mpg’ and ‘cyl’ is represented by a symbol, ‘+’, that means the correlation value for both of this variables is within the range of -0.90 and -0.60 (strong negative correlation).</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="scatter-plot-matrix" class="section level2">
+<h2><a id="Scatter Plot Matrix"></a>Scatter Plot Matrix</h2>
+<p><br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><br> <br></p>
+<p>A scatter plot matrix is a table of scatter plots in visualizing correlation matrix. The diagonal of the table is the list of variables inside of dataset, every variable on the rows of a table is our y-axis while every variable on the columns of a table will be our x-axis. For an example, let’s talk about the scatter plot above from the second row and first column, the ‘Solar.R’ is our y-axis and ‘Ozone’ is our x-axis.</p>
+<p>Then what about the scatter plot from the third row and second column?</p>
+<p>.<br />
+.<br />
+.<br />
+.</p>
+<p><br></p>
+<p>The answer is ‘Wind’ will be our y-axis while ‘Solar.R’ is our x-axis.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="network-plot" class="section level2">
+<h2><a id="Network Plot"></a>Network Plot</h2>
+<p><br> <br></p>
+<p>Network plot is one of the way to visualize correlation matrices. By using ‘corrr’ package, you can produce a network plot like:</p>
+<p><br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-21-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="correlogram" class="section level2">
+<h2><a id="Correlogram"></a>Correlogram</h2>
+<p><br> <br></p>
+<p>A correlogram is another graphical display of a correlation matrix. To avoid ourselves from making hundred of plots during the stage of exploratory analysis, this technique is used. A customized correlogram can be simply plotted by using the available functions from ‘corrplot’ package.</p>
+<p><br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><br> <br></p>
+<p>A full correlogram which all the correlation coefficients for every pair of numerical variables are represented by symbols of ‘ellipse’.</p>
+<p><br> <br> <br> <br></p>
+<p>You can also plot a upper or lower correlogram like:</p>
+<p><br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><br> <br> <br> <br></p>
+<p><img src="/post/correlation-and-covariance_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><br> <br></p>
+<p>This is a mixed correlogram which consists of correlation coefficient and pie chart for each pair of numerical variables. For the upper part of correlogram, every lower part of the correlation value is represented by a pie chart. A whole pie chart is equal to +ve 1 or -ve 1. By default, a red colour pie chart is representing for a negative correlation value, a blue colour pie chart is representing for a positive correlation value and white colour is used for a pie chart when two numerical variables have no correlation (r=0).</p>
+<p><br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="additional-information" class="section level1">
+<h1>Additional Information</h1>
+<p><br></p>
+<ul>
+<li><a href="https://briatte.github.io/ggcorr/">GGally</a></li>
+</ul>
+<p><br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="the-end" class="section level1">
+<h1>The End</h1>
+<p><br></p>
+<p>Visualizing correlation matrices is not only limited to few of these, but I have to stop here, hope to hear from you about the other ways which I’m not able to cover here.</p>
+<p><br></p>
+<div class="figure">
+<img src="https://media1.giphy.com/media/OtbZhLpNLxDoc/giphy-tumblr.gif?cid=e1bb72ff5b17d9af5a67724132f18e61" />
+
+</div>
+<p><br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/read-world-bank-data-into-r/">A hint on how to read World Bank data into R</a></h4>
+    <h5>May 19, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/import"><kbd class="item-tag">Import</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/hypothesis-testing/">Hypothesis testing</a></h4>
+    <h5>May 13, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/statistics"><kbd class="item-tag">Statistics</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/data-wrangling/">Data wrangling with dplyr, tidyr and gsub()</a></h4>
+    <h5>May 2, 2018</h5>
+    
+    <a href="/tags/wrangle"><kbd class="item-tag">Wrangle</kbd></a>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+
+</div>
+ 
+
+    
+
+    
+
+        <h4 class="page-header">Comments</h4>
+
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kaiwen-teoh" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
+
+        <footer>
+         
+         <p class="copyright text-muted">&copy; 2018 Kaiwen Teoh.
+         
+         All posts are released under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+              
+        </footer>
+       
+    </body>
+
+</html>
+
