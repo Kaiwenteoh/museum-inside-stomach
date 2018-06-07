@@ -474,7 +474,7 @@ prop.test(39, 250, 0.30, alternative = "less", correct= FALSE, conf.level = 0.97
   <br>
   <br>
   <br>
-
+  
 ## The End
 
   <br>
