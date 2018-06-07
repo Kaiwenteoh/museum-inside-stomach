@@ -38,6 +38,17 @@ A correlation, r is a statistical way that describes the degree of relationship 
     </item>
     
     <item>
+      <title>Temporary Post</title>
+      <link>/project/temporary-post/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/project/temporary-post/</guid>
+      <description>Still working on it, be right back!
+
+</description>
+    </item>
+    
+    <item>
       <title>A hint on how to read World Bank data into R</title>
       <link>/post/read-world-bank-data-into-r/</link>
       <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>

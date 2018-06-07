@@ -1,0 +1,15 @@
+---
+title: Temporary Post
+author: Kaiwen Teoh
+date: '2018-06-01'
+slug: temporary-post
+categories: []
+tags: []
+---
+Still working on it, be right back!
+
+  <br>
+  <br>
+  
+  ![](https://media3.giphy.com/media/fhAwk4DnqNgw8/giphy-downsized.gif?cid=e1bb72ff5b18fcd76966594a4da7f9f0)  
+
