@@ -23,6 +23,19 @@
     </item>
     
     <item>
+      <title>Create correlation network plot in a quick way</title>
+      <link>/post/create-a-correlation-network-plot/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/create-a-correlation-network-plot/</guid>
+      <description>Corrr package
+From my previous post, I did mention about the use of network plot from ‘corrr’ package in visualizing correlation matrices. So, for this time, I’m going to share with you on how to create your own correlation network plot by using ‘corrr’ package in a quick way and also how do we actually interpret it in short.
+
+Installation
+Download and install the ‘corrr’ and ‘magrittr’ R packages from CRAN for the first time before we can make use of the functions from it.</description>
+    </item>
+    
+    <item>
       <title>Correlation and Covariance</title>
       <link>/post/correlation-and-covariance/</link>
       <pubDate>Sat, 02 Jun 2018 00:00:00 +0000</pubDate>

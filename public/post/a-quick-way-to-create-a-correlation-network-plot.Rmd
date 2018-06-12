@@ -1,0 +1,216 @@
+---
+title: Create correlation network plot in a quick way
+author: Kaiwen Teoh
+date: '2018-06-08'
+categories:
+  - R
+  - Visualization
+tags:
+  - R
+  - Visualization
+slug: create-a-correlation-network-plot
+---
+  
+  <br>
+
+#Corrr package
+
+----------------------------------------------------------------
+
+
+<br>
+
+  From my previous [post](https://kaiwen.space/post/correlation-and-covariance/), I did mention about the use of network plot from 'corrr' package in visualizing correlation matrices. So, for this time, I'm going to share with you on how to create your own correlation network plot by using 'corrr' package in a quick way and also how do we actually interpret it in short.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+#Installation
+
+-----------------------------------------------------------------------
+  
+  
+<br>
+  
+  Download and install the 'corrr' and 'magrittr' R packages from CRAN for the first time before we can make use of the functions from it.
+  
+  <br>
+  
+```{r eval=F}
+
+install.packages("corr")
+
+install.packages("magrittr")
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# Network plot
+
+---------------------------------------------------------
+  
+  
+<br>
+  
+```{r eval=F}
+
+library('corrr')
+
+library('magrittr')
+
+iris[,1:4] %>% correlate( ) %>% network_plot(min_cor = 0.3)
+
+```
+  
+  <br>
+  <br>
+
+```{r echo=F, message=F, warning=F}
+
+library('corrr')
+
+library('magrittr')
+
+iris[,1:4] %>% correlate( ) %>% network_plot(min_cor = 0.3)
+
+```
+  
+  <br>
+  
+  We are required to load the 'corrr' package every time when we are intended to use the functions from it. 
+  
+  For this case, I select only the numeric variables from **'iris'** dataset in plotting a correlation network plot.
+  
+  **correlate( )** function works just like a **cor( )** function do, except it provides you the ability to render the output in a table form (tibble). 
+  
+  However, **min_cor** which included inside the function of **network_plot** specifies the minimum correlation value(in absolute scale) to be plotted in a network plot.
+  
+  '%>%' is a forward pipe operator from the package of 'magrittr'. It is used instead of parenthesis,'( )' because the use of parenthesis sometimes makes our R code difficult to read and understand. For an example:
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+network_plot(correlate(data_name), min_cor=0.3)
+
+```
+  
+  <br>
+  
+  Compare with the use of pipe operator, '%>%':
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+data_name %>% correlate( ) %>% network_plot(min_cor = 0.3)
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  All of these can be summarised as below:
+  
+  <br>
+  <br>
+  
+  
+Function                 | Description          
+-------------------------|-----------------------
+<br>                     |
+                         |
+correlate( )             |View all correlation values among variables in a table 
+<br>                     |
+                         |
+network_plot( )          |Plot a correlation network plot
+<br>                     |
+                         |
+min_cor                  |Minumum correlation value to be plotted in a network plot
+<br>                     |
+                         |
+%>%                      |Make R code easy to read and understand.
+  
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+#Explanation
+
+---------------------------------------------------------------------
+  
+  
+<br>
+
+  * Each path connecting from a variable to another variable represents a correlation value, r.
+  
+  * A path with blue color represents a positive correlation between two variables. 
+  
+  * A red color path indicates a negative correlation between two quantitative variables.
+  
+  * Width and transparency of path explain the magnitude of a correlation between two variables. The path is narrow and transparent when the strength of correlation between two variables is weak.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+##Example
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+mtcars[,1:5] %>% correlate( ) %>% network_plot(min_cor=0.3)
+
+```
+  
+  From the diagram above, it can be showed that the negative correlation between 'hp' and 'mpg' is much more stronger than the correlation between 'hp' and 'drat'.
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+cor(mtcars$hp,mtcars$mpg)
+# correlation coefficient for 'hp' and 'mpg'
+
+cor(mtcars$hp, mtcars$drat)
+# correlation coefficient for 'mpg' and 'drat'
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  That's all from me. Thank you.
+
+  
+  
+  
+  
+  
+
+   
+  
+  
+  
+  
+  

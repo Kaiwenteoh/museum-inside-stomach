@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Visualization on Utopia</title>
+    <link>/categories/visualization/</link>
+    <description>Recent content in Visualization on Utopia</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/visualization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Create correlation network plot in a quick way</title>
+      <link>/post/create-a-correlation-network-plot/</link>
+      <pubDate>Fri, 08 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/create-a-correlation-network-plot/</guid>
+      <description>Corrr package
+From my previous post, I did mention about the use of network plot from ‘corrr’ package in visualizing correlation matrices. So, for this time, I’m going to share with you on how to create your own correlation network plot by using ‘corrr’ package in a quick way and also how do we actually interpret it in short.
+
+Installation
+Download and install the ‘corrr’ and ‘magrittr’ R packages from CRAN for the first time before we can make use of the functions from it.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/post/create-a-correlation-network-plot/</loc>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/correlation-and-covariance/</loc>
     <lastmod>2018-06-02T00:00:00+00:00</lastmod>
   </url>
@@ -57,7 +62,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-06-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -69,13 +74,13 @@
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-06-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2018-06-02T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -112,6 +117,18 @@
   <url>
     <loc>/</loc>
     <lastmod>2018-05-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/visualization/</loc>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/visualization/</loc>
+    <lastmod>2018-06-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

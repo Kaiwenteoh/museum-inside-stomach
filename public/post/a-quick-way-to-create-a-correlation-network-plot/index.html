@@ -4,7 +4,7 @@
          
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Categories</title>
+        <title>Here&#39;s a quick way to create a correlation network plot</title>
         
         <style>
 
@@ -61,9 +61,6 @@
 <script>$(document).on('click', function() { $('.collapse').collapse('hide'); })</script>
  <meta name="generator" content="Hugo 0.38.2" />
         
-        <link href="/categories/index.xml" rel="alternate" type="application/rss+xml" title="Utopia" />
-        <link href="/categories/index.xml" rel="feed" type="application/rss+xml" title="Utopia" />
-        
 
         
         
@@ -93,7 +90,7 @@
 
                 <div class="navbar-header">
 
-                    <a class="navbar-brand visible-xs" href="#">Categories</a>
+                    <a class="navbar-brand visible-xs" href="#">Here&#39;s a quick way to create a correlation network plot</a>
 
                     <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse">
                         <span class="icon-bar"></span>
@@ -144,9 +141,7 @@
 
 <main>
 
-    <h2>Categories</h2>
-
-     <div class="item">
+    <div class="item">
 
     
     
@@ -155,26 +150,114 @@
     
     
 
-    <h4><a href="/categories/import/">Import</a></h4>
-    <h5>May 19, 2018</h5>
-    
-
-</div>
-  <div class="item">
-
-    
-    
-    
-
-    
-    
-
-    <h4><a href="/categories/r/">R</a></h4>
+    <h4><a href="/post/a-quick-way-to-create-a-correlation-network-plot/">Here&#39;s a quick way to create a correlation network plot</a></h4>
     <h5>June 8, 2018</h5>
     
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/visualization"><kbd class="item-tag">Visualization</kbd></a>
+    
 
 </div>
-  <div class="item">
+
+
+    <br> <div class="text-justify"><p><br></p>
+<div id="corrr-package" class="section level1">
+<h1>Corrr package</h1>
+<p><br></p>
+<p>From my previous <a href="https://kaiwen.space/post/correlation-and-covariance/">post</a>, I did mentioned about the use of network plot from ‘corrr’ package in visualizing correlation matrices. So, for this time, I’m going to show you how to create your own correlation network plot by using ‘corrr’ package in a quick way and also how do we actually intrepret it.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<p><br></p>
+<p>Download and install the ‘corrr’ and ‘magrittr’ R packages from CRAN for the first time before we can make use of the functions from it.</p>
+<p><br></p>
+<pre class="r"><code>install.packages(&quot;corr&quot;)
+
+install.packages(&quot;magrittr&quot;)</code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="network-plot" class="section level1">
+<h1>Network plot</h1>
+<p><br></p>
+<pre class="r"><code>library(&#39;corrr&#39;)
+
+library(&#39;magrittr&#39;)
+
+iris %&gt;% correlate( ) %&gt;% network_plot(min_cor = 0.3)</code></pre>
+<p><br> <br></p>
+<p>At first, we load the required R packages from the library(provided the packages are already installed). Next, we insert the sample dataset, ‘iris’ followed by correlate( ) function and then network_plot( ) function. min_cor specify the minimum correlation value(in absolute scale) to be plotted in a network plot and in this case, we specify all the correlation values among variables which below 0.3 and also -0.3 are eliminated which do not</p>
+<table style="width:65%;">
+<colgroup>
+<col width="31%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td>correlate( )</td>
+<td>View all correlation value among variables in table(tibble format)</td>
+</tr>
+<tr class="even">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+<tr class="even">
+<td>network_plot( )</td>
+<td>Plot a correlation network plot</td>
+</tr>
+<tr class="odd">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td>min_cor</td>
+<td>Minumum correlation value to be plotted in a network plot</td>
+</tr>
+<tr class="even">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+<tr class="even">
+<td>%&gt;%</td>
+<td>Forward pipe operator</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+</div>
+</div>
+
+    
+    
+
+    
+
+        <h4 class="page-header">Related</h4>
+
+         <div class="item">
 
     
     
@@ -183,9 +266,13 @@
     
     
 
-    <h4><a href="/categories/regression/">Regression</a></h4>
+    <h4><a href="/post/correlation-and-covariance/">Correlation and Covariance</a></h4>
     <h5>June 2, 2018</h5>
     
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/regression"><kbd class="item-tag">Regression</kbd></a>
+    
 
 </div>
   <div class="item">
@@ -197,42 +284,65 @@
     
     
 
-    <h4><a href="/categories/statistics/">Statistics</a></h4>
+    <h4><a href="/post/read-world-bank-data-into-r/">A hint on how to read World Bank data into R</a></h4>
+    <h5>May 19, 2018</h5>
+    
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
+    
+    <a href="/tags/import"><kbd class="item-tag">Import</kbd></a>
+    
+
+</div>
+  <div class="item">
+
+    
+    
+    
+
+    
+    
+
+    <h4><a href="/post/hypothesis-testing/">Hypothesis testing</a></h4>
     <h5>May 13, 2018</h5>
     
-
-</div>
-  <div class="item">
-
+    <a href="/tags/r"><kbd class="item-tag">R</kbd></a>
     
-    
-    
-
-    
-    
-
-    <h4><a href="/categories/visualization/">Visualization</a></h4>
-    <h5>June 8, 2018</h5>
+    <a href="/tags/statistics"><kbd class="item-tag">Statistics</kbd></a>
     
 
 </div>
  
 
-</main>
-
-
-
-<div class="pages">
-
-     
-    <a class="icon pages-icon" href="/categories/page/2/" rel="next">
-        <i class="fa fa-arrow-right"></i>
-    </a>
     
 
-</div>
+    
 
+        <h4 class="page-header">Comments</h4>
 
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "kaiwen-teoh" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+    
+
+</main>
 
         <footer>
          
