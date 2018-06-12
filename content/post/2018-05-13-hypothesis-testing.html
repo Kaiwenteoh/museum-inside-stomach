@@ -1,0 +1,656 @@
+---
+title: Hypothesis testing
+author: Kaiwen Teoh
+date: '2018-05-13'
+slug: hypothesis-testing
+categories:
+  - Statistics
+tags:
+  - R
+  - Statistics
+---
+
+
+
+<div id="menu" class="section level1">
+<h1>MENU</h1>
+<hr />
+<p>*<a href="#Introduction">Introduction</a></p>
+<p><br></p>
+<p>*<a href="#Hypothesis%20test%20about%20a%20population%20mean,%20$\mu$">Hypothesis test about a population mean, <span class="math inline">\(\mu\)</span></a></p>
+<p><br></p>
+<p>*<a href="#Hypothesis%20test%20about%20a%20population%20proportion,%20p">Hypothesis test about a population proportion, p</a></p>
+<p><br></p>
+<p><br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="introduction" class="section level1">
+<h1><a id="Introduction"></a>Introduction</h1>
+<p><br> <br></p>
+<p>A <strong>hypothesis test</strong> is a standard procedure for testing a claim about a property of a population. A formal hypothesis test has few components which includes null hypothesis, alternative hypothesis, test statistics, p-value, tail of test, type I and type II error.</p>
+<p><br></p>
+<p>A <strong>population parameter</strong> is a statistical measure that for a given population is fixed and can be used in the description of that population. Proportion, <span class="math inline">\(p\)</span>, population mean, <span class="math inline">\(\mu\)</span> and population standard deviation, <span class="math inline">\(\sigma\)</span> are the examples of population parameter.</p>
+<p><br></p>
+<p>The <strong>null hypothesis</strong> which denoted by <span class="math inline">\(H_0\)</span> is a statement that the value of population parameter is assumed to be true until it is declared false. For an instance, the mean height of male secondary school students is 162 cm. The population parameter here is refer to the mean height and its value, 162 cm is true unless we prove it’s wrong.</p>
+<p><br></p>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu\)</span> = 162cm</p>
+<p><br></p>
+<p>The <strong>alternative hypothesis</strong> which denoted by <span class="math inline">\(H_1\)</span> is a statement that the population parameter has a value that somehow differs from the value specified in the null hypothesis, <span class="math inline">\(H_0\)</span>. Let continue from previous example, our null hypothesis, <span class="math inline">\(H_0\)</span> has stated that the mean height of male secondary school students is 162 cm, so our alternative hypothesis for this case, <span class="math inline">\(H_1\)</span> here can be the mean height of male secondary school students not equal to 162 cm, less than 162 cm or more than 162 cm.</p>
+<p><br></p>
+<p><span class="math inline">\(H_1\)</span>: <span class="math inline">\(\mu\)</span> <span class="math inline">\(\ne\)</span> 162cm<br />
+<span class="math inline">\(H_1\)</span>: <span class="math inline">\(\mu\)</span> &lt; 162cm<br />
+<span class="math inline">\(H_1\)</span>: <span class="math inline">\(\mu\)</span> &gt; 162cm</p>
+<p><br></p>
+<p>While <strong>test statistic</strong> is a value that we compute from the sample of data and it is crucial in determining whether our null hypothesis, <span class="math inline">\(H_0\)</span> is rejected or not.</p>
+<p><br></p>
+<p>A <strong>p-value</strong> is a probability that we compute from test statistic. It’s just like test statistic which used in decision making on whether we should reject the claim from null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p><br></p>
+<p>A hypothesis test can be a <strong>one-tailed test</strong> or <strong>two-tailed test</strong> depends on the situation. A one-tailed test can be divided into a left-tailed and right-tailed test. If the sign in the null hypothesis, <span class="math inline">\(H_0\)</span> is equal (=), then a two-tailed test should be performed instead of one-tailed test. For a left-tailed test, the sign for the value of population parameter in the null hypothesis, <span class="math inline">\(H_0\)</span> should be greater than equal (<span class="math inline">\(\ge\)</span>), while for a right-tailed test, sign for the null hypothesis, <span class="math inline">\(H_0\)</span> is less than equal (<span class="math inline">\(\le\)</span>).</p>
+<p><br></p>
+<p>A <strong>type I error</strong> occurs when we reject the true null hypothesis, <span class="math inline">\(H_O\)</span> while a <strong>type II error</strong> occurs when a false null hypothesis, <span class="math inline">\(H_0\)</span> is not rejected. The probability of making type I error is known as significance level, <span class="math inline">\(\alpha\)</span> and the probability of making type II error is denoted as <span class="math inline">\(\beta\)</span>. From the previous example, type I error is the error occured when we reject the true mean height of male secondary school students which is 162 cm. However, type II error from above case is the mean height of male secondary school students is not equal to 162 cm but we do not reject the false statement.</p>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="one-sample-hypothesis-testing" class="section level1">
+<h1>One-Sample Hypothesis Testing</h1>
+<p><br> <br></p>
+<div id="hypothesis-test-about-a-population-mean-mu" class="section level2">
+<h2><a id="Hypothesis test about a population mean, $\mu$"></a>Hypothesis test about a population mean, <span class="math inline">\(\mu\)</span></h2>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population mean, <span class="math inline">\(\mu\)</span>, we perform Z-test when the sample is sufficiently large (n <span class="math inline">\(\ge\)</span> 30).</p>
+<p><br> <br></p>
+<div id="z-test" class="section level3">
+<h3><a id="Z-test"></a>Z-test</h3>
+<p><br> <br></p>
+<p>Since base library of R doesn’t provide the function of Z-test, so we have to download and install the required R package, <a href="https://www.rdocumentation.org/packages/BSDA/versions/1.2.0">“BSDA”</a> which stands for <strong>Basic Statistics and Data Analysis</strong> from CRAN.</p>
+<p><br> <br></p>
+<pre class="r"><code>install.packages(&quot;BSDA&quot;)          
+# Install required R package</code></pre>
+<p><br> <br></p>
+<p>Then we load the library in console and use z.test( ) function to check the claim of the null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p><br> <br></p>
+<pre class="r"><code>library(&quot;BSDA&quot;)                   
+# Load &quot;BSDA&quot; 
+
+z.test(x, alternative = &quot;two.sided&quot;/&quot;greater&quot;/&quot;less&quot;, mu, sigma.x, conf.level)
+# Z-test</code></pre>
+<p><br> <br> <br></p>
+<div id="example-1" class="section level4">
+<h4>Example 1</h4>
+<p><br> <br></p>
+<p>A marketing department of a branch company claims that the mean time of their staffs late to work on Monday is 5 minutes with a standard deviation of 1.29 minutes. The human resource department from headquarter of that company wishes to check the claims whether it is true or not in order to improve employee’s discipline. A sample of 35 people from marketing department late to work time in minutes on a Monday is determined and recorded. The collected sample data is indicated as below:</p>
+<p><br> <br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Number
+</th>
+<th style="text-align:center;">
+Late.time.in.minutes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+16
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+17
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+18
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+19
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+20
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+21
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+22
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+23
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+24
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+25
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+26
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+27
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+28
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+29
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+30
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+31
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+32
+</td>
+<td style="text-align:center;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+34
+</td>
+<td style="text-align:center;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+35
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br> <br></p>
+<pre class="r"><code>late_time= read.csv(file.choose())                       
+# Read file into R</code></pre>
+<p><br> <br></p>
+<pre class="r"><code>library(&quot;BSDA&quot;)
+# Load &quot;BSDA&quot; package
+
+late_to_work= late_time$Late.time.in.minutes                          
+# Store data into &quot;late_to_work&quot; 
+
+z.test(late_to_work, alternative=&quot;two.sided&quot;, mu=5, sigma.x=1.29,conf.level = 0.95)  
+# Z-test with 5% significance level</code></pre>
+<p><br> <br></p>
+<pre><code>
+    One-sample z-Test
+
+data:  late_to_work
+z = -0.91722, p-value = 0.359
+alternative hypothesis: true mean is not equal to 5
+95 percent confidence interval:
+ 4.37263 5.22737
+sample estimates:
+mean of x 
+      4.8 </code></pre>
+<p><br> <br></p>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu\)</span> = 5 minutes</p>
+<p><span class="math inline">\(H_1\)</span>: <span class="math inline">\(\mu\)</span> <span class="math inline">\(\ne\)</span> 5 minutes</p>
+<p><br> <br></p>
+<p>We reject our null hypothesis, <span class="math inline">\(H_0\)</span> when p-value is less than significance level, <span class="math inline">\(\alpha\)</span>. From the above summary, p = 0.359 is greater than <span class="math inline">\(\alpha\)</span> = 0.05.</p>
+<p>We also can have a look on 95% confidence interval. Since the population mean, <span class="math inline">\(\mu\)</span> 5 minutes is within the 95% confidence interval = (4.37263 , 5.22737), so we do not reject the null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p>Thus, there is insuficient evidence to conclude that the mean late time of marketing staffs to work on Monday is not equal to 5 minutes.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="t-test" class="section level3">
+<h3>T-test</h3>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population mean, <span class="math inline">\(\mu\)</span>, we perform T-test when</p>
+<ul>
+<li>The sample is small (n&lt;30).</li>
+<li>Standard deviation, <span class="math inline">\(\sigma\)</span> of the population is <strong>not known</strong>.</li>
+<li>The sample is drawn from a population which is approximately normally distributed.</li>
+</ul>
+<p><br> <br></p>
+<pre class="r"><code>t.test(x, alternative = &quot;two.sided&quot;/&quot;greater&quot;/&quot;less&quot;, mu, conf.level)
+# T-test </code></pre>
+<p><br> <br></p>
+<div id="example-2" class="section level4">
+<h4>Example 2</h4>
+<p><br> <br></p>
+<p>A company’s marketing department claims that the average time of their staffs late to work on Monday is 5 minutes with a standard deviation of 1.29 minutes. As a human resource staff, you are required to test the claims whether it is longer than 5 minutes. A sample of 15 people from marketing department late to work time in minutes on a Monday is determined and recorded. The sample data is indicated as below:</p>
+<p><br> <br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Number
+</th>
+<th style="text-align:center;">
+Late.time.in.minutes
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+6
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+7
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+8
+</td>
+<td style="text-align:center;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+9
+</td>
+<td style="text-align:center;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+10
+</td>
+<td style="text-align:center;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+12
+</td>
+<td style="text-align:center;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+13
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+14
+</td>
+<td style="text-align:center;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+15
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+<pre class="r"><code>late_time_min= read.csv(file.choose())
+# Read file into R
+
+late_time_min= late_time_min$Late.time.in.minutes                          
+# Store data into &quot;late_time_min&quot; 
+
+t.test(late_time_min, alternative=&quot;greater&quot;, mu=5, conf.level = 0.95)  
+# T-test with 5% significance level</code></pre>
+<p><br> <br></p>
+<pre><code>
+    One Sample t-test
+
+data:  late_time_min
+t = 0.76972, df = 14, p-value = 0.2271
+alternative hypothesis: true mean is greater than 5
+95 percent confidence interval:
+ 4.22706     Inf
+sample estimates:
+mean of x 
+      5.6 </code></pre>
+<p><br> <br></p>
+<p><span class="math inline">\(H_0\)</span>: <span class="math inline">\(\mu\)</span> = 5 minutes</p>
+<p><span class="math inline">\(H_1\)</span>: <span class="math inline">\(\mu\)</span> &gt; 5 minutes</p>
+<p><br></p>
+<p>From the above summary, p = 0.2271 is greater than <span class="math inline">\(\alpha\)</span> = 0.05.</p>
+<p>We also can have a look on 95% confidence interval. Since the population mean, <span class="math inline">\(\mu\)</span> 5 minutes is within the 95% confidence interval = (4.22706 , Inf), so we do not reject the null hypothesis, <span class="math inline">\(H_0\)</span>.</p>
+<p>Thus, there is insuficient evidence to conclude that the mean late time to work of marketing staffs on Monday is not equal to 5 minutes.</p>
+<p><br> <br> <br> <br></p>
+</div>
+</div>
+<div id="small-sample-size-with-known-standard-deviation-sigma" class="section level3">
+<h3>Small sample size with known standard deviation, <span class="math inline">\(\sigma\)</span></h3>
+<p><br> <br></p>
+<p>Perform <a href="#Z-test">Z-test</a> instead of T-test for small sample size when:</p>
+<ul>
+<li>The sample size is small (n&lt;30).</li>
+<li>Standard deviation, <span class="math inline">\(\sigma\)</span> of the population is <strong>known</strong>.</li>
+<li>The sample is drawn from a population which is approximately normally distributed.</li>
+</ul>
+<p><br> <br> <br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="hypothesis-test-about-a-population-proportion-p" class="section level2">
+<h2><a id="Hypothesis test about a population proportion, p"></a>Hypothesis test about a population proportion, p</h2>
+<p><br> <br></p>
+<p>In tests of hypothesis about a single population proportion, p, we perform Z-test when the sample is large (np&gt;5, nq&gt;5).</p>
+<p><br> <br></p>
+<div id="z-test-proprotion" class="section level3">
+<h3>Z-test (proprotion)</h3>
+<p><br> <br></p>
+<pre class="r"><code>prop.test(x, n, p, alternative=&quot;greater&quot;, correct=FALSE, conf.level = 0.95)            
+# Z-test for population proportion</code></pre>
+<p><br> <br></p>
+<div id="example3" class="section level4">
+<h4>Example3</h4>
+<p><br> <br></p>
+<p>A company’s marketing department claims that at most 30% of their staffs are tend to be late to work in July. In September of the same year, staffs from human resource department wish to know whether the percentage has changed(become lower) after the training program was conducted in August. A sample of 250 marketing staffs showed that 39 of them are tend to be late to work.</p>
+<p><br> <br></p>
+<pre class="r"><code>prop.test(39, 250, 0.30, alternative = &quot;less&quot;, correct= FALSE, conf.level = 0.975)            </code></pre>
+<p><br> <br></p>
+<pre><code>
+    1-sample proportions test without continuity correction
+
+data:  39 out of 250, null probability 0.3
+X-squared = 24.686, df = 1, p-value = 3.374e-07
+alternative hypothesis: true p is less than 0.3
+97.5 percent confidence interval:
+ 0.0000000 0.2061459
+sample estimates:
+    p 
+0.156 </code></pre>
+<p><br> <br></p>
+<p><span class="math inline">\(H_0\)</span> = <span class="math inline">\(p\)</span> = 0.30</p>
+<p><span class="math inline">\(H_1\)</span> = <span class="math inline">\(p\)</span> &lt; 0.30</p>
+<p><br></p>
+<p>From the above summary, the p-value less than the significance level, <span class="math inline">\(\alpha\)</span> which is equal to 0.025.</p>
+<p>Besides, the population proportion, <span class="math inline">\(p\)</span> = 0.3 is not within the 97.5% confidence interval (0.0000000 , 0.2061459).</p>
+<p>Thus, there is sufficient evidence to conclude that the percentage of marketing staffs tend to be late to work after attended training program is less than 30%.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+</div>
+<div id="the-end" class="section level2">
+<h2>The End</h2>
+<p><br> <br></p>
+<p>What I did without computing software.</p>
+<p><br></p>
+<div class="figure">
+<img src="https://media3.giphy.com/media/xUPGcqaVH1cDeKZTBS/giphy-downsized.gif?cid=e1bb72ff5afc0d586a353651777054cf" />
+
+</div>
+<p><br> <br></p>
+<p><a href="#top">Back to top</a></p>
+</div>
+</div>

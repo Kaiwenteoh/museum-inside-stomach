@@ -1,0 +1,145 @@
+---
+title: Create correlation network plot in a quick way
+author: Kaiwen Teoh
+date: '2018-06-08'
+categories:
+  - R
+  - Visualization
+tags:
+  - R
+  - Visualization
+slug: create-a-correlation-network-plot
+---
+
+
+
+<p><br></p>
+<div id="corrr-package" class="section level1">
+<h1>Corrr package</h1>
+<hr />
+<p><br></p>
+<p>From my previous <a href="https://kaiwen.space/post/correlation-and-covariance/">post</a>, I did mention about the use of network plot from ‘corrr’ package in visualizing correlation matrices. So, for this time, I’m going to share with you on how to create your own correlation network plot by using ‘corrr’ package in a quick way and also how do we actually interpret it in short.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="installation" class="section level1">
+<h1>Installation</h1>
+<hr />
+<p><br></p>
+<p>Download and install the ‘corrr’ and ‘magrittr’ R packages from CRAN for the first time before we can make use of the functions from it.</p>
+<p><br></p>
+<pre class="r"><code>install.packages(&quot;corr&quot;)
+
+install.packages(&quot;magrittr&quot;)</code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="network-plot" class="section level1">
+<h1>Network plot</h1>
+<hr />
+<p><br></p>
+<pre class="r"><code>library(&#39;corrr&#39;)
+
+library(&#39;magrittr&#39;)
+
+iris[,1:4] %&gt;% correlate( ) %&gt;% network_plot(min_cor = 0.3)</code></pre>
+<p><br> <br></p>
+<p><img src="/post/a-quick-way-to-create-a-correlation-network-plot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><br></p>
+<p>We are required to load the ‘corrr’ package every time when we are intended to use the functions from it.</p>
+<p>For this case, I select only the numeric variables from <strong>‘iris’</strong> dataset in plotting a correlation network plot.</p>
+<p><strong>correlate( )</strong> function works just like a <strong>cor( )</strong> function do, except it provides you the ability to render the output in a table form (tibble).</p>
+<p>However, <strong>min_cor</strong> which included inside the function of <strong>network_plot</strong> specifies the minimum correlation value(in absolute scale) to be plotted in a network plot.</p>
+<p>‘%&gt;%’ is a forward pipe operator from the package of ‘magrittr’. It is used instead of parenthesis,‘( )’ because the use of parenthesis sometimes makes our R code difficult to read and understand. For an example:</p>
+<p><br> <br></p>
+<pre class="r"><code>network_plot(correlate(data_name), min_cor=0.3)</code></pre>
+<p><br></p>
+<p>Compare with the use of pipe operator, ‘%&gt;%’:</p>
+<p><br> <br></p>
+<pre class="r"><code>data_name %&gt;% correlate( ) %&gt;% network_plot(min_cor = 0.3)</code></pre>
+<p><br> <br> <br> <br></p>
+<p>All of these can be summarised as below:</p>
+<p><br> <br></p>
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td>correlate( )</td>
+<td>View all correlation values among variables in a table</td>
+</tr>
+<tr class="even">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+<tr class="even">
+<td>network_plot( )</td>
+<td>Plot a correlation network plot</td>
+</tr>
+<tr class="odd">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="even">
+<td></td>
+</tr>
+<tr class="odd">
+<td>min_cor</td>
+<td>Minumum correlation value to be plotted in a network plot</td>
+</tr>
+<tr class="even">
+<td><br></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+</tr>
+<tr class="even">
+<td>%&gt;%</td>
+<td>Make R code easy to read and understand.</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="explanation" class="section level1">
+<h1>Explanation</h1>
+<hr />
+<p><br></p>
+<ul>
+<li><p>Each path connecting from a variable to another variable represents a correlation value, r.</p></li>
+<li><p>A path with blue color represents a positive correlation between two variables.</p></li>
+<li><p>A red color path indicates a negative correlation between two quantitative variables.</p></li>
+<li><p>Width and transparency of path explain the magnitude of a correlation between two variables. The path is narrow and transparent when the strength of correlation between two variables is weak.</p></li>
+</ul>
+<p><br> <br> <br> <br> <br></p>
+<div id="example" class="section level2">
+<h2>Example</h2>
+<p><br></p>
+<p><img src="/post/a-quick-way-to-create-a-correlation-network-plot_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>From the diagram above, it can be showed that the negative correlation between ‘hp’ and ‘mpg’ is much more stronger than the correlation between ‘hp’ and ‘drat’.</p>
+<p><br></p>
+<pre class="r"><code>
+cor(mtcars$hp,mtcars$mpg)
+[1] -0.7761684
+# correlation coefficient for &#39;hp&#39; and &#39;mpg&#39;
+
+cor(mtcars$hp, mtcars$drat)
+[1] -0.4487591
+# correlation coefficient for &#39;mpg&#39; and &#39;drat&#39;</code></pre>
+<p><br> <br> <br> <br> <br></p>
+<p>That’s all from me. Thank you.</p>
+</div>
+</div>

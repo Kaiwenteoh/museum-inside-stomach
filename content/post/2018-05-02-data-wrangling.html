@@ -1,0 +1,227 @@
+---
+title: Data wrangling with dplyr, tidyr and gsub()
+author: Kaiwen Teoh
+date: '2018-05-02'
+categories:
+  - Wrangle
+tags:
+  - Wrangle
+  - R
+slug: data-wrangling
+---
+
+
+
+<p>During my semester one in year two, I was given the opportunity to take part in Watson analytics competition which organised by IBM Watsons annually. Overall, it was a pleasant experience and I did learnt a lot of things from it. One of it is how to make use of R in wrangling datasets. It was my first time to join and words can’t explain my feelings and gratitude to my academic advisor for her approach, guidance and patience.</p>
+<p><br> <br> <br></p>
+<div id="reading-data-into-r" class="section level2">
+<h2>Reading data into R</h2>
+<p><br></p>
+<p>Before we store our dataset into a variable, we have to download it. <a href="https://data.worldbank.org/indicator/EN.ATM.GHGT.KT.CE">Here</a> is the open data which I took from <a href="https://data.worldbank.org/">The Word Bank</a>.</p>
+<p><br> <br></p>
+<pre class="r"><code>data1=read.csv(file.choose())         # read csv file into R and store in a named variable</code></pre>
+<p><br> <br></p>
+<p>‘file.choose( )’ function is an alternative for you to select downloaded file and read into R. You can also replace it with your filename in ‘filename.csv’ format inside the parentheses of ‘read.csv( )’ function if you prefer to do so.</p>
+<p><br> <br></p>
+<p>Print the output of ‘data1’ into R console in data frame occupies large space and it is undesirable. One way to deal with it is to change the class of ‘data1’ from data frame to tibble. And this require to load the <em>Tibble</em> package from <em>Tidyverse</em> library. <em>Tidyverse</em> is my personal favourite and it consists list of useful analysis R packages like <em>ggplot2</em>, <em>tidyr</em>, <em>dyplr</em> and more.</p>
+<p><br> <br></p>
+<pre class="r"><code>
+nrow(data1)                            # check number of rows for variable
+[1] 264
+
+ncol(data1)                            # check number of columns for variable
+[1] 47</code></pre>
+<p><br> <br></p>
+<pre class="r"><code>
+library(&#39;tidyverse&#39;)                   # load library
+
+class(data1)                           # determine the class of variable
+[1] &quot;data.frame&quot;
+
+data1=as.tibble(data1)                 # change class of variable and store
+
+class(data1)
+[1] &quot;tbl_df&quot;     &quot;tbl&quot;        &quot;data.frame&quot;</code></pre>
+<p><br> <br></p>
+<p>Class of ‘data1’ variable changed from data frame to tibble. And the following output is produced.</p>
+<p><br> <br></p>
+<pre class="r"><code>
+data1                                  # print output
+# A tibble: 264 x 47
+   Country.Name Country.Code Indicator.Name Indicator.Code   X1970   X1971
+   &lt;fct&gt;        &lt;fct&gt;        &lt;fct&gt;          &lt;fct&gt;            &lt;dbl&gt;   &lt;dbl&gt;
+ 1 Aruba        ABW          Total greenho~ EN.ATM.GHGT.K~  4.23e1  4.28e1
+ 2 Afghanistan  AFG          Total greenho~ EN.ATM.GHGT.K~  1.43e4  1.44e4
+ 3 Angola       AGO          Total greenho~ EN.ATM.GHGT.K~  6.06e4  3.92e4
+ 4 Albania      ALB          Total greenho~ EN.ATM.GHGT.K~  6.96e3  6.95e3
+ 5 Andorra      AND          Total greenho~ EN.ATM.GHGT.K~ NA      NA     
+ 6 Arab World   ARB          Total greenho~ EN.ATM.GHGT.K~  5.52e5  5.77e5
+ 7 United Arab~ ARE          Total greenho~ EN.ATM.GHGT.K~  3.30e4  4.14e4
+ 8 Argentina    ARG          Total greenho~ EN.ATM.GHGT.K~  2.22e5  2.14e5
+ 9 Armenia      ARM          Total greenho~ EN.ATM.GHGT.K~  6.25e3  6.38e3
+10 American Sa~ ASM          Total greenho~ EN.ATM.GHGT.K~  1.31e1  1.32e1
+# ... with 254 more rows, and 41 more variables: X1972 &lt;dbl&gt;, X1973 &lt;dbl&gt;,
+#   X1974 &lt;dbl&gt;, X1975 &lt;dbl&gt;, X1976 &lt;dbl&gt;, X1977 &lt;dbl&gt;, X1978 &lt;dbl&gt;,
+#   X1979 &lt;dbl&gt;, X1980 &lt;dbl&gt;, X1981 &lt;dbl&gt;, X1982 &lt;dbl&gt;, X1983 &lt;dbl&gt;,
+#   X1984 &lt;dbl&gt;, X1985 &lt;dbl&gt;, X1986 &lt;dbl&gt;, X1987 &lt;dbl&gt;, X1988 &lt;dbl&gt;,
+#   X1989 &lt;dbl&gt;, X1990 &lt;dbl&gt;, X1991 &lt;dbl&gt;, X1992 &lt;dbl&gt;, X1993 &lt;dbl&gt;,
+#   X1994 &lt;dbl&gt;, X1995 &lt;dbl&gt;, X1996 &lt;dbl&gt;, X1997 &lt;dbl&gt;, X1998 &lt;dbl&gt;,
+#   X1999 &lt;dbl&gt;, X2000 &lt;dbl&gt;, X2001 &lt;dbl&gt;, X2002 &lt;dbl&gt;, X2003 &lt;dbl&gt;,
+#   X2004 &lt;dbl&gt;, X2005 &lt;dbl&gt;, X2006 &lt;dbl&gt;, X2007 &lt;dbl&gt;, X2008 &lt;dbl&gt;,
+#   X2009 &lt;dbl&gt;, X2010 &lt;dbl&gt;, X2011 &lt;dbl&gt;, X2012 &lt;dbl&gt;</code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="data-wrangling-on-r" class="section level2">
+<h2>Data wrangling on R</h2>
+<p><br></p>
+<p>As output produced is not in tidy format(one variable in one column and every observations have its row), it is difficult for us to do our analysis and visualize later. Not only that, in this case, there are some variables which you might have no interest to include it in tibble(table) like ‘Indicator.name’ and ‘Indicator.Code’. To overcome these kind of issues, <em>dplyr</em> and <em>tidyr</em> from <em>Tidyverse</em> library are always helpful in manipulating and tidying data.</p>
+<p>So, we have a scenario here. Let say we want to include the name of countries and their amount of green house gasses released from 2008 to 2011 by 4 columns. First column is for the list of countries, while second column is for code of countries, third column is for years and fourth column is for total green house gasses released in kilo tonnes of carbon dioxide equivalent.</p>
+<p><br> <br></p>
+<div id="i" class="section level3">
+<h3>I</h3>
+<pre class="r"><code>
+data1=select(data1,Country.Name,Country.Code,X2008,X2009,X2010,X2011)   
+
+# select desired variables
+
+data1=gather(data1,&#39;X2008&#39;,&#39;X2009&#39;,&#39;X2010&#39;,&#39;X2011&#39;,key=&#39;Year&#39;,value=&#39;Total greenhouse gas emissions (kt of CO2 equivalent)&#39;)    
+
+# tidy data                                                                      
+</code></pre>
+<p><br> <br></p>
+<p>‘%&gt;%’ is a pipe operator which indicates ‘and then’. Pipe operator is a convenient tool from <em>Magrittr</em> package but when we have <em>Tidyverse</em> library, it will be unnecessary for us to intall and load <em>Magrittr</em> package manually because it’s part of the library.</p>
+<p>By using ‘%&gt;%’, we will get the same output with above code in one shot.</p>
+<p><br> <br></p>
+</div>
+<div id="ii" class="section level3">
+<h3>II</h3>
+<pre class="r"><code>
+data1=data1 %&gt;% select(Country.Name,Country.Code,X2008,X2009,X2010,X2011) %&gt;% gather(&#39;X2008&#39;,&#39;X2009&#39;,&#39;X2010&#39;,&#39;X2011&#39;,key=&#39;Year&#39;,value=&#39;Total greenhouse gas emissions (kt of CO2 equivalent)&#39;)
+
+# select() specifies which column you wish to include by column name
+
+# gather() tidy data 
+
+data1           
+# A tibble: 1,056 x 4
+   Country.Name         Country.Code Year  `Total greenhouse gas emission~
+   &lt;fct&gt;                &lt;fct&gt;        &lt;chr&gt;                           &lt;dbl&gt;
+ 1 Aruba                ABW          X2008                            NA  
+ 2 Afghanistan          AFG          X2008                         15289. 
+ 3 Angola               AGO          X2008                         37396. 
+ 4 Albania              ALB          X2008                          8137. 
+ 5 Andorra              AND          X2008                            NA  
+ 6 Arab World           ARB          X2008                       2364089. 
+ 7 United Arab Emirates ARE          X2008                        181389. 
+ 8 Argentina            ARG          X2008                        411504. 
+ 9 Armenia              ARM          X2008                         12470. 
+10 American Samoa       ASM          X2008                            54.6
+# ... with 1,046 more rows</code></pre>
+<p><br> <br></p>
+<p>4 different years from 2008 to 2011 are grouped into a column named ‘Year’, and it’s data are grouped into another column named ‘Total greenhouse gas emissions (kt of CO2 equivalent)’. Because of this dataset consists total of 1056 rows so by default tibble can only shows up to 10 rows. You can always change this default mannually or even show the top or bottom of dataset.</p>
+<p><br> <br></p>
+<pre class="r"><code>
+options(tibble.print_min=50)          # change the default to print 50 rows
+
+head(data1,20)                        # show 30 rows from top
+# A tibble: 20 x 4
+   Country.Name         Country.Code Year  `Total greenhouse gas emission~
+   &lt;fct&gt;                &lt;fct&gt;        &lt;chr&gt;                           &lt;dbl&gt;
+ 1 Aruba                ABW          X2008                            NA  
+ 2 Afghanistan          AFG          X2008                         15289. 
+ 3 Angola               AGO          X2008                         37396. 
+ 4 Albania              ALB          X2008                          8137. 
+ 5 Andorra              AND          X2008                            NA  
+ 6 Arab World           ARB          X2008                       2364089. 
+ 7 United Arab Emirates ARE          X2008                        181389. 
+ 8 Argentina            ARG          X2008                        411504. 
+ 9 Armenia              ARM          X2008                         12470. 
+10 American Samoa       ASM          X2008                            54.6
+11 Antigua and Barbuda  ATG          X2008                           492. 
+12 Australia            AUS          X2008                        892629. 
+13 Austria              AUT          X2008                         94609. 
+14 Azerbaijan           AZE          X2008                         53833. 
+15 Burundi              BDI          X2008                          5725. 
+16 Belgium              BEL          X2008                        137214. 
+17 Benin                BEN          X2008                         37640. 
+18 Burkina Faso         BFA          X2008                         40706. 
+19 Bangladesh           BGD          X2008                        164701. 
+20 Bulgaria             BGR          X2008                         71720. 
+
+tail(data1,20)                        # show 30 rows from bottom
+# A tibble: 20 x 4
+   Country.Name                   Country.Code Year  `Total greenhouse ga~
+   &lt;fct&gt;                          &lt;fct&gt;        &lt;chr&gt;                 &lt;dbl&gt;
+ 1 Tanzania                       TZA          X2011              234762. 
+ 2 Uganda                         UGA          X2011               80319. 
+ 3 Ukraine                        UKR          X2011              410067. 
+ 4 Upper middle income            UMC          X2011            22158624. 
+ 5 Uruguay                        URY          X2011               33774. 
+ 6 United States                  USA          X2011             6571654. 
+ 7 Uzbekistan                     UZB          X2011              180735. 
+ 8 St. Vincent and the Grenadines VCT          X2011                 311. 
+ 9 Venezuela, RB                  VEN          X2011              275684. 
+10 British Virgin Islands         VGB          X2011                  NA  
+11 Virgin Islands (U.S.)          VIR          X2011                  60.9
+12 Vietnam                        VNM          X2011              285091. 
+13 Vanuatu                        VUT          X2011                 440. 
+14 World                          WLD          X2011            52790527. 
+15 Samoa                          WSM          X2011                 349. 
+16 Kosovo                         XKX          X2011                  NA  
+17 Yemen, Rep.                    YEM          X2011               39949. 
+18 South Africa                   ZAF          X2011                  NA  
+19 Zambia                         ZMB          X2011              320025. 
+20 Zimbabwe                       ZWE          X2011               71562. </code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="gsub-function" class="section level2">
+<h2>Gsub function</h2>
+<p><br></p>
+<p>I never found gsub( ) function is so useful until I met this problem during that time. As you can notice that in ‘Year’ colunmn, all the entries are followed by a ‘X’ character. By using gsub( ) function, this issue is not longer an issue anymore.</p>
+<p><br> <br></p>
+<pre class="r"><code>
+data1$Year=gsub(&#39;X&#39;,&#39;&#39;,data1$Year)               # replace &#39;X&#39; character with empty
+
+data1[1:20, ]                                    # diplay first 20 rows
+# A tibble: 20 x 4
+   Country.Name         Country.Code Year  `Total greenhouse gas emission~
+   &lt;fct&gt;                &lt;fct&gt;        &lt;chr&gt;                           &lt;dbl&gt;
+ 1 Aruba                ABW          2008                             NA  
+ 2 Afghanistan          AFG          2008                          15289. 
+ 3 Angola               AGO          2008                          37396. 
+ 4 Albania              ALB          2008                           8137. 
+ 5 Andorra              AND          2008                             NA  
+ 6 Arab World           ARB          2008                        2364089. 
+ 7 United Arab Emirates ARE          2008                         181389. 
+ 8 Argentina            ARG          2008                         411504. 
+ 9 Armenia              ARM          2008                          12470. 
+10 American Samoa       ASM          2008                             54.6
+11 Antigua and Barbuda  ATG          2008                            492. 
+12 Australia            AUS          2008                         892629. 
+13 Austria              AUT          2008                          94609. 
+14 Azerbaijan           AZE          2008                          53833. 
+15 Burundi              BDI          2008                           5725. 
+16 Belgium              BEL          2008                         137214. 
+17 Benin                BEN          2008                          37640. 
+18 Burkina Faso         BFA          2008                          40706. 
+19 Bangladesh           BGD          2008                         164701. 
+20 Bulgaria             BGR          2008                          71720. </code></pre>
+<p><br> <br></p>
+<p>Try View( ) function in Rstudio or Rgui to prints the whole result in another tab, so that you can have look on it, instead of print the large dataset on console.</p>
+<p>To modify your dataset like filling in missing values or adding new column to your datasets, use edit( ) command. This command works exactly like View( ) function except it provides you with the ability to refine data.</p>
+<p><br> <br></p>
+<pre class="r"><code>View(data1)               # view output
+edit(data1)               # modify data</code></pre>
+<p><br> <br> <br> <br> <br></p>
+<div id="the-end" class="section level3">
+<h3>The End</h3>
+<p>Hope you won’t like</p>
+<p><br></p>
+<div class="figure">
+<img src="https://media1.giphy.com/media/gLv9hDfYSyFyg/giphy.gif?cid=e1bb72ff5aec3acb414d33666fbe8e06" />
+
+</div>
+<p>`</p>
+</div>
+</div>
