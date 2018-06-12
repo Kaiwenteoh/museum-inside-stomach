@@ -1,0 +1,350 @@
+---
+title: A hint on how to read World Bank data into R
+author: Kaiwen Teoh
+date: '2018-05-19'
+slug: read-world-bank-data-into-r
+categories:
+  - R
+  - Import
+tags:
+  - R
+  - Import
+---
+
+  <br>
+  <br>
+  
+  [World Bank](https://data.worldbank.org/) is an ideal place for us to access global development data. We can always search suitable open data by relevant keyword and download it in any format we prefer (CSV, XML, EXCEL). However, if you are the guy who prefers to wrangle data with R, then there is another option for you to deal with it instead of download open data from World Bank into your pc and import into R manually by using read.csv( ), read.xlsx( ) functions.
+  
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Installation
+
+----------------------------------------
+  
+  To download and install 'WDI' package from CRAN, use install.packages( ) function.
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+install.packages('WDI')
+# Install R package, 'WDI'.
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Search for data
+
+------------------------------------------
+  
+  By using WDIsearch( ) function from 'WDI' package, we are allowed to search interested datasets from World Bank web API by inserting relevant keywords. But before we make use of this function, do remember to load the package in our R console after the installation of 'WDI' package.
+  
+  <br>
+  <br>
+  
+```{r message=F, warning=F}
+
+library('WDI')
+# Load R package.
+
+```
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+WDIsearch('keyword')
+# Insert relevant keyword inside single quote.
+
+```
+  
+  <br>
+  <br>
+  
+  Let's say we're looking for global greenhouse gas emissions data from World Bank for our assignment purpose. We can start to search the relevant data by key in:
+  
+  * greenhouse
+  * green
+
+inside the single quote.
+
+  <br>
+  <br>
+  
+```{r comment=NA, eval=F}
+
+WDIsearch('greenhouse')
+# 'greenhouse' keyword
+
+WDIsearch('green')
+# 'green' keyword
+
+```
+  
+  <br>
+  <br>
+  
+  Please be noted that the keyword we insert into the function inside single quote(not wrong for using a double quote, " ") should not consist of **white space**. For an example,
+  
+  * greenhouse gas emissions
+  * green house gas emissions
+  
+  <br>
+  
+  If you wish to do these, use '.\*' for each white space between the words. For an instance,
+  
+  * greenhouse.\*gass.\*emissions
+  * green.\*house.\*gass.\*emissions
+  
+  <br>
+  <br>
+  
+```{r comment=NA, eval=F}
+
+WDIsearch('greenhouse.\*gass.\*emissions')
+# 'greenhouse.\*gass.\*emissions' keyword
+
+WDIsearch('green.\*house.\*gass.\*emissions')
+# 'green.\*house.\*gass.\*emissions' keyword
+
+```
+  
+  <br>
+  <br>
+  
+  All of them produce the same output which is a matrix which consists of a list of indicators and name of datasets.
+  
+  <br>
+  <br>
+  
+```{r comment=NA, echo=F}
+
+WDIsearch('greenhouse')
+
+```
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Convert class of searched output(optional)
+
+----------------------------------------------------
+  
+  It seems like the output produced above is a little bit messy. So, let's convert the class of the matrix into another data type, data frame. Before that, we have to store the output produced by a named variable.
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+data= WDIsearch('greenhouse')
+# Store in 'data'
+
+```
+  
+  <br>
+  <br>
+  
+  Use as.data.frame( ) function to convert any data type into data frame. 
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+as.data.frame(data)
+# Convert class
+
+```
+  
+  <br>
+  <br>
+  
+  Or perform these two steps in one line.
+  
+  <br>
+  <br>
+  
+```{r eval=F}
+
+data= as.data.frame(WDIsearch('greenhouse'))
+
+```
+  
+  <br>
+  <br>
+  
+  Both of the above ways produce the same output in data frame format.
+  
+  <br>
+  <br>
+  
+```{r comment=NA, echo=F, collapse=F}
+
+data= as.data.frame(WDIsearch('greenhouse'))
+
+data
+# Display searched output
+
+```
+  
+  <br>
+  <br>
+  
+  Because of limited space here, the 'name' variable is shifted a little bit downward, but if you follow the steps in R console, this should not be an issue.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Download and insert data into R
+
+------------------------------------
+
+  If you have read my [first post](https://kaiwen.space/post/data-wrangling/) on this blog, you will know how complicated I wrangled the downloaded data from World Bank web API in R during analytics competition. However, one of the wonderful features for this R package is WDI( ) function allows us to make use of downloaded data from World Bank in tidy format directly (one variable in one column and every observation have its row).
+  
+  <br>
+  <br>
+  
+```{r eval=F, highlight=TRUE}
+
+variable_name= WDI(indicator='keyword', country= c('country_code1','country_code2','country_code3'),start= start_year, end= end_year)
+
+```
+  
+  <br>
+  <br>
+  
+  Let's talk back about global greenhouse gas emissions. We have obtained the list of greenhouse gas emissions data which available on World Bank. 
+  
+  <br>
+  <br>
+  
+```{r message=F, warning=FALSE, echo=F}
+
+wdi_ghe <- tibble::tribble(
+           ~indicator,                                                                                       ~name,
+     "EN.ATM.GHGT.ZG",                                       "Total greenhouse gas emissions (% change from 1990)",
+  "EN.ATM.GHGT.KT.CE",                                     "Total greenhouse gas emissions (kt of CO2 equivalent)",
+     "EN.ATM.GHGO.ZG",                                       "Other greenhouse gas emissions (% change from 1990)",
+  "EN.ATM.GHGO.KT.CE", "Other greenhouse gas emissions, HFC, PFC and SF6 (thousand metric tons of CO2 equivalent)"
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(wdi_ghe, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+```
+  
+  <br>
+  <br>
+  
+  Indicator for each of dataset is important as it is used as a keyword which can be included in WDI( ) function.  
+    
+  We have a scenario here. Let's say we want to download the total greenhouse gas emissions in kilotonnes of carbon dioxide equivalent for Malaysia, Singapore, Canada from the year 2000 to 2004, then we need to include the indicator for this dataset, country code, start year and end year inside the WDI( ) function.  
+    
+  <br>
+    
+  * indicator= EN.ATM.GHGT.KT.CE (from searched result)
+  * country code= Malaysia= MY, Singapore= SG, Canada= CA
+  * start year= 2000
+  * end year= 2004
+    
+  <br>
+  <br>
+    
+```{r}
+
+ghge= WDI(indicator='EN.ATM.GHGT.KT.CE', country= c('MY','SG','CA'),start= 2000,end= 2004)
+# Download data and store into 'ghge'.
+
+```
+    
+  <br>
+  <br>
+  
+  Now, we have our dataset in tidy format. If you notice, you will found that total greenhouse gas emissions in kilotonnes in different years for these three countries are combined under a named 'year' column.
+  
+  <br>
+  <br>
+  
+```{r echo=F, comment=NA}
+
+ghge
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Renaming columns of data
+  
+----------------------------------
+
+  To change the name for each column of data, use colnames( ) function. 
+  
+  <br>
+  <br>
+  
+```{r comment=NA}
+
+columnnames=c('Country Code','Country','Total Greenhouse Gass Emissions in kt','Year')
+# Renaming columns of data and store in 'columnnames'
+
+colnames(ghge)= columnnames
+# change columns name of 'ghge' with the new names we set
+
+```
+  
+  <br>
+  <br>
+  
+```{r comment=NA, message=F, echo=F}
+
+ghge
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## Resources
+
+---------------------------------
+
+  For more details and information, refer documentation for [WDI](https://www.rdocumentation.org/packages/WDI/versions/2.5)
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  <img src="https://media0.giphy.com/media/cVo0s2rC0zFLi/giphy-downsized.gif?cid=e1bb72ff5b053e763739574d36806f59" width="350" height="300">

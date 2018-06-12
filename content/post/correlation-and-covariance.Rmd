@@ -1,0 +1,920 @@
+---
+title: Correlation and Covariance
+author: Kaiwen Teoh
+date: '2018-06-02'
+slug: correlation-and-covariance
+categories:
+  - R
+  - Regression
+tags:
+  - R
+  - Regression
+---
+
+
+#RECIPE
+
+--------------------------------------------------------
+
+* [Intro to Correlation](#Correlation)
+  <br>
+
+* [Intro to Covariance](#Covariance)
+  <br>
+
+* [Difference between Correlation and Covariance](#Correlation vs Covariance)
+  <br>
+  
+* [Hypothesis test about a correlation, $\rho$](#Testing Hypothesis About a Correlation Coefficient)
+  <br>
+  
+* [Testing difference between two correlation coefficients](#Testing Difference Between Two Corrrelation Coefficients)
+  <br>
+  
+* Visualizing correlation 
+    + [Scatter plot](#Scatter Plot)
+  <br>
+  
+* Visualizing correlation matrices  
+    + [Symbolic Number Coding](#Symbolic Number Coding)  
+    + [Scatter Plot Matrix](#Scatter Plot Matrix)  
+    + [Network Plot](#Network Plot)  
+    + [Correlogram](#Correlogram)  
+    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+#<a id="Correlation"></a>Correlation
+
+  <br>
+  <br>
+  
+##What?
+  <br>
+  
+  A **correlation**, r is a statistical way that describes the degree of relationship between two quantitative variables.  
+   
+  A positive correlation means that when one variable increase, the other variable also increase and when one variable decrease, the other variable decrease. While negative correlation exists when one variable increase, the other variable decrease.
+
+  <br>
+  <br>
+  
+##Why?
+  <br>
+  
+  Correlation is important as it describes the direction (positive or negative) and also strength (weak, strong) of a relationship between two variables. For an example, a correlation, r can be used to explain the degree of association between GPA and study time of student in hours. And the relationships between these two variables doesn't necessarily mean "causality" (cause and effect). It means that correlation, in this case, does not imply that the change in GPA is affected by the study time in hours and vice versa. So, no matter what variable, in this case, is used as a response variable or a predictor variable, the correlation coefficient is still the same.
+  
+  <br>
+  <br>
+  
+##How?
+  <br>
+
+   Correlation, r has the value that lies between -1 to 1 (from negative correlation to positive correlation). 
+  
+  * when r= 0, there is no linear relationship between two variables.
+  * when r= -1, there is a strong negative correlation between two variables.
+  * when r= +1, there is a strong positive correlation between two variables.
+  
+  <br>
+  
+  The formula for calculating correlation, r between two quantitative variables is:
+  
+  <br>
+  
+  $$r = \frac {{S}{xy}}{\sqrt {{S}{xx}{S}_{yy}}}$$  
+  <br>
+  
+  * S<sub>xy</sub> is the sum of product of difference between each x value and its mean, $\bar{X}$ and difference between each y value and its mean, $\bar{Y}$.
+  * S<sub>xx</sub> is the sum of square of difference between each x value and its mean, $\bar{X}$.
+  * S<sub>yy</sub> is the sum of square of difference between each y value and its mean, $\bar{Y}$.
+  
+  <br>
+  <br>
+ 
+  To compute correlation, r by using statistical language, R use cor( ) function.
+  
+  <br>
+  
+```{r eval=F}
+
+cor(x,y)
+# correlation between 2 variables.
+
+```
+  
+  <br>
+  <br>
+  
+##Example
+  <br>
+  
+  "women" is a dataset from base library of R which consists of height and weight of 15 womens.
+  
+  <br>
+  
+```{r collapse=T, comment=NA}
+
+women
+
+cor(women$height, women$weight)
+
+```
+  
+  <br>
+  
+  Since r= 0.995, so there is a strong positive linear relationship between weight and height of women.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+#<a id="Covariance"></a>Covariance
+
+  <br>
+  <br>
+  
+## What?
+  <br>
+  
+  Covariance is a measure of how a change in one variable is associated with changes in the second variable. For a variable, variance measures the deviation of data from its mean. When coming to two variables, covariance is used to indicate the direction of a linear relationship between the two variables. If both variables tend to increase or decrease together, the covariance coefficient is positive. If one variable tends to increase while the other variable decrease, the covariance coefficient is negative.
+  
+  <br>
+  <br>
+  
+## Why?
+  <br>
+  
+  Covariance can be used to describe the direction (positive, negative) of a linear relationship between two variables. In addition, covariance is a measure of correlation and it can be used to determine the correlation coefficient, r between two variables. The formula for calculating correlation, r between two variables using covariance is:
+  
+  
+  <br>
+  
+  $$r = \frac {cov(x,y)}{\sqrt {{S}{x}{S}_{y}}}$$
+  <br>
+  
+  * where cov(x,y) is the covariance of variable x and y.
+  * S<sub>x</sub> is the standard deviation of x.
+  * S<sub>y</sub> is the standard deviation of y.
+  
+  <br>
+  <br>
+  
+#How?
+  <br>
+  
+  Unlike correlation, r, covariance is not limited to the range of -1 to +1. If both variables tend to increase or decrease together, the covariance coefficient is positive. A positive covariance coefficient indicates that there is a positive linear relationship between two variables while negative covariance coefficient explains that there is a negative linear relationship between two variables. The formula for calculating covariance coefficient is:
+  
+  <br>
+  
+  $$cov{(x,y)} = \frac{\sum\limits_{i=1}^{n}{(x_i-\overline{x}) \cdot (y_i-\overline{y})} }{n-1}$$
+  <br>
+  
+  To perform computation of covariance between two variables in R, use cov( ) function.
+  
+  <br>
+  
+```{r eval=F}
+
+cov(x,y)
+# covariance of x and y.
+
+```
+  
+  <br>
+  <br>
+  
+## Example
+  <br>
+  
+```{r collapse=T,comment=NA}
+
+cov(women$height,women$weight)
+
+```
+  
+  <br>
+  
+  Positive covariance coefficient, 69 indicates that there is positive linear relationship between weight and height of women.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+#<a id="Correlation vs Covariance"></a>Correlation vs Covariance
+  
+  <br>
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+Difference <- tibble::tribble(
+                                               ~Correlation,                                              ~Covariance,
+                                                  "No unit",                                     "Expressed in units",
+                                 "Value lies from -1 to +1", "Value lies from negative infinity to positive infinity",
+  "Direction and magnitude of linear relationship is known",         "Magnitude of linear relationship is not known.",
+                                                 "cor(x,y)",                                               "cov(x,y)"
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(Difference, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id="Testing Hypothesis About a Correlation Coefficient"></a>Testing Hypothesis About a Correlation Coefficient
+
+  <br>
+  <br>
+
+## What?
+  <br>
+  
+  Hypothesis testing is the idea to make use of sample statistics to make inference about population parameters. The sample statistics in this case refers to correlation coefficient, r. By convention, the population parameter that we use here is $\rho$.  
+  
+  <br>
+  <br>
+  
+## Why?
+  <br>
+  
+  Normally, we know which variable should be regarded as a response variable, Y. Consider evaluating whether or not a linear relationship exists between human fertility rate and radiotherapy treatments. For this example, it is obvious that human fertility rate should be used as a response variable to be predicted by radiotherapy treatments.   
+  
+  What if we have the case like it is not obvious to treat which variable as a response variable? For an instance, we wish to evaluate whether or not a linear relationship exists between height and weight of women. In this situation, t-test for correlation coefficient is used instead of Z-test for testing:
+  
+  <br>
+  
+  * $H_0$: $\rho$ = 0.
+  * $H_0$: $\rho$ $\ge$ 0.
+  * $H_0$: $\rho$ $\le$ 0.
+  
+  <br>
+  <br>
+  
+## How?
+  <br>
+
+### Step1:
+  <br>
+  
+  Define null hypothesis, $H_0$ and alternative hypothesis, $H_1$.  
+  
+  <br>
+  
+### Step2:
+  <br>
+  
+  Set confidence level.  
+  
+  <br>
+  
+### Step3: 
+  <br>
+  
+  Compute test statistic, t with formula:
+  
+  <br>
+    
+  $$t = \frac{r{\sqrt{N-2}}}{\sqrt {1-{r}^{2}}}$$
+  
+  <br>
+  
+### Step4: 
+  <br>
+  
+  Reject $H_0$ if p-value is less than significance level, $\alpha$.  
+  
+  <br>
+  
+### Step5: 
+  <br>
+  
+  Conclusion.
+  
+  <br>
+  <br>
+
+  To have a hypothesis testing for correlation coefficient in r, use cor.test(). There are two ways of syntax which provide the same output.  
+  
+  The first one is making use of **with( ) function**. With( ) function allow us to include the name of column inside the cor.test( ) function without the use of dollar sign, '$'.
+  
+  <br>
+  
+```{r eval=F}
+
+with(dataname, cor.test(column_name1, column_name2, alternative= "greater" / "less" / "two.sided"))
+
+```
+  
+  <br>
+  
+  or
+  
+  <br>
+  
+  The second one is making use of **dollar sign, '$'** which has much shorter code compare to with( ) function. 
+  
+  <br>
+  
+```{r eval=F}
+
+cor.test(dataname$column_name1, data$column_name2, alternative= "greater" / "less" / "two.sided")
+
+```
+  
+  <br>
+  <br>
+  
+## Example
+  <br>
+
+  I'm using back the 'women' dataset from the previous example as illustration. Assuming that we know in advance that correlation of height and weight should be positive (the increase of height will increase the weight also). So, our null hypothesis, $H_0$ and alternative hypothesis, $H_1$ is set as:
+  
+  <br>
+  
+  * $H_0$: $\rho$ $\le$ 0
+  * $H_1$: $\rho$ $>$ 0
+  
+  <br>
+  
+  We set our significance level, $\alpha$ equal to 5%.
+  
+  <br>
+  
+```{r collapse=T, comment=NA}
+
+cor.test(women$height, women$weight, alternative= "greater")
+
+```
+  
+  <br>
+  
+  Since the p-value is less than 0.05 (5%), there is sufficient evidence to conclude that at $\alpha$=0.05, there is a significant linear relationship between height and weight of women.
+  
+  Note that correlation coefficient, r is also known as Pearson's product-moment correlation coefficient.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  It's 12 am. 
+  
+  <br>
+  
+  <img src="https://media.giphy.com/media/inH7GSP1hqMus/giphy.gif" width="300" height="250">
+  
+  <br>
+  <br>
+  
+# <a id="Testing Difference Between Two Corrrelation Coefficients"></a>Testing Difference Between Two Corrrelation Coefficients
+
+  <br>
+  <br>
+  
+## What?
+  <br>
+  
+  To compare the correlation coefficient, r between two variables from two different groups, we can also do a hyopothesis testing on it.
+  
+  <br>
+  
+## Why?
+  <br>
+
+  To determine the correlation coefficient, r for two different groups whether it's different from each other for the same variables.
+  
+  <br>
+  
+## How?
+  <br>
+  
+###Step1:
+  <br>
+  
+  Z-test is used instead of t-test. And this require us to do a transformation which is called **Fisher's r to z transformation**. The formula of the transformation is:
+  
+  <br>
+  
+  $$Z_r= \frac{[ln(1+r)-ln(1-r)]}{2}$$
+  
+  <br>
+  
+###Step2:
+  <br>
+  
+  Set the confidence level.
+  
+  <br>
+  
+###Step3:
+  <br>
+  
+  The test statistic, Z is:
+  
+  <br>
+  
+  $$Z= \frac{Z_1-Z_2}{{\sigma}_{z_1-z_2}}$$
+  
+  <br>
+  
+  where $${\sigma}_{z_1-z_2}= \sqrt{\frac{1}{{N}_{1}-{3}}+\frac{1}{{N}_{2}-{3}}}$$
+  
+  <br>
+  
+###Step4:
+  <br>
+  
+  Reject $H_0$ if p-value is less than significance level, $\alpha$. 
+  
+  <br>
+  
+###Step5:
+  <br>
+  
+  Conclusion.
+  
+  <br>
+  <br>
+  
+  To testing the difference between two correlation coefficients, use r.test( ) function in **psych** package.
+  
+  <br>
+  
+```{r eval=F}
+
+install.packages("psych")
+# install package
+
+library("psych")
+# load library
+
+r.test(r12=r_1, n=n_1, r34=y, n2=n_2, twotailed = T/F)
+# hypothesis testing
+
+```
+  
+  <br>
+  
+## Example
+  <br>
+
+  Suppose we have two groups, Chemistry students and students from Engineering programme. For the sample of 100 students from Chemistry programme, the correlation between GPA and study time in hours is 0.789 while the correlation between these two variables for the 120 students from Engineering programme is 0.673. To test the difference between two correlation coefficients whether it's the same at $\alpha$ = 0.05:
+  
+  <br>
+  
+  * $H_0$: $r_1$ = $r_2$
+  * $H_1$: $r_1$ $\ne$ $r_2$
+  
+  <br>
+  
+```{r message=F, warning=F, comment=NA}
+
+library("psych")
+
+r.test(r12=0.789, n=100, r34=0.673, n2=120, twotailed = T)
+
+```
+  
+  <br>
+  
+  Since the p-value is not less than 0.05, thus there is insufficient evidence to conclude that there is a difference between two correlation coefficients.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# Correlation Matrix
+  <br>
+  
+  In addition, to find a single correlation coefficient, r for two quantitative variables, we can also make use of cor( ) function to find a correlation matrix for multiple quantitative variables. This enables us to have a look at the relationship between multiple variables during the stage of exploratory analysis.
+  
+  <br>
+  
+```{r eval=F}
+
+cor(x)
+# correlation for multiple variables in table
+# x is a dataset which consists of numerical variables.   
+
+```
+  
+  <br>
+  
+##Example 1
+  <br>
+  
+  Let's use one of the popular sample datasets from base library named 'mtcars' for the next illustration. By typing in 'mtcars' in r console, you will found that the 'mtcars' dataset consists of 11 numerical variables. To find all of the correlation coefficients, r at once in a table:
+  
+  <br>
+  
+```{r collapse=T, comment=NA, message=F, warning=F}
+
+cor(mtcars)
+
+```
+  
+  <br>
+  
+  You might found that the values of correlation are showed in 7 decimal places and it is quite messy. To change the decimal places of the values (round off), apply round ( ) function.
+  
+  <br>
+  
+```{r eval=F}
+
+round(x, digit place)
+# replace x with name of dataset
+
+```
+  
+  <br>
+  
+## Example 2
+  <br>
+  
+  To display the output of 'mtcars' dataset from the previous example in 2 decimal places, you have two options here.  
+  
+  * Store its output into a named variable first then only apply round( ) function.
+  * One shot to display the round off output in R console.
+  
+  <br>
+  
+```{r collapse=T, comment=NA}
+
+data= cor(mtcars)
+# store output into 'data'
+
+round(data, 2)
+# display output in 2 decimal places(round off)
+
+```
+
+  <br>
+  
+  or
+  
+  <br>
+  
+```{r collapse=T, comment=NA}
+
+round(cor(mtcars), 2)
+# one shot display the new output in 2 decimal places
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# Missing value
+  <br>
+  
+  Sometime we might get 'NA' as a result of cor( ) function. This is because of the dataset we put into the argument of cor( ) function consists of missing values. To encounter this kind of problem, apply **use="complete.obs"** inside the function of cor( ) function. For more details about the usage of use( ) function, we can always refer the official documentation of correlation, covariance function by typing in ?cor or ?cov in R console.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id="Visualizing correlation"></a>Visualizing correlation 
+  <br>
+  <br>
+  
+## <a id="Scatter Plot"></a>Scatter Plot
+  <br>
+  <br>
+  
+```{r echo=F,  fig.align="center", fig.height=4.6}
+
+par(bg="black")
+
+plot(iris$Petal.Width, iris$Sepal.Length, xlab="width of petal", ylab="length of sepal", pch = 8 , bty='n', col='light blue', las=1, cex=1.2, font.axis=6, col.axis="gray71", col.lab="gray71", col.main="gray71", xlim=c(0,2.5) , cex.lab=1.1, )
+
+```
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+```{r echo=F, fig.align="center", message=F, warning=F}
+
+library("ggplot2")
+data1=ggplot(data=iris) + geom_point(mapping=aes(x=Petal.Width, Sepal.Length, color= Species), shape=18, size=3)
+data1+labs(x="Width of petal",y="Length of sepal", caption="Based on the data from iris")
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  **Scatter plot** is a graphical way to show the relationship between two quantitative variables. To create a simple scatter plot in R, we can make use of R base graphics or download and install additional data visualization R packages like 'ggplot2', 'ggvis', 'plotly' and so on. 
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id="Visualizing Correlation Matrix"></a>Visualizing Correlation Matrix
+  <br>
+  <br>
+  <br>
+  
+## <a id="Symbolic Number Coding"></a>Symbolic Number Coding
+  <br>
+  <br>
+  
+  From previous example, we determine correlation coefficients for multiple variables in a table form like:
+  <br>
+  <br>
+  
+```{r echo=F, comment=NA}
+
+round(cor(mtcars[,1:4]),2)
+
+```
+  
+  <br>
+  
+  synmnum( ) function is a simple function to visualize the structured matrix. In short, this function encodes range of values inside a matrix table as symbols we set for ease of interpretation.
+  
+  <br>
+  
+```{r echo=F, comment=NA}
+
+data=round(cor(mtcars[,1:4]),2)
+
+symnum(data, cutpoints=c(-0.9,-0.6,-0.3,0.0,0.3,0.6,0.9,0.95,1),symbols=c('+','-','@','$','^','*','#','&'),abbr.colnames = F)
+
+```
+  
+  <br>
+  <br>
+  
+  If you notice, you will found that there's a legend below the table, each value within an interval is represented by a symbol we set. For an example, the correlation between 'mpg' and 'cyl' is represented by a symbol, '+', that means the correlation value for both of this variables is within the range of -0.90 and -0.60 (strong negative correlation).
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <a id="Scatter Plot Matrix"></a>Scatter Plot Matrix
+  <br>
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+plot(airquality[,1:4])
+
+```
+  
+  <br>
+  <br>
+  
+  A scatter plot matrix is a table of scatter plots in visualizing correlation matrix. The diagonal of the table is the list of variables inside of dataset, every variable on the rows of a table is our y-axis while every variable on the columns of a table will be our x-axis. For an example, let's talk about the scatter plot above from the second row and first column, the 'Solar.R' is our y-axis and 'Ozone' is our x-axis.   
+  
+  Then what about the scatter plot from the third row and second column?   
+  
+  .  
+  .  
+  .  
+  .
+  
+  <br>
+  
+  The answer is 'Wind' will be our y-axis while 'Solar.R' is our x-axis.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <a id="Network Plot"></a>Network Plot
+  <br>
+  <br>
+  
+  Network plot is one of the way to visualize correlation matrices. By using 'corrr' package, you can produce a network plot like:
+  
+  <br>
+  
+```{r echo=F, message=F, warning=F, fig.align="center"}
+
+library('corrr')
+mtcars[,2:6] %>% correlate() %>% network_plot(min_cor=0.3)
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br> 
+  <br>
+  
+## <a id="Correlogram"></a>Correlogram
+  <br>
+  <br>
+  
+  A correlogram is another graphical display of a correlation matrix. To avoid ourselves from making hundred of plots during the stage of exploratory analysis, this technique is used. A customized correlogram can be simply plotted by using the available functions from 'corrplot' package. 
+  
+  <br>
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+library("corrplot")
+
+name=cor(mtcars[,1:9])
+
+diag(name)= NA
+
+corrplot(method="ellipse", name, na.label='-', col= terrain.colors(100), tl.col="black")
+
+
+```
+  
+  <br>
+  <br>
+  
+  A full correlogram which all the correlation coefficients for every pair of numerical variables are represented by symbols of 'ellipse'. 
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  You can also plot a upper or lower correlogram like:
+  
+  <br>
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+library("corrplot")
+
+data2= cor(mtcars[,1:9])
+
+corrplot(data2, method="circle", type="lower", tl.srt=45, col=c('yellow','white'), bg='black', tl.col='black')
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+```{r echo=F, warning=F, message=F}
+
+library("corrplot")
+
+data1=cor(mtcars[,1:9])
+
+corrplot.mixed(data1, number.cex=0.7, upper="pie", lower.col="black", tl.col="dark grey")
+
+```
+  
+  <br>
+  <br>
+  
+  This is a mixed correlogram which consists of correlation coefficient and pie chart for each pair of numerical variables. For the upper part of correlogram, every lower part of the correlation value is represented by a pie chart. A whole pie chart is equal to +ve 1 or -ve 1. By default, a red colour pie chart is representing for a negative correlation value, a blue colour pie chart is representing for a positive correlation value and white colour is used for a pie chart when two numerical variables have no correlation (r=0). 
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+#Additional Information
+  <br>
+  
+  * [GGally](https://briatte.github.io/ggcorr/) 
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+#The End
+  <br>
+  
+  Visualizing correlation matrices is not only limited to few of these, but I have to stop here, hope to hear from you about the other ways which I'm not able to cover here.
+  
+  <br>
+  
+![](https://media1.giphy.com/media/OtbZhLpNLxDoc/giphy-tumblr.gif?cid=e1bb72ff5b17d9af5a67724132f18e61)  
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
