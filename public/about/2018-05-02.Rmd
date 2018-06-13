@@ -30,7 +30,7 @@ weight: 5
 
 -------------------------------------
 
-  You can always reach me by [email](kalvin_kaiwen@hotmail.com), [facebook](https://www.facebook.com/kalvinkaiwen) and my R code, Markdown files will be available on my [github](https://github.com/Kaiwenteoh/museum-inside-stomach). Feel free to leave relevant comments and any suggestions will be much appreciated and welcomed.
+  You can always reach me by <a href="mailto:kalvin_kaiwen@hotmail.com">email</a>, [facebook](https://www.facebook.com/kalvinkaiwen) and my R code, Markdown files will be available on my [github](https://github.com/Kaiwenteoh/museum-inside-stomach). Feel free to leave relevant comments and any suggestions will be much appreciated and welcomed.
   
   <br>
   <br>
