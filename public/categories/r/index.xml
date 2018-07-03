@@ -6,10 +6,27 @@
     <description>Recent content in R on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 08 Jun 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 29 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R vs Excel: lookup and text functions</title>
+      <link>/post/lookup-and-text-functions/</link>
+      <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/lookup-and-text-functions/</guid>
+      <description>Content
+Lookup functions in R
+Text functions in R
+Lookup functions in Excel
+Text functions in Excel
+Summary
+
+Background
+Last week Saturday, I attended an Excel workshop which is organised by my course society at my campus. On that day, I have learnt some basic techniques and concepts in Microsoft Excel. Overall, the learning topic of the day can be categorized into three sub-sections which are lookup functions, logical functions and text functions.</description>
+    </item>
     
     <item>
       <title>Create correlation network plot in a quick way</title>

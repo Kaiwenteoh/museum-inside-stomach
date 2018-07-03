@@ -1,0 +1,1106 @@
+---
+title: 'R vs Excel: lookup and text functions'
+author: Kaiwen Teoh
+date: '2018-06-29'
+categories:
+  - R
+  - Excel
+tags:
+  - R
+  - Excel
+slug: lookup-and-text-functions
+---
+
+#Content
+
+------------------------------------------------
+
+<br>
+
+* [Lookup functions in R](#Lookup function in R)
+
+* [Text functions in R](#Text Functions in R)
+
+* [Lookup functions in Excel](#Lookup functions in Excel)
+
+* [Text functions in Excel](#Text functions in Excel)
+
+* [Summary](#Summary) 
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+#<ins>Background</ins>
+
+<br>
+
+  Last week Saturday, I attended an Excel workshop which is organised by my course society at my campus. On that day, I have learnt some basic techniques and concepts in Microsoft Excel. Overall, the learning topic of the day can be categorized into three sub-sections which are **lookup functions**, **logical functions** and **text functions**. It's quite useful, direct and this inspires me to write this post to compare some of the lookup and text functions in Microsoft Excel with R. For the rest of programming languages, it will be updated in following posts ~~soon~~ and my comparison here is more on how do we actually make use of those functions in Excel & R so that we can achieve the desired result and solve our problems.
+  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+#<a id="Lookup function in R"></a><ins>Lookup function in R</ins>
+
+<br>
+
+  So, what actually a lookup function is? 
+  
+  In short, lookup function is a designed function and used when we want to fill in data in the corresponding row based on the column of data searched by the function.
+  
+  Let say you have a catalogue on hand like:
+  
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+Price <- tibble::tribble(
+     ~Goods, ~Price,
+    "Apple",      0.99,
+    "Lemon",      1.2,
+     "Milk",      5.5,
+  "Tomato" ,      0.89,
+    "Sugar",      4.5,
+   "Salt"  ,      5.65,
+    "Oil"  ,     10.8
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(Price, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+```
+  
+  <br>
+  <br>
+  
+  And now, imagine your customer needs only apple, oil and milk and he or she wants to know the price of each item.
+  
+  <br>
+  
+```{r echo=F, warning=F, message=F}
+Item <- tibble::tribble(
+   ~Goods, ~Price,
+  "Apple",     " ",
+    "Oil",     " ",
+   "Milk",     " "
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(Item, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+
+```
+  
+  <br>
+  <br>
+  
+  Yeah, you can just search the price of the goods and fill in the blank accordingly since the catalogue consists only a few of items but what if your catalogue consists of 100 or even 1000 of goods? 
+  
+  In this time, we can make use of lookup functions in R to complete our task.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>How</ins>
+
+  <br>
+  
+###Method 1:
+  
+  <br>
+  
+  **merge** function is an **inner_join** which joins two data frames together based on the matched key. It returns us only the matched item with its value in alphabetical order. While **outer_join** like **left_join** and **right_join** returns us the matched item with its value and unmatched item with 'NA' value. The usage of merge function is indicated as below:
+  
+  <br>
+  
+```{r eval=F}
+
+merge(dataframe1, dataframe2, by="columnname")
+# specify a key in 'by' arugument
+
+```
+  
+  <br>
+  <br>
+
+###Method 2:
+
+  <br>
+  
+  **match** function tells us the matched item for two vectors on which position but not the value of it. This function is another way to solve the issue faced above in few lines of code. 
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <a id="Example 1"></a><ins>Example 1</ins>
+  
+  <br>
+  
+  For an example, I have a list of students' score for a mid-term test:
+  
+  <br>
+  
+```{r eval=F, comment=NA}
+
+Score
+# display students' score in output
+
+```
+  
+  <br>
+  
+```{r echo=F, message=F, warning=F}
+
+Score <- tibble::tribble(
+   ~Student, ~Score,
+   "Kalvin",     78,
+    "David",     56,
+  "Michael",   45.5,
+      "May",     89,
+     "June",     34,
+   "Taylor",     67,
+     "John",     88,
+  "Massive",     56,
+   "Steven",     58
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(Score, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+```
+  
+  <br>
+  
+  Now, I have some of them in another list in random order:
+
+  <br>
+  
+```{r eval=F, comment=NA}
+
+Score1
+# display few selected students in output
+
+```
+  
+  <br>
+  <br>
+
+```{r echo=F, message=F, warning=F}  
+
+Score1 <- tibble::tribble(
+   ~Student,  ~Score, 
+   "Steven",     " ",                             
+     "John",     " ",                             
+   "Kalvin",     " ",                            
+     "June",     " ",                         
+      "May",     " ",                             
+  "Massive",     " ",                             
+  )
+
+require(knitr)
+require(kableExtra)
+kable_styling(
+              kable(Score1, digits = 3, row.names = FALSE, align = "c",
+              caption = NULL, format = "html"),
+        bootstrap_options = c("striped", "hover", "condensed"),
+        position = "center", full_width = FALSE) 
+
+```
+  
+  <br>
+  <br>
+  <br>
+  
+  <img src ="https://media0.giphy.com/media/OVtqvymKkkcTu/giphy.gif?cid=e1bb72ff5b387d4a374859614d0a8735"  width="250" height="200">  
+    
+  <br>
+  <br>
+  <br>
+  <br>
+  
+```{r comment=NA}
+
+merge_data= merge(Score, Score1[,1], by="Student")
+# merge two data frames by 'Student'
+
+```
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+merge_data                     # display result
+
+```
+  
+  <br>
+ 
+  Above indicated that two data frames are joined together based on the key, "Student". In other words, merge function fill in the score of few selected students in a new table based on the original data we have. Noted that, a data frame is a data structure which consists of rows and columns and just like a table. Next, if you notice carefully, you will found that all the students' name are arranged in alphabetical order and this is what I mentioned previously.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>Example2</ins>:
+
+  <br>
+  
+  Next, suppose I have a group of people with different age in a data frame named **people_age**.
+  
+  <br>
+  
+```{r echo=F}
+
+Name= c('Abu','Ali', 'Ahmad', 'Mohammad', 'Muthu')
+Age= c(34,56,21,23,15)
+people_age= data.frame(Name, Age, stringsAsFactors =F) 
+
+```
+  
+```{r comment=NA, collapse=T, echo=F}
+
+people_age
+
+```
+  
+  <br>
+  <br>
+  
+  and another data frame named **people_without_age**.
+  
+  <br>
+  
+```{r echo=F, comment=NA}
+
+people_without_age= data.frame(sample(Name, 20, replace=T), stringsAsFactors =F)
+colnames(people_without_age)=c('Name')
+people_without_age
+
+```
+  
+  <br />
+  <br />
+  
+1. To use match function to fill in age for 20 people in the second table, first, you will need to open a column for the table.
+      
+      * people_without_age\$Age
+  
+  <br>
+  
+2. After that, match the name of people from second data frame named **people_without_age** with the first one, **people_age** which has the age information.
+      
+      * match( people_without_age\$name, people_age\$name )
+    
+  <br>
+  
+3. Normally, if we want to have the values of a particular column in data frames, we use syntax like:
+  
+  <br>
+  
+```{r eval=F}
+
+data$column_name[]
+# data is your name of data frame
+# '$' specifies which column from data frame
+
+```
+
+  <br>
+  
+  From this example, we are going to take all the values for different age of people. 
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+people_age$Age[]
+
+```
+  
+  <br>
+  <br>
+  
+4. Combine all above in a line of code. Interpret as we take the values of **Age** from first data frame for only the matched items based on the **Name** variable in two data frames. After that, store in a new opened column named **Age** inside the data frame named **people_without_age**.
+  
+  <br>
+  
+```{r}
+
+people_without_age$Age= people_age$Age[match(people_without_age$Name, people_age$Name)]
+
+```
+  
+  <br>
+  
+  Or make use of 'with' function to make our life easier.
+  
+  <br>
+  
+```{r}
+
+people_without_age$Age= with(people_age, Age[match(people_without_age$Name, Name)])
+
+```
+  
+  <br>
+  <br>
+  
+  Result:
+  
+```{r comment=NA, collapse=T}
+
+people_without_age
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  Click [here](#Lookup functions in Excel) to jump to **Lookup function in Excel**.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id="Text Functions in R"></a><ins>Text Functions in R</ins>
+
+<br>
+
+  Okay, text functions. Suppose you have two strings, now you wish to combine them into one word, or extract some of words from the term, we use text functions to do it.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>Concatenate</ins>
+
+<br>
+
+  To combine multiple strings into one in R, use paste( ) funcion.
+  
+  <br>
+  
+```{r eval=F}
+
+paste(string1, string2, sep="??")
+# 'sep' argument specifies two strings separate by what character or symbol you set.
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+### <ins>Example</ins>
+
+<br>
+
+  My first name is **Teoh** and my last name is **Kai Wen**. To combine these two strings by empty space, I will do:
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+paste("Teoh", "Kai Wen", sep=" ")
+# left a space in 'sep' argument give you an empty space between 2 strings.
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>Substr and Substring</ins>
+
+<br>
+
+  You might be interested in extracting some characters which start from left, right or middle of a word in text analysis. So, the **substr** function in the base library of R is an option for you to print the number of characters start from left to right in the console.
+  
+  There is another option for you to perform the same task and get the job done. stringR is an additionally R package you can download and install in Rstudio.
+  
+  You might curious if the base library of R offers substr function which can get your job done, why do we still need to download and install additional R package? It's ok, I answer these later. 
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+### <ins>Example 1</ins>
+
+  <br>
+  <br>
+  
+### substr( )
+
+  <br>
+  
+```{r eval=F}
+
+substr(x, start, stop)
+
+```
+  
+  <br>
+  
+  **substr**( ) is a function for us to extract some characters from a string. For an instance, my name is **Teoh Kai Wen** and I want to extract my first name from my full name.
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+substr("Teoh Kai Wen", 1, 4)
+# start at 1, end at 4 
+
+```
+  
+  <br>
+  
+  What if I want to extract my middle name from full name?
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+substr("Teoh Kai Wen", 6, 9)
+# start at 6, because empty space do occupy space
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+### substring( )
+
+<br>
+
+  **substring**( ) function is slightly different from **substr**( ) function. Recall **substr**, we specify the start and stop number for a string. But for **substring**, 
+  
+  <br>
+  
+```{r eval=F}
+
+substring(x, start, last)
+# by default, the number of last character to be returned is 1 million.
+
+```
+  
+  <br>
+  
+  For an example, I want to print my name start from middle name to last name (Kai Wen) from full name (Teoh Kai Wen), I do:
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+substring("Teoh Kai Wen", 5)
+# start from 5 
+
+```
+  
+  <br>
+  
+  And the returned result will be started from the starting number I specify until the end of string (by deafult until 1000000)
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+### <ins>Example2</ins>
+
+  <br>
+  
+### str_sub( )
+
+  <br>
+  
+  By default, **substr( )** from the base library of R print the characters started from left to right. But what if we want to print the characters start from right to left of a string?
+  
+  Yes, **stringR** is the answer on why do we need to install additional R package and it allows us to print the number of characters start from right to left of a string in the console. Of course, this is not the only extension function that it has, you can have more details in its official documentation.  
+  
+  <br>
+  <br>
+  
+  I can use traditional **substr** to print my last name by specifying the start and the end number in the function. 
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+substr("Teoh Kai Wen",10, 13 )
+
+```
+  
+  <br>
+  
+  But it's much more convenient for us to code in this way.
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+library(stringr)
+# load R package
+
+str_sub("Teoh Kai Wen", -3, -1)
+# -ve indicate start from right to left
+# print the first to third character from right 
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>Substitution</ins>
+
+  <br>
+  
+  The following next section is fun, interesting and I would like to talk more about it. 
+  
+  If you are an R user, you knew that sometimes import your dataset for an example, in Excel format(.xlsx) into R will results some annoying characters appear on the header of a data frame.
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/1.JPG)
+  
+  <br>
+  <br>
+  
+  This is a dataset about products sales (in unit) for the year from 2016 to 2018. But when I save this in .xlsx format and import this dataset into Rstudio, my output shown in Rstudio is looked like:.
+  
+  <br>
+  
+```{r echo=F, comment=NA}
+
+library("xlsx")
+
+data1=read.xlsx(file.choose(),1)
+
+data1
+
+```
+  
+  <br>
+  <br>
+  
+  If you notice carefully, you will found that my header is slightly different from the dataset in Excel (.xlsx) format. To change and remove extra annoying characters, 'X' in every header of dataset in R, we make use of **gsub** or **sub** function.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+###gsub( ) and sub( )
+
+  <br>
+
+   A **gsub** function and **sub** function are the same except **gsub** function replace all the occurence of match characters you specify to the character you set. However, a **sub** function makes change only the first occurence of match character to the character you set.
+   
+   <br>
+   
+```{r eval=F}
+
+gsub(pattern_to_replace, replacement, data)
+# replace all match characters
+
+sub(pattern_to_replace, replacement, data)
+# replace only the first occurence of match character
+
+```
+   
+   <br>
+   
+   It's ok you confuse what I'm talking right now, but you will understand soon.
+   
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+###<ins>Example 1</ins>
+  
+  <br>
+  
+   Consider the previous dataset which I modify a little bit (all the years put in a column named **Year**).
+   
+   <br>
+   <br>
+   
+```{r echo=F, comment=NA, message=F}
+
+library('tidyverse')
+
+data1= data1 %>% gather("X2016", "X2017", "X2018", key="Year", value="Unit_Sold") 
+
+data1
+
+```
+   
+  <br>
+  <br>
+  
+  To replace all 'X' into empty spacev(remove 'x' character), do:
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+data1$Year= gsub("X"," ", data1$Year)
+# replace all 'X' with white space
+
+data1
+# display output
+
+```
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+###<ins>Example 2</ins>
+  
+  Then What about a **sub** function?
+  
+  <br>
+  
+  Consider we have a string here: "can you put some candy inside the can?"
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+sent=c("can you put some candy inside the can?")
+# store a string inside 'sent'
+
+sub("c", "D", sent)
+# substitute the first encountered 'c' into D
+
+```
+  
+  <br>
+  
+  And again, if we use **gsub**,  
+  
+  <br>
+  
+```{r comment=NA, collapse=T}
+
+sent=c("can you put some candy inside the can?")
+# store a string inside 'sent'
+
+gsub("c", "D", sent)
+# substitute the all 'c' into D
+
+```
+  
+  <br>
+  <br>
+  <br>
+  
+  Noted that both **gsub** and **sub** function are **case sensitive**, for an example, e$\ne$ E. And both of these functions are useful especially when we perform web scraping to get some data from web pages as you need to remove unnecessary, insignificant symbols before to do your further analysis in R. It takes time to learn and explore as sometimes we are not only deal with the extra characters like the previous example. But also some sensitive symbols like parentheses, white space and combine all of them is much more complicated in replacing of them. For an example, you can try to replace the string **(I) (2015)** into **2015** by using the ways I showed above.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  Click [here](#Text functions in Excel) to jump to **Text functions in Excel**.
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id= "Lookup functions in Excel"></a> <ins>Lookup functions in Excel</ins>
+
+  <br>
+  
+  Compare to R, operations in Excel is much more simple and convenient. Recall the example of [mid-term score](#Example 1) in the previous section. 
+  
+  <br>
+  
+  In Excel, there is a lookup function called **VLOOKUP**. The purpose of using this function is to search for the data we have and fill in the values (in this case refer to mid-term score) for the chosen keyword (in this case refer to student). 
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/vlookup.JPG)
+  
+  <br>
+  <br>
+  
+  To fill in the mid-term score of a selected student in a new column, we do:
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/vlookup1.JPG)
+  
+  <br>
+  <br>
+  
+  To fill in the mid-term score of all selected students, we drag the **Score** column until row number 7. But note that, we have to lock the data (table)  from **A2 to B10** because when we drag the column down, the position of data it sets in every row will be changed accordingly. To lock the table, we highlight the position of table (in this case is from A2 to B10) and add **dollar sign**, '$' or just simply press the shotcut key, **f4**.
+  
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/vlookup2.JPG)
+  
+  <br>
+  <br>
+  
+  Drag along the column, you get this:
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/vlookup3.JPG)
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+# <a id="Text functions in Excel"></a><ins>Text functions in Excel</ins>
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+## <ins>Concatenate</ins>
+
+  <br>
+  
+  To join two strings together, Excel came with the function **CONCATENATE**. And the syntax of this function is shown as below:
+  
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/Concatenate1.JPG)
+  
+  <br>
+  <br>
+  
+  Both of the strings in **A2** and **B2** are joined together with a space between them in forming a full name. Besides white space, " ", you can also set the other type of symbols and characters in between two strings or just leave it blank in **VLOOKUP** function.
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/Concatenate.JPG)
+  
+  <br>
+  <br>
+  
+  To join multiple strings together, we can just insert the strings accordingly in the function.
+  
+  For an example:
+  
+  =VLOOKUP(text1, text2, text3...)
+  
+  <br>
+  
+  And now when I drag down the column, all the first name are joined together with last name with a space between them.
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/Concatenate2.JPG)
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+## <ins>Left, Right and Mid function</ins>
+
+ <br>
+ 
+ To print the characters from a string or sentence started from left to right or right to left, we make use of these functions.
+ 
+ <br>
+ <br>
+ 
+ The syntax of **left** , **right** and **mid** function are shown as below:
+ 
+ <br>
+ <br>
+ 
+ ![Left function](/post/lookup-and-text-functions_files/left.JPG)
+ 
+ <br>
+ <br>
+ 
+ Let say we're interested in printing the first name of 'John Teoh' which is **John**, what we can do is:
+ 
+ <br>
+ <br>
+ 
+ ![](/post/lookup-and-text-functions_files/left1.JPG)
+ 
+ <br>
+ <br>
+ <br>
+ <br>
+ 
+ For the **right** function, it prints the characters of a string started from right to left.
+ 
+ <br>
+ <br>
+ 
+ And the syntax of this function is:
+ 
+ <br>
+ <br>
+ 
+ ![Right function](/post/lookup-and-text-functions_files/right.JPG)
+ 
+ <br>
+ <br>
+ 
+ Let say we want to print the four characters started from right to left for the name **Vincent**:
+ 
+ <br>
+ <br>
+ 
+ ![](/post/lookup-and-text-functions_files/right1.JPG)
+ 
+ <br>
+ <br>
+ <br>
+ <br>
+ 
+ For **mid** funtion, we can define the starting and ending number in printing the characters of a string.
+ 
+ <br>
+ <br>
+ 
+ The syntax of this function is slightly different from the **left** and **right** function and is shown as below:
+ 
+ <br>
+ <br>
+ 
+ ![Mid function](/post/lookup-and-text-functions_files/mid.JPG)
+ 
+ <br>
+ <br>
+ 
+ For an instance, we can print the characters of a string started from the middle to somewhere we specify:
+ 
+ <br>
+ <br>
+ 
+ ![](/post/lookup-and-text-functions_files/mid1.JPG)
+ 
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ 
+## <ins>Substitution</ins>
+
+  <br>
+  
+  Nothing special and I did talk a lot about it in previous section. In Excel, the same output can be produced just like in R.
+  
+  <br>
+  <br>
+  
+  The syntax of this function can be wrote in this way:
+  
+  <br>
+  
+  =SUBSTITUTE(x,"pattern","replace")
+  
+  <br>
+  
+  If you want to substitute the only first occurence (by default, all matched pattern are removed) just like a **sub()** do:
+  
+  <br>
+  
+```{r eval=F}
+
+=SUBSTITUTE(x, "pattern", "replace", 1)
+# remove the first encountered pattern
+
+```
+  
+  <br>
+  <br>
+  
+  I provide an example in Excel. Consider we have a sentence,
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/substitute.JPG)
+  
+  <br>
+  <br>
+  
+  All the 'a' characters are replaced with 'x'.
+  
+  If we want to replace only the first 'a' character with 'x', try:
+  
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/substitute1.JPG)
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  Note that in R, single quote, '' are same with double quote, " ". However, in Excel, you only can insert double quote, " " for arguments but not single quote, ' '. Because I'm the one who prefer single quote more than double quote, that' why I mention here =.= .
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  
+#<a id="Summary"></a><ins>Summary</ins>
+
+  <br>
+  <br>
+  <br>
+  
+  ![](/post/lookup-and-text-functions_files/Summary.JPG){width=500px height=550px}
+  
+  <br>
+  <br>
+  <br>
+  <br>
+  
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
+  
+  
+  
+
+
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+
+    
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+

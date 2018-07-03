@@ -1,0 +1,816 @@
+---
+draft: yes
+title: 'R vs Excel: lookup and text functions'
+author: Kaiwen Teoh
+date: '2018-06-29'
+categories:
+  - R
+  - Excel
+tags:
+  - R
+  - Excel
+slug: lookup-and-text-functions
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<div id="content" class="section level1">
+<h1>Content</h1>
+<hr />
+<p><br></p>
+<ul>
+<li><p><a href="#Lookup%20function%20in%20R">Lookup functions in R</a></p></li>
+<li><p><a href="#Text%20Functions%20in%20R">Text functions in R</a></p></li>
+<li><p><a href="#Lookup%20functions%20in%20Excel">Lookup functions in Excel</a></p></li>
+<li><p><a href="#Text%20functions%20in%20Excel">Text functions in Excel</a></p></li>
+<li><p><a href="#Summary">Summary</a></p></li>
+</ul>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="background" class="section level1">
+<h1><ins>Background</ins></h1>
+<p><br></p>
+<p>Last week Saturday, I attended an Excel workshop which is organised by my course society at my campus. On that day, I have learnt some basic techniques and concepts in Microsoft Excel. Overall, the learning topic of the day can be categorized into three sub-sections which are <strong>lookup functions</strong>, <strong>logical functions</strong> and <strong>text functions</strong>. It’s quite useful, direct and this inspires me to write this post to compare some of the lookup and text functions in Microsoft Excel with R. For the rest of programming languages, it will be updated in following posts <del>soon</del> and my comparison here is more on how do we actually make use of those functions in Excel &amp; R so that we can achieve the desired result and solve our problems.</p>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="lookup-function-in-r" class="section level1">
+<h1><a id="Lookup function in R"></a><ins>Lookup function in R</ins></h1>
+<p><br></p>
+<p>So, what actually a lookup function is?</p>
+<p>In short, lookup function is a designed function and used when we want to fill in data in the corresponding row based on the column of data searched by the function.</p>
+<p>Let say you have a catalogue on hand like:</p>
+<p><br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Goods
+</th>
+<th style="text-align:center;">
+Price
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Apple
+</td>
+<td style="text-align:center;">
+0.99
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Lemon
+</td>
+<td style="text-align:center;">
+1.20
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Milk
+</td>
+<td style="text-align:center;">
+5.50
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Tomato
+</td>
+<td style="text-align:center;">
+0.89
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Sugar
+</td>
+<td style="text-align:center;">
+4.50
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Salt
+</td>
+<td style="text-align:center;">
+5.65
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Oil
+</td>
+<td style="text-align:center;">
+10.80
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+<p>And now, imagine your customer needs only apple, oil and milk and he or she wants to know the price of each item.</p>
+<p><br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Goods
+</th>
+<th style="text-align:center;">
+Price
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Apple
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Oil
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Milk
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br></p>
+<p>Yeah, you can just search the price of the goods and fill in the blank accordingly since the catalogue consists only a few of items but what if your catalogue consists of 100 or even 1000 of goods?</p>
+<p>In this time, we can make use of lookup functions in R to complete our task.</p>
+<p><br> <br> <br> <br> <br></p>
+<div id="how" class="section level2">
+<h2><ins>How</ins></h2>
+<p><br></p>
+<div id="method-1" class="section level3">
+<h3>Method 1:</h3>
+<p><br></p>
+<p><strong>merge</strong> function is an <strong>inner_join</strong> which joins two data frames together based on the matched key. It returns us only the matched item with its value in alphabetical order. While <strong>outer_join</strong> like <strong>left_join</strong> and <strong>right_join</strong> returns us the matched item with its value and unmatched item with ‘NA’ value. The usage of merge function is indicated as below:</p>
+<p><br></p>
+<pre class="r"><code>merge(dataframe1, dataframe2, by=&quot;columnname&quot;)
+# specify a key in &#39;by&#39; arugument</code></pre>
+<p><br> <br></p>
+</div>
+<div id="method-2" class="section level3">
+<h3>Method 2:</h3>
+<p><br></p>
+<p><strong>match</strong> function tells us the matched item for two vectors on which position but not the value of it. This function is another way to solve the issue faced above in few lines of code.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="example-1" class="section level2">
+<h2><a id="Example 1"></a><ins>Example 1</ins></h2>
+<p><br></p>
+<p>For an example, I have a list of students’ score for a mid-term test:</p>
+<p><br></p>
+<pre class="r"><code>Score
+# display students&#39; score in output</code></pre>
+<p><br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Student
+</th>
+<th style="text-align:center;">
+Score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Kalvin
+</td>
+<td style="text-align:center;">
+78.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+David
+</td>
+<td style="text-align:center;">
+56.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Michael
+</td>
+<td style="text-align:center;">
+45.5
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+May
+</td>
+<td style="text-align:center;">
+89.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+June
+</td>
+<td style="text-align:center;">
+34.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Taylor
+</td>
+<td style="text-align:center;">
+67.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+John
+</td>
+<td style="text-align:center;">
+88.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Massive
+</td>
+<td style="text-align:center;">
+56.0
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Steven
+</td>
+<td style="text-align:center;">
+58.0
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Now, I have some of them in another list in random order:</p>
+<p><br></p>
+<pre class="r"><code>Score1
+# display few selected students in output</code></pre>
+<p><br> <br></p>
+<table class="table table-striped table-hover table-condensed" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+Student
+</th>
+<th style="text-align:center;">
+Score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+Steven
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+John
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Kalvin
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+June
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+May
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+Massive
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+</table>
+<p><br> <br> <br></p>
+<p><img src ="https://media0.giphy.com/media/OVtqvymKkkcTu/giphy.gif?cid=e1bb72ff5b387d4a374859614d0a8735"  width="250" height="200"></p>
+<p><br> <br> <br> <br></p>
+<pre class="r"><code>merge_data= merge(Score, Score1[,1], by=&quot;Student&quot;)
+# merge two data frames by &#39;Student&#39;</code></pre>
+<p><br></p>
+<pre class="r"><code>
+merge_data                     # display result
+  Student Score
+1    John    88
+2    June    34
+3  Kalvin    78
+4 Massive    56
+5     May    89
+6  Steven    58</code></pre>
+<p><br></p>
+<p>Above indicated that two data frames are joined together based on the key, “Student”. In other words, merge function fill in the score of few selected students in a new table based on the original data we have. Noted that, a data frame is a data structure which consists of rows and columns and just like a table. Next, if you notice carefully, you will found that all the students’ name are arranged in alphabetical order and this is what I mentioned previously.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="example2" class="section level2">
+<h2><ins>Example2</ins>:</h2>
+<p><br></p>
+<p>Next, suppose I have a group of people with different age in a data frame named <strong>people_age</strong>.</p>
+<p><br></p>
+<pre><code>      Name Age
+1      Abu  34
+2      Ali  56
+3    Ahmad  21
+4 Mohammad  23
+5    Muthu  15</code></pre>
+<p><br> <br></p>
+<p>and another data frame named <strong>people_without_age</strong>.</p>
+<p><br></p>
+<pre><code>       Name
+1       Ali
+2       Ali
+3  Mohammad
+4       Ali
+5  Mohammad
+6     Muthu
+7       Ali
+8     Muthu
+9     Ahmad
+10    Muthu
+11      Abu
+12    Ahmad
+13      Ali
+14 Mohammad
+15      Abu
+16      Abu
+17    Ahmad
+18 Mohammad
+19      Ali
+20    Ahmad</code></pre>
+<p><br /> <br /></p>
+<ol style="list-style-type: decimal">
+<li><p>To use match function to fill in age for 20 people in the second table, first, you will need to open a column for the table.</p>
+<ul>
+<li>people_without_age$Age</li>
+</ul></li>
+</ol>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>After that, match the name of people from second data frame named <strong>people_without_age</strong> with the first one, <strong>people_age</strong> which has the age information.</p>
+<ul>
+<li>match( people_without_age$name, people_age$name )</li>
+</ul></li>
+</ol>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Normally, if we want to have the values of a particular column in data frames, we use syntax like:</li>
+</ol>
+<p><br></p>
+<pre class="r"><code>data$column_name[]
+# data is your name of data frame
+# &#39;$&#39; specifies which column from data frame</code></pre>
+<p><br></p>
+<p>From this example, we are going to take all the values for different age of people.</p>
+<p><br></p>
+<pre class="r"><code>
+people_age$Age[]
+[1] 34 56 21 23 15</code></pre>
+<p><br> <br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Combine all above in a line of code. Interpret as we take the values of <strong>Age</strong> from first data frame for only the matched items based on the <strong>Name</strong> variable in two data frames. After that, store in a new opened column named <strong>Age</strong> inside the data frame named <strong>people_without_age</strong>.</li>
+</ol>
+<p><br></p>
+<pre class="r"><code>people_without_age$Age= people_age$Age[match(people_without_age$Name, people_age$Name)]</code></pre>
+<p><br></p>
+<p>Or make use of ‘with’ function to make our life easier.</p>
+<p><br></p>
+<pre class="r"><code>people_without_age$Age= with(people_age, Age[match(people_without_age$Name, Name)])</code></pre>
+<p><br> <br></p>
+<p>Result:</p>
+<pre class="r"><code>
+people_without_age
+       Name Age
+1       Ali  56
+2       Ali  56
+3  Mohammad  23
+4       Ali  56
+5  Mohammad  23
+6     Muthu  15
+7       Ali  56
+8     Muthu  15
+9     Ahmad  21
+10    Muthu  15
+11      Abu  34
+12    Ahmad  21
+13      Ali  56
+14 Mohammad  23
+15      Abu  34
+16      Abu  34
+17    Ahmad  21
+18 Mohammad  23
+19      Ali  56
+20    Ahmad  21</code></pre>
+<p><br> <br> <br> <br></p>
+<p>Click <a href="#Lookup%20functions%20in%20Excel">here</a> to jump to <strong>Lookup function in Excel</strong>.</p>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="text-functions-in-r" class="section level1">
+<h1><a id="Text Functions in R"></a><ins>Text Functions in R</ins></h1>
+<p><br></p>
+<p>Okay, text functions. Suppose you have two strings, now you wish to combine them into one word, or extract some of words from the term, we use text functions to do it.</p>
+<p><br> <br> <br> <br> <br></p>
+<div id="concatenate" class="section level2">
+<h2><ins>Concatenate</ins></h2>
+<p><br></p>
+<p>To combine multiple strings into one in R, use paste( ) funcion.</p>
+<p><br></p>
+<pre class="r"><code>paste(string1, string2, sep=&quot;??&quot;)
+# &#39;sep&#39; argument specifies two strings separate by what character or symbol you set.</code></pre>
+<p><br> <br> <br> <br> <br></p>
+<div id="example" class="section level3">
+<h3><ins>Example</ins></h3>
+<p><br></p>
+<p>My first name is <strong>Teoh</strong> and my last name is <strong>Kai Wen</strong>. To combine these two strings by empty space, I will do:</p>
+<p><br></p>
+<pre class="r"><code>
+paste(&quot;Teoh&quot;, &quot;Kai Wen&quot;, sep=&quot; &quot;)
+[1] &quot;Teoh Kai Wen&quot;
+# left a space in &#39;sep&#39; argument give you an empty space between 2 strings.</code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="substr-and-substring" class="section level2">
+<h2><ins>Substr and Substring</ins></h2>
+<p><br></p>
+<p>You might be interested in extracting some characters which start from left, right or middle of a word in text analysis. So, the <strong>substr</strong> function in the base library of R is an option for you to print the number of characters start from left to right in the console.</p>
+<p>There is another option for you to perform the same task and get the job done. stringR is an additionally R package you can download and install in Rstudio.</p>
+<p>You might curious if the base library of R offers substr function which can get your job done, why do we still need to download and install additional R package? It’s ok, I answer these later.</p>
+<p><br> <br> <br> <br> <br></p>
+<div id="example-1-1" class="section level3">
+<h3><ins>Example 1</ins></h3>
+<p><br> <br></p>
+</div>
+<div id="substr" class="section level3">
+<h3>substr( )</h3>
+<p><br></p>
+<pre class="r"><code>substr(x, start, stop)</code></pre>
+<p><br></p>
+<p><strong>substr</strong>( ) is a function for us to extract some characters from a string. For an instance, my name is <strong>Teoh Kai Wen</strong> and I want to extract my first name from my full name.</p>
+<p><br></p>
+<pre class="r"><code>
+substr(&quot;Teoh Kai Wen&quot;, 1, 4)
+[1] &quot;Teoh&quot;
+# start at 1, end at 4 </code></pre>
+<p><br></p>
+<p>What if I want to extract my middle name from full name?</p>
+<p><br></p>
+<pre class="r"><code>
+substr(&quot;Teoh Kai Wen&quot;, 6, 9)
+[1] &quot;Kai &quot;
+# start at 6, because empty space do occupy space</code></pre>
+<p><br> <br> <br> <br></p>
+</div>
+<div id="substring" class="section level3">
+<h3>substring( )</h3>
+<p><br></p>
+<p><strong>substring</strong>( ) function is slightly different from <strong>substr</strong>( ) function. Recall <strong>substr</strong>, we specify the start and stop number for a string. But for <strong>substring</strong>,</p>
+<p><br></p>
+<pre class="r"><code>substring(x, start, last)
+# by default, the number of last character to be returned is 1 million.</code></pre>
+<p><br></p>
+<p>For an example, I want to print my name start from middle name to last name (Kai Wen) from full name (Teoh Kai Wen), I do:</p>
+<p><br></p>
+<pre class="r"><code>
+substring(&quot;Teoh Kai Wen&quot;, 5)
+[1] &quot; Kai Wen&quot;
+# start from 5 </code></pre>
+<p><br></p>
+<p>And the returned result will be started from the starting number I specify until the end of string (by deafult until 1000000)</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="example2-1" class="section level3">
+<h3><ins>Example2</ins></h3>
+<p><br></p>
+</div>
+<div id="str_sub" class="section level3">
+<h3>str_sub( )</h3>
+<p><br></p>
+<p>By default, <strong>substr( )</strong> from the base library of R print the characters started from left to right. But what if we want to print the characters start from right to left of a string?</p>
+<p>Yes, <strong>stringR</strong> is the answer on why do we need to install additional R package and it allows us to print the number of characters start from right to left of a string in the console. Of course, this is not the only extension function that it has, you can have more details in its official documentation.</p>
+<p><br> <br></p>
+<p>I can use traditional <strong>substr</strong> to print my last name by specifying the start and the end number in the function.</p>
+<p><br></p>
+<pre class="r"><code>
+substr(&quot;Teoh Kai Wen&quot;,10, 13 )
+[1] &quot;Wen&quot;</code></pre>
+<p><br></p>
+<p>But it’s much more convenient for us to code in this way.</p>
+<p><br></p>
+<pre class="r"><code>
+library(stringr)
+# load R package
+
+str_sub(&quot;Teoh Kai Wen&quot;, -3, -1)
+[1] &quot;Wen&quot;
+# -ve indicate start from right to left
+# print the first to third character from right </code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="substitution" class="section level2">
+<h2><ins>Substitution</ins></h2>
+<p><br></p>
+<p>The following next section is fun, interesting and I would like to talk more about it.</p>
+<p>If you are an R user, you knew that sometimes import your dataset for an example, in Excel format(.xlsx) into R will results some annoying characters appear on the header of a data frame.</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/1.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>This is a dataset about products sales (in unit) for the year from 2016 to 2018. But when I save this in .xlsx format and import this dataset into Rstudio, my output shown in Rstudio is looked like:.</p>
+<p><br></p>
+<pre><code>   Product X2016 X2017 X2018
+1 Keyboard   400   200   540
+2    Mouse   300   400   600
+3  Monitor   303   630   270</code></pre>
+<p><br> <br></p>
+<p>If you notice carefully, you will found that my header is slightly different from the dataset in Excel (.xlsx) format. To change and remove extra annoying characters, ‘X’ in every header of dataset in R, we make use of <strong>gsub</strong> or <strong>sub</strong> function.</p>
+<p><br> <br> <br> <br> <br></p>
+<div id="gsub-and-sub" class="section level3">
+<h3>gsub( ) and sub( )</h3>
+<p><br></p>
+<p>A <strong>gsub</strong> function and <strong>sub</strong> function are the same except <strong>gsub</strong> function replace all the occurence of match characters you specify to the character you set. However, a <strong>sub</strong> function makes change only the first occurence of match character to the character you set.</p>
+<p><br></p>
+<pre class="r"><code>gsub(pattern_to_replace, replacement, data)
+# replace all match characters
+
+sub(pattern_to_replace, replacement, data)
+# replace only the first occurence of match character</code></pre>
+<p><br></p>
+<p>It’s ok you confuse what I’m talking right now, but you will understand soon.</p>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="example-1-2" class="section level3">
+<h3><ins>Example 1</ins></h3>
+<p><br></p>
+<p>Consider the previous dataset which I modify a little bit (all the years put in a column named <strong>Year</strong>).</p>
+<p><br> <br></p>
+<pre><code>   Product  Year Unit_Sold
+1 Keyboard X2016       400
+2    Mouse X2016       300
+3  Monitor X2016       303
+4 Keyboard X2017       200
+5    Mouse X2017       400
+6  Monitor X2017       630
+7 Keyboard X2018       540
+8    Mouse X2018       600
+9  Monitor X2018       270</code></pre>
+<p><br> <br></p>
+<p>To replace all ‘X’ into empty spacev(remove ‘x’ character), do:</p>
+<p><br></p>
+<pre class="r"><code>
+data1$Year= gsub(&quot;X&quot;,&quot; &quot;, data1$Year)
+# replace all &#39;X&#39; with white space
+
+data1
+   Product  Year Unit_Sold
+1 Keyboard  2016       400
+2    Mouse  2016       300
+3  Monitor  2016       303
+4 Keyboard  2017       200
+5    Mouse  2017       400
+6  Monitor  2017       630
+7 Keyboard  2018       540
+8    Mouse  2018       600
+9  Monitor  2018       270
+# display output</code></pre>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="example-2" class="section level3">
+<h3><ins>Example 2</ins></h3>
+<p>Then What about a <strong>sub</strong> function?</p>
+<p><br></p>
+<p>Consider we have a string here: “can you put some candy inside the can?”</p>
+<p><br></p>
+<pre class="r"><code>
+sent=c(&quot;can you put some candy inside the can?&quot;)
+# store a string inside &#39;sent&#39;
+
+sub(&quot;c&quot;, &quot;D&quot;, sent)
+[1] &quot;Dan you put some candy inside the can?&quot;
+# substitute the first encountered &#39;c&#39; into D</code></pre>
+<p><br></p>
+<p>And again, if we use <strong>gsub</strong>,</p>
+<p><br></p>
+<pre class="r"><code>
+sent=c(&quot;can you put some candy inside the can?&quot;)
+# store a string inside &#39;sent&#39;
+
+gsub(&quot;c&quot;, &quot;D&quot;, sent)
+[1] &quot;Dan you put some Dandy inside the Dan?&quot;
+# substitute the all &#39;c&#39; into D</code></pre>
+<p><br> <br> <br></p>
+<p>Noted that both <strong>gsub</strong> and <strong>sub</strong> function are <strong>case sensitive</strong>, for an example, e<span class="math inline">\(\ne\)</span> E. And both of these functions are useful especially when we perform web scraping to get some data from web pages as you need to remove unnecessary, insignificant symbols before to do your further analysis in R. It takes time to learn and explore as sometimes we are not only deal with the extra characters like the previous example. But also some sensitive symbols like parentheses, white space and combine all of them is much more complicated in replacing of them. For an example, you can try to replace the string <strong>(I) (2015)</strong> into <strong>2015</strong> by using the ways I showed above.</p>
+<p><br> <br> <br> <br></p>
+<p>Click <a href="#Text%20functions%20in%20Excel">here</a> to jump to <strong>Text functions in Excel</strong>.</p>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+</div>
+<div id="lookup-functions-in-excel" class="section level1">
+<h1><a id= "Lookup functions in Excel"></a> <ins>Lookup functions in Excel</ins></h1>
+<p><br></p>
+<p>Compare to R, operations in Excel is much more simple and convenient. Recall the example of <a href="#Example%201">mid-term score</a> in the previous section.</p>
+<p><br></p>
+<p>In Excel, there is a lookup function called <strong>VLOOKUP</strong>. The purpose of using this function is to search for the data we have and fill in the values (in this case refer to mid-term score) for the chosen keyword (in this case refer to student).</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/vlookup.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>To fill in the mid-term score of a selected student in a new column, we do:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/vlookup1.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>To fill in the mid-term score of all selected students, we drag the <strong>Score</strong> column until row number 7. But note that, we have to lock the data (table) from <strong>A2 to B10</strong> because when we drag the column down, the position of data it sets in every row will be changed accordingly. To lock the table, we highlight the position of table (in this case is from A2 to B10) and add <strong>dollar sign</strong>, ‘$’ or just simply press the shotcut key, <strong>f4</strong>.</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/vlookup2.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>Drag along the column, you get this:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/vlookup3.JPG" />
+
+</div>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+<div id="text-functions-in-excel" class="section level1">
+<h1><a id="Text functions in Excel"></a><ins>Text functions in Excel</ins></h1>
+<p><br> <br> <br> <br> <br></p>
+<div id="concatenate-1" class="section level2">
+<h2><ins>Concatenate</ins></h2>
+<p><br></p>
+<p>To join two strings together, Excel came with the function <strong>CONCATENATE</strong>. And the syntax of this function is shown as below:</p>
+<p><br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/Concatenate1.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>Both of the strings in <strong>A2</strong> and <strong>B2</strong> are joined together with a space between them in forming a full name. Besides white space, &quot; “, you can also set the other type of symbols and characters in between two strings or just leave it blank in <strong>VLOOKUP</strong> function.</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/Concatenate.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>To join multiple strings together, we can just insert the strings accordingly in the function.</p>
+<p>For an example:</p>
+<p>=VLOOKUP(text1, text2, text3…)</p>
+<p><br></p>
+<p>And now when I drag down the column, all the first name are joined together with last name with a space between them.</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/Concatenate2.JPG" />
+
+</div>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="left-right-and-mid-function" class="section level2">
+<h2><ins>Left, Right and Mid function</ins></h2>
+<p><br></p>
+<p>To print the characters from a string or sentence started from left to right or right to left, we make use of these functions.</p>
+<p><br> <br></p>
+<p>The syntax of <strong>left</strong> , <strong>right</strong> and <strong>mid</strong> function are shown as below:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/left.JPG" alt="Left function" />
+<p class="caption">Left function</p>
+</div>
+<p><br> <br></p>
+<p>Let say we’re interested in printing the first name of ‘John Teoh’ which is <strong>John</strong>, what we can do is:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/left1.JPG" />
+
+</div>
+<p><br> <br> <br> <br></p>
+<p>For the <strong>right</strong> function, it prints the characters of a string started from right to left.</p>
+<p><br> <br></p>
+<p>And the syntax of this function is:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/right.JPG" alt="Right function" />
+<p class="caption">Right function</p>
+</div>
+<p><br> <br></p>
+<p>Let say we want to print the four characters started from right to left for the name <strong>Vincent</strong>:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/right1.JPG" />
+
+</div>
+<p><br> <br> <br> <br></p>
+<p>For <strong>mid</strong> funtion, we can define the starting and ending number in printing the characters of a string.</p>
+<p><br> <br></p>
+<p>The syntax of this function is slightly different from the <strong>left</strong> and <strong>right</strong> function and is shown as below:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/mid.JPG" alt="Mid function" />
+<p class="caption">Mid function</p>
+</div>
+<p><br> <br></p>
+<p>For an instance, we can print the characters of a string started from the middle to somewhere we specify:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/mid1.JPG" />
+
+</div>
+<p><br> <br> <br> <br> <br></p>
+</div>
+<div id="substitution-1" class="section level2">
+<h2><ins>Substitution</ins></h2>
+<p><br></p>
+<p>Nothing special and I did talk a lot about it in previous section. In Excel, the same output can be produced just like in R.</p>
+<p><br> <br></p>
+<p>The syntax of this function can be wrote in this way:</p>
+<p><br></p>
+<p>=SUBSTITUTE(x,“pattern”,“replace”)</p>
+<p><br></p>
+<p>If you want to substitute the only first occurence (by default, all matched pattern are removed) just like a <strong>sub()</strong> do:</p>
+<p><br></p>
+<pre class="r"><code>=SUBSTITUTE(x, &quot;pattern&quot;, &quot;replace&quot;, 1)
+# remove the first encountered pattern</code></pre>
+<p><br> <br></p>
+<p>I provide an example in Excel. Consider we have a sentence,</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/substitute.JPG" />
+
+</div>
+<p><br> <br></p>
+<p>All the ‘a’ characters are replaced with ‘x’.</p>
+<p>If we want to replace only the first ‘a’ character with ‘x’, try:</p>
+<p><br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/substitute1.JPG" />
+
+</div>
+<p><br> <br> <br> <br></p>
+<p>Note that in R, single quote, ‘’ are same with double quote, &quot; “. However, in Excel, you only can insert double quote,” &quot; for arguments but not single quote,’ ‘. Because I’m the one who prefer single quote more than double quote, that’ why I mention here =.= .</p>
+<p><br> <br> <br> <br> <br> <br></p>
+</div>
+</div>
+<div id="summary" class="section level1">
+<h1><a id="Summary"></a><ins>Summary</ins></h1>
+<p><br> <br> <br></p>
+<div class="figure">
+<img src="/post/lookup-and-text-functions_files/Summary.JPG" width="500" height="550" />
+
+</div>
+<p><br> <br> <br> <br></p>
+</div>
