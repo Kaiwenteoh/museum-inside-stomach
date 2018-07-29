@@ -218,18 +218,34 @@ legend(1.5, 1, c('Female', 'Male'), fill=colour, bty='n')
 
 ```{r echo=F, warning=F, message=F}
 
-library('DT')
-# load library of R
+table1 <- tibble::tribble(
+                  ~State.of.Malaysia, ~Average.size.of.household, ~Average.number.of.certificate, ~Aevrage.income,
+                             "Johor",                      4.288,                         20.081,         3957.46,
+                             "Kedah",                      4.287,                         20.082,         3963.96,
+                           "Kelatan",                       4.29,                          20.12,         3955.53,
+                            "Melaka",                      4.287,                         20.095,         3964.44,
+                   "Negeri Sembilan",                      4.295,                         20.145,         4003.11,
+                            "Pahang",                      4.282,                         20.149,          3977.3,
+                             "Perak",                      4.287,                         20.127,         3956.07,
+                            "Perlis",                      4.291,                         20.116,         3962.81,
+                      "Pulau Pinang",                      4.286,                         20.108,         3959.27,
+                             "Sabah",                       4.29,                         20.082,         3953.89,
+                           "Sarawak",                      4.289,                         20.081,         3960.06,
+                          "Selangor",                      4.288,                         20.097,         3961.31,
+                        "Terengganu",                      4.292,                         20.088,         3956.47,
+  "Wilayah Persekutuan Kuala Lumpur",                      4.287,                         20.094,          3962.6,
+        "Wilayah Persekutuan Labuan",                      4.288,                         19.981,         4023.31,
+     "Wilayah Persekutuan Putrajaya",                      4.277,                         19.742,         3980.71
+  )
 
-data4=read.csv(file.choose())
-#read .csv file
+require(DT)
+datatable(table1, options = list(pageLength = 5), rownames = FALSE, caption = NULL,
+               filter = "top", escape = FALSE, style = "default",
+               width = NULL, height = NULL)
 
-colnames(data4)=c('State of Malaysia', 'Average size of household', 'Average number of certificate', 'Mean income')
-
-datatable(data4, options = list(pageLength = 5))
 
 ```
-  
+
 <br>
 <br>
 

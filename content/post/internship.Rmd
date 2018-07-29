@@ -17,7 +17,7 @@ tags: []
   
   While the format of my report is prepared in Rmarkdown(.rmd). By using the **knitr** package, I'm able to knit my Rmarkdown document to HTML, pdf and word format. Rmarkdown is great and it not only allows us to embed R code chunk but also other programming languages like Julia and Python. What I'm like the most is you can even insert some HTML elements inside document if you didn't know markdown very well (Like what I'm doing right now).
   
-  Last, you can refer my work [here]() on my project. The given dataset that I used for this analysis might not be a true dataset and you will find out why I'd say so if you notice carefully.
+  Last, you can refer my work [here](https://kaiwen.space/project/socioeconomic-my/) on my project. The given dataset that I used for this analysis might not be a true dataset and you will find out why I'd say so if you notice carefully.
 
   
   
