@@ -243,7 +243,6 @@ datatable(table1, options = list(pageLength = 5), rownames = FALSE, caption = NU
                filter = "top", escape = FALSE, style = "default",
                width = NULL, height = NULL)
 
-
 ```
 
 <br>
