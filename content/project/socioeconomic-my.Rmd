@@ -1,0 +1,257 @@
+---
+title: Socioeconomic status in Malaysia
+author: Kaiwen Teoh
+date: '2018-07-29'
+slug: socioeconomic-my
+categories: []
+tags: []
+---
+
+<br>
+
+```{r echo=F, message=F, warning=F}
+
+library('tidyverse')
+# load R package
+
+data1=read.csv(file.choose())
+# read .csv file into a named variable
+
+data1=data1 %>% select(-1, -7, -11:-13)
+# remove column 1, 7, 11, 13
+
+data1=as.tibble(data1)
+# chg class of data1 
+
+colnames(data1)=c('State in Malaysia', 'Strata', 'Size of household', 'Head of household_gender', 'Head of household_age', 'Head of household_marital status', 'Head of household_certificate', 'Head of household_activity')
+# chg column name of data
+
+```
+
+
+##Economic status
+
+<hr />
+<br>
+
+  Malaysia is a multi-ethnic and multi-cultural country which is rich in natural resources like palm oil, timber and petroleum. In Malaysia, there is a total of 13 states and it is group by Peninsular Malaysia and East Malaysia.
+  
+  Vision 2020 is a Malaysia ideal introduced by the current prime minister of Malaysia, Dr.Tun Mahathir Mohamad. One of the nine challenges he outlined is "Ensuring an economically just society, in which there is a fair and equitable distribution of the wealth of the nation". That means to achieve a prosperous and developed country, Malaysia has to overcome the gap between the rich and the poor.
+  
+  Based on the dataset, for the 13 states of Malaysia, the total number of household who stay in the urban and rural area can be summarised as below:  
+  
+<br>
+<br>
+<br>
+  
+  
+  
+```{r echo=F, warning=F, message=F, comment=NA}
+
+data2=ftable(data1$`State in Malaysia`,data1$Strata)
+# create a table
+
+data2
+# display data
+
+```
+
+<br>
+<br>
+
+```{r echo=F, warning=F, message=F}
+
+data3=data1 %>% group_by(`State in Malaysia`) %>% count(Strata)
+state_by_rural_urban=spread(data3, key=Strata, value=n ) 
+# group total number of urban and rural by states
+
+
+state_by_rural=state_by_rural_urban[order(state_by_rural_urban$Rural, decreasing=F), ]
+# order 'Rural' by states in decreasing order from bottom to top
+
+state_by_urban=state_by_rural_urban[order(state_by_rural_urban$Urban, decreasing=F), ]
+# order 'Urban' by states in decreasing order from bottom to top
+
+par(mar=c(4,10,2,2))
+barplot(state_by_rural$Rural, names.arg=state_by_rural$`State in Malaysia`, las=1, horiz=T, cex.names=0.7, cex.axis=0.65, col='dark red', border=NA, xlim=c(0,250), main="Rural Region")
+# plot barchart for rural region
+
+```
+     
+<br>
+     
+```{r echo=F, warning=F, message=F}
+
+par(mar=c(4,10,3,2))
+barplot(state_by_urban$Urban, names.arg=state_by_urban$`State in Malaysia`, las=1, horiz=T, cex.names=0.7, cex.axis=0.65, col='dark green', border=NA, xlim=c(0,250), main="Urban Region")
+# barplot for urban region
+
+```
+
+<br>
+<br>
+    
+  Malaysia is a multi-ethnic and multi-cultural country which is rich in natural resources like palm oil, timber and petroleum. In Malaysia, there is a total of 13 states and it is group by Peninsular Malaysia and East Malaysia.
+Above diagrams indicate that the total number of households who stay in the rural and urban region for 13 states of Malaysia. From 2000 number of respondents, it is found that most of the households from Sabah and Sarawak are stay in rural areas. While most of the household from the state of Johor and Selangor are stay in the urban region. 
+    
+<br>
+<br>
+    
+  If we further group the total number of 13 states in Malaysia into Peninsular Malaysia (11 states), Federal Territories (3 territories) and East Malaysia(2 states). 
+  
+<br>
+  
+```{r echo=F, warning=F, message=F}
+
+peninsular_my=state_by_rural_urban %>% filter(`State in Malaysia` %in% c('Perlis', 'Kedah', 'Pulau Pinang', 'Perak', 'Kelatan', 'Terengganu', 'Pahang', 'Selangor', 'Negeri Sembilan', 'Melaka', 'Johor'))
+# Peninsular Malaysia
+
+east_my=state_by_rural_urban %>% filter(`State in Malaysia` %in% c('Sabah', 'Sarawak'))
+# East Malaysia
+
+federal_my=state_by_rural_urban %>% filter(`State in Malaysia` %in% c('Wilayah Persekutuan Kuala Lumpur
+', 'Wilayah Persekutuan Labuan', 'Wilayah Persekutuan Putrajaya'))
+# Federal Territories of Malaysia
+
+Total_rural=c(sum(peninsular_my$Rural), sum(east_my$Rural), sum(federal_my$Rural, na.rm=T))
+# make a column for rural region
+
+Total_urban=c(sum(peninsular_my$Urban), sum(east_my$Urban), sum(federal_my$Urban))
+# make a column for urban region
+
+Region=c('Peninsular Malaysia', 'East Malaysia', 'Federal Territories')
+# make a column for region
+
+my_region= data.frame(Region, Rural=Total_rural, Urban=Total_urban)
+# make a data frame
+
+barplot(as.matrix(my_region[,2:3]), beside=T, ylim=c(0,1200), las=1, ylab="Total number of households by region", cex.axis=0.7, cex.names=1.25, density=c(300,310,320), border=NA, legend.text = c("Peninsular Malaysia", "East Malaysia", "Federal Territories"), col=c('navy blue', 'light blue', 'deepskyblue3'), args.legend = list(x ='topright', bty='n', inset=c(-0.08,0)))
+
+# make a barplot
+
+```
+  
+<br>
+  
+  From the group bar chart, it is obvious that most of the households from the Federal Territories of Malaysia are stay in the urban area. For the people who stay in the urban area, most of them are from Peninsular Malaysia. However, households from the states of East Malaysia tend to stay in the rural area than the urban area.
+  
+  In this situation, public sector plays an important role in balancing the wealth distribution between the Peninsular Malaysia and East Malaysia since most of the people from East Malaysia are stay in fewer facilities rural area compare to people from Peninsular Malaysia who stay in the urban area. In addition, East Malaysia has the higher number of households who stay in the rural area than the urban area. That means most of them are living in less developed regions which have fewer health facilities.
+  
+  Thus, in order to achieve a prosperous society with an economy that is fully dynamic and resilient, the government should pay attention not only in developing Peninsular Malaysia which rich in natural resources but also in East Malaysia.
+  
+<br>
+<br>
+<br>
+<br>
+
+  On the other hand, we can also have a look at the characteristics of the head of households from the total number of 2000 respondents. 
+  
+<br>
+
+```{r echo=F, warning=F, message=F}
+
+data3=data.frame(data1$`Head of household_gender`,data1$`Head of household_marital status`)
+colnames(data3)= c('Head of household_gender', 'Head of household_marital.status')
+# Create a data frame with only has gender and marrital status column
+
+
+# table(data3$`Head of household_gender`)
+# Check the frequency of each gender for the head of household
+
+
+hoh_gender=data.frame(Gender=c('Female', 'Male'), Frequency=c(348, 1652))
+# data frame for gender of head of household
+
+
+# table(data3$`Head of household_marital.status`)
+# check the frequency of marrital status for the head of household
+
+
+hoh_marry=data.frame(Status=c('Married', 'Never Married', 'Divorced', 'Widowed', 'Seperated') ,Frequency=c(1540, 211, 49, 193, 7 ))
+# data frame for marrital status of head of household
+
+par(mfrow=c(2,1), mar=c(1,3,2,4), las=1, bty='n')
+# Set 2 pie charts in one window
+
+colour=c('peachpuff2', 'peachpuff3', 'peachpuff4', 'peru', 'salmon4')
+Percentage=round(hoh_marry$Frequency/sum(hoh_marry$Frequency)*100,1)
+Percentage=paste(Percentage, sep="", '%')
+pie(hoh_marry$Frequency, labels=Percentage, init.angle=0, clockwise=T, col=colour, main="Gender of head of household in Malaysia")
+legend(1.5, 1, c('Married', 'Never Married', 'Divorced', 'Widowed', 'Seperated'), fill=colour, bty='n')
+# Create pie chart for marrital status of head of household
+
+
+colour=c('light yellow', 'gold')
+Percentage=round(hoh_gender$Frequency/sum(hoh_gender$Frequency)*100,1)
+Percentage=paste(Percentage, sep="", '%')
+pie(hoh_gender$Frequency, labels=Percentage, init.angle=0, clockwise=T, col=colour, main="Gender of head of household in Malaysia")
+legend(1.5, 1, c('Female', 'Male'), fill=colour, bty='n')
+# Create pie chart for gender of head of household
+
+```
+
+<br>
+
+  Based on the findings, it is clear that male workers from 13 states of Malaysia pay more household expenses than female since the percentage in the gender of head of the household for the male is higher than female. However, the female of the head of household contributes close to 20% of the total number.
+  
+  For the top pie chart, it is obvious that the married head of households occupies a large proportion which is about 77.0%. While head of households which are never married and windowed carry almost the similar percentage. 
+  
+  Ensuring economic development of a country is not only the responsibility of government but also involve the private sector. Based on these findings, entrepreneurs and businessmen may involve themselves in a new market. For an instance, they might be targeting the market of married women (introduce housekeeping service etc) since there are getting more women involved in sustaining household expenses.
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+##Social Status
+
+<hr />
+<br>
+
+  The number of certificates gained by the head of households indicates the education level of them in society. A high education level of a citizen might get a well-paid job and their financial ability in supporting a family is high. The following interactive table is the summary of the social status of the 2000 respondents from 13 different states of Malaysia.
+  
+<br>
+<br>
+<br>
+
+```{r echo=F, warning=F, message=F}
+
+library('DT')
+# load library of R
+
+data4=read.csv(file.choose())
+#read .csv file
+
+colnames(data4)=c('State of Malaysia', 'Average size of household', 'Average number of certificate', 'Mean income')
+
+datatable(data4, options = list(pageLength = 5))
+
+```
+  
+<br>
+<br>
+
+  Based on the interactive table, the average size of the household and the number of certificates gained by the head of households are almost the same. For the mean income, people form Wilayah Persekutuan Labuan has the highest mean income compared to other states of Malaysia.
+  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+##Assumption
+
+<hr />
+<br>
+
+  1. The sample size of the dataset is powerful enough (sufficient) to represent the population of Malaysia.
+  
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>

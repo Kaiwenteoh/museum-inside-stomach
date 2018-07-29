@@ -8,6 +8,16 @@
   </url>
   
   <url>
+    <loc>/post/internship/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/socioeconomic-my/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/lookup-and-text-functions/</loc>
     <lastmod>2018-06-29T00:00:00+00:00</lastmod>
   </url>
@@ -79,13 +89,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-06-29T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/</loc>
-    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
