@@ -1,5 +1,5 @@
 ---
-title: I got my internship!
+title: I got my internship
 author: Kaiwen Teoh
 date: '2018-07-29'
 slug: internship
