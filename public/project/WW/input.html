@@ -1,0 +1,87 @@
+<html>
+	
+	<head>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="input2.css" type="text/css" rel="stylesheet" />
+	
+	</head>
+	
+
+	<body>
+	
+		<div class="split left">
+		<div class="centered">
+
+		<h2 class="title_font_right"> Dynamic lot-size model </h2>
+		<p class="body_font"> a.k.a Wagner-Whitin algorithm. Is a generalized EOQ model that takes account into demand for the product varies over time. </p>
+
+		</div>
+		</div>
+
+
+		<div class="split right">
+	
+		<form id="input_form_id" name="input_form">	
+		
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<p class="body_font"> &ensp; Select the number of duration: &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&nbsp; <select id="num_month" name="month"></p>
+		<option value=""> &ensp;- Select -&ensp; </option>
+		<option value="p1">1</option>
+		<option value="p2">2</option>
+		<option value="p3">3</option>
+		<option value="p4">4</option>
+		<option value="p5">5</option>
+		<option value="p6">6</option>
+		<option value="p7">7</option>
+		<option value="p8">8</option>
+		<option value="p9">9</option>
+		<option value="p10">10</option>
+		<option value="p11">11</option>
+		<option value="p12">12</option>		
+		</select>
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<p class="body_font"> &ensp; Enter the setup cost, K: &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="number" id="setup_cost" name="setupcost" min="0" maxlength="11" /></p>
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<p class="body_font"> &ensp; Enter the holding cost per period, h: &ensp;&ensp;&nbsp; <input type="number" id="holding_cost" name="hcost" min="0" maxlength="11" /></p>
+		<br />
+		<br />
+		<br />
+		<br />
+		
+		<p class="body_font"> &ensp; Enter the variable cost per unit, c: &ensp;&ensp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="number" id="variable_cost" name="vcost" min="0" maxlength="11" /></p>
+		</form>
+		
+		<br />
+		<br />
+
+		
+		&ensp; <button onclick="input_interface()"><p class="body_font">Continue</p></button>
+		
+		</div>
+
+		
+		<script type="text/javascript" src="input1.js"></script>
+		
+		
+		
+	</body>
+	
+</html>
+		
+
+			
+			

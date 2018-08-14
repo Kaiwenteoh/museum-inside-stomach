@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Css</title>
+      <link>/categories/css/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/css/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Excel</title>
       <link>/categories/excel/</link>
       <pubDate>Fri, 29 Jun 2018 00:00:00 +0000</pubDate>
@@ -20,11 +29,29 @@
     </item>
     
     <item>
+      <title>Html</title>
+      <link>/categories/html/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/html/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Import</title>
       <link>/categories/import/</link>
       <pubDate>Sat, 19 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/import/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Js</title>
+      <link>/categories/js/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/js/</guid>
       <description></description>
     </item>
     

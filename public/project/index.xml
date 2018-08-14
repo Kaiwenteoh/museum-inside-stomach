@@ -6,10 +6,19 @@
     <description>Recent content in Projects on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 14 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dynamic lot-size model</title>
+      <link>/project/ww/</link>
+      <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/project/ww/</guid>
+      <description>Your browser does not support iframes.</description>
+    </item>
     
     <item>
       <title>Socioeconomic status in Malaysia</title>
@@ -31,6 +40,24 @@ Vision 2020 is a Malaysia ideal introduced by the current prime minister of Mala
       <description>Still working on it, be right back!
 
 </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/project/dt_table/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/dt_table/</guid>
+      <description>datatables{&#34;x&#34;:{&#34;filter&#34;:&#34;top&#34;,&#34;filterHTML&#34;:&#34;\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n&#34;,&#34;data&#34;:[[&#34;Johor&#34;,&#34;Kedah&#34;,&#34;Kelatan&#34;,&#34;Melaka&#34;,&#34;Negeri Sembilan&#34;,&#34;Pahang&#34;,&#34;Perak&#34;,&#34;Perlis&#34;,&#34;Pulau Pinang&#34;,&#34;Sabah&#34;,&#34;Sarawak&#34;,&#34;Selangor&#34;,&#34;Terengganu&#34;,&#34;Wilayah Persekutuan Kuala Lumpur&#34;,&#34;Wilayah Persekutuan Labuan&#34;,&#34;Wilayah Persekutuan Putrajaya&#34;],[4.288,4.287,4.29,4.287,4.295,4.282,4.287,4.291,4.286,4.29,4.289,4.288,4.292,4.287,4.288,4.277],[20.081,20.082,20.12,20.095,20.145,20.149,20.127,20.116,20.108,20.082,20.081,20.097,20.088,20.094,19.981,19.742],[3957.46,3963.96,3955.53,3964.44,4003.11,3977.3,3956.07,3962.81,3959.27,3953.89,3960.06,3961.31,3956.47,3962.6,4023.31,3980.71]],&#34;container&#34;:&#34;\n \n \n State.of.Malaysia\n Average.size.of.household\n Average.number.of.certificate\n Aevrage.income\n \n \n&#34;,&#34;options&#34;:{&#34;pageLength&#34;:5,&#34;columnDefs&#34;:[{&#34;className&#34;:&#34;dt-right&#34;,&#34;targets&#34;:[1,2,3]}],&#34;order&#34;:[],&#34;autoWidth&#34;:false,&#34;orderClasses&#34;:false,&#34;orderCellsTop&#34;:true,&#34;lengthMenu&#34;:[5,10,25,50,100]}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}{&#34;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>/project/interactivetable/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/project/interactivetable/</guid>
+      <description>datatablesHTMLWidgets.pymChild = new pym.Child();HTMLWidgets.addPostRenderHandler(function(){setTimeout(function(){HTMLWidgets.pymChild.sendHeight();},100);});{&#34;x&#34;:{&#34;filter&#34;:&#34;top&#34;,&#34;filterHTML&#34;:&#34;\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n&#34;,&#34;data&#34;:[[&#34;Johor&#34;,&#34;Kedah&#34;,&#34;Kelatan&#34;,&#34;Melaka&#34;,&#34;Negeri Sembilan&#34;,&#34;Pahang&#34;,&#34;Perak&#34;,&#34;Perlis&#34;,&#34;Pulau Pinang&#34;,&#34;Sabah&#34;,&#34;Sarawak&#34;,&#34;Selangor&#34;,&#34;Terengganu&#34;,&#34;Wilayah Persekutuan Kuala Lumpur&#34;,&#34;Wilayah Persekutuan Labuan&#34;,&#34;Wilayah Persekutuan Putrajaya&#34;],[4.288,4.287,4.29,4.287,4.295,4.282,4.287,4.291,4.286,4.29,4.289,4.288,4.292,4.287,4.288,4.277],[20.081,20.082,20.12,20.095,20.145,20.149,20.127,20.116,20.108,20.082,20.081,20.097,20.088,20.094,19.981,19.742],[3957.46,3963.96,3955.53,3964.44,4003.11,3977.3,3956.07,3962.81,3959.27,3953.89,3960.06,3961.31,3956.47,3962.6,4023.31,3980.71]],&#34;container&#34;:&#34;\n \n \n State.</description>
     </item>
     
   </channel>

@@ -239,9 +239,11 @@ table1 <- tibble::tribble(
   )
 
 require(DT)
+
 datatable(table1, options = list(pageLength = 5), rownames = FALSE, caption = NULL,
                filter = "top", escape = FALSE, style = "default",
                width = NULL, height = NULL)
+
 
 ```
 
