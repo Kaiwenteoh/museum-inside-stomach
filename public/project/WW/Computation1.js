@@ -4365,7 +4365,7 @@ function stage1(k,c,h,demand1){
 
 			document.write("<br /><br/>");
 
-			
+						
 			//footer
 
 			document.write("<div class='col-sm-7' style='background-color:White;'>");
