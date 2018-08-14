@@ -4365,10 +4365,7 @@ function stage1(k,c,h,demand1){
 
 			document.write("<br /><br/>");
 
-			//Code
-			document.write("<a href='https://github.com/Kaiwenteoh/museum-inside-stomach/tree/master/public/project/WW'>View code</a)");
-
-
+			
 			//footer
 
 			document.write("<div class='col-sm-7' style='background-color:White;'>");
