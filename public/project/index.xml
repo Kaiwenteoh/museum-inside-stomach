@@ -6,10 +6,19 @@
     <description>Recent content in Projects on Utopia</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 09 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Forecasting the stock price of Genting Malaysia</title>
+      <link>/project/forecast-stock-price-gm/</link>
+      <pubDate>Wed, 09 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/project/forecast-stock-price-gm/</guid>
+      <description>Your browser does not support iframes.</description>
+    </item>
     
     <item>
       <title>Dynamic lot-size model</title>
@@ -17,7 +26,7 @@
       <pubDate>Tue, 14 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/project/ww/</guid>
-      <description>Your browser does not support iframes.</description>
+      <description>Your browser does not support iframes.</description>
     </item>
     
     <item>
@@ -26,7 +35,7 @@
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/project/internship/</guid>
-      <description>Your browser does not support iframes.</description>
+      <description>Your browser does not support iframes.</description>
     </item>
     
     <item>
@@ -35,7 +44,7 @@
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/project/temporary-post/</guid>
-      <description>Still working on it, be right back!
+      <description>Still working on it, be right back!
 
 </description>
     </item>
